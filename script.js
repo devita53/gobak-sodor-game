@@ -31,26 +31,88 @@ const gamePage =
    TIDAK MENGGUNAKAN ALERT BROWSER
 ===================================================== */
 
+/*
+   Jika ada alert lama dari kode sebelumnya,
+   akan diarahkan ke notifikasi dalam game.
+   Jadi tidak muncul lagi:
+   "devita53.github.io says"
+*/
+
+window.alert = function(message) {
+
+    showNotification(
+        message,
+        "Informasi",
+        "ℹ️"
+    );
+
+};
+
+
 function showNotification(
     message,
     title = "Informasi",
     icon = "ℹ️"
 ) {
 
-    document.getElementById(
-        "notificationTitle"
-    ).textContent = title;
+    const titleElement =
+        document.getElementById(
+            "notificationTitle"
+        );
 
-    document.getElementById(
-        "notificationMessage"
-    ).textContent = message;
+    const messageElement =
+        document.getElementById(
+            "notificationMessage"
+        );
 
-    document.getElementById(
-        "notificationIcon"
-    ).textContent = icon;
+    const iconElement =
+        document.getElementById(
+            "notificationIcon"
+        );
+
+    const thumbnailElement =
+        document.getElementById(
+            "notificationThumbnail"
+        );
+
+
+    /* Judul notifikasi */
+    titleElement.textContent =
+        title;
+
+
+    /* Isi pesan */
+    messageElement.textContent =
+        message;
+
+
+    /* Icon notifikasi */
+    iconElement.textContent =
+        icon;
+
+
+    /*
+       Thumbnail mengikuti jenis
+       notifikasi.
+    */
+
+    if (thumbnailElement) {
+
+        thumbnailElement.textContent =
+            icon;
+
+    }
+
+
+    /*
+       Tampilkan popup notifikasi
+       dari dalam game.
+    */
 
     document
-        .getElementById("notificationPopup")
+        .getElementById(
+            "notificationPopup"
+        )
         .classList.remove("hidden");
 }
 
@@ -58,7 +120,9 @@ function showNotification(
 function closeNotification() {
 
     document
-        .getElementById("notificationPopup")
+        .getElementById(
+            "notificationPopup"
+        )
         .classList.add("hidden");
 }
 
