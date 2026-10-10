@@ -3,44 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Gerobak Sodor Game</title>
-
+    <title>Gobak Sodor Adventure</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <!-- ================= LOGIN ================= -->
-<section id="loginPage" class="page active">
 
-    <div class="login-box">
+<section id="loginPage" class="auth-page">
 
-        <div class="game-logo">🎮</div>
+    <div class="auth-card">
 
-        <h1>Gerobak Sodor</h1>
-        <p class="subtitle">Game Tradisional Indonesia</p>
+        <div class="game-logo">🏃</div>
+
+        <h1>GOBAK SODOR</h1>
+
+        <p class="subtitle">
+            Adventure Game
+        </p>
 
         <input
             type="text"
             id="loginUsername"
-            placeholder="Username"
-            autocomplete="off"
+            placeholder="Nama pengguna"
         >
 
         <input
             type="password"
             id="loginPassword"
-            placeholder="Password"
+            placeholder="Kata sandi"
         >
 
         <button onclick="login()" class="main-btn">
-            Masuk
+            MASUK
         </button>
 
-        <p class="register-text">
+        <p class="small-text">
             Belum punya akun?
-            <button onclick="showRegister()" class="link-btn">
+            <button
+                onclick="showRegister()"
+                class="link-btn"
+            >
                 Daftar
             </button>
         </p>
@@ -51,36 +55,51 @@
 
 
 <!-- ================= REGISTER ================= -->
-<section id="registerPage" class="page">
 
-    <div class="login-box">
+<section id="registerPage" class="auth-page hidden">
 
-        <div class="game-logo">📝</div>
+    <div class="auth-card">
 
-        <h1>Daftar Akun</h1>
-        <p class="subtitle">Buat akun untuk bermain</p>
+        <div class="game-logo">🎮</div>
+
+        <h1>BUAT AKUN</h1>
+
+        <p class="subtitle">
+            Buat akun untuk bermain
+        </p>
 
         <input
             type="text"
             id="registerUsername"
-            placeholder="Buat username"
-            autocomplete="off"
+            placeholder="Nama pengguna"
         >
 
         <input
             type="password"
             id="registerPassword"
-            placeholder="Buat password"
+            placeholder="Kata sandi"
         >
 
-        <button onclick="register()" class="main-btn">
-            Daftar
+        <input
+            type="password"
+            id="registerConfirm"
+            placeholder="Ulangi kata sandi"
+        >
+
+        <button
+            onclick="register()"
+            class="main-btn"
+        >
+            DAFTAR
         </button>
 
-        <p class="register-text">
+        <p class="small-text">
             Sudah punya akun?
-            <button onclick="showLogin()" class="link-btn">
-                Kembali Login
+            <button
+                onclick="showLogin()"
+                class="link-btn"
+            >
+                Masuk
             </button>
         </p>
 
@@ -90,30 +109,52 @@
 
 
 <!-- ================= MENU ================= -->
-<section id="menuPage" class="page">
 
-    <div class="menu-box">
+<section id="menuPage" class="menu-page hidden">
 
-        <div class="game-logo">🏃</div>
+    <div class="menu-card">
 
-        <h1>GEROBAK SODOR</h1>
+        <div class="logo-big">
+            🏃
+        </div>
 
-        <p>
+        <h1>GOBAK SODOR</h1>
+
+        <p class="welcome">
             Selamat datang,
-            <strong id="menuUsername">Pemain</strong>!
+            <strong id="menuUsername"></strong>!
         </p>
 
         <div class="menu-info">
-            <div>❤️ 5 Nyawa</div>
-            <div>👮 3 Penjaga</div>
-            <div>🪙 Kumpulkan Koin</div>
+
+            <div>
+                <span>❤️</span>
+                <b>5 Nyawa</b>
+            </div>
+
+            <div>
+                <span>👮</span>
+                <b>3 Penjaga</b>
+            </div>
+
+            <div>
+                <span>🪙</span>
+                <b>Koin Acak</b>
+            </div>
+
         </div>
 
-        <button onclick="startGame()" class="main-btn">
-            🎮 MULAI BERMAIN
+        <button
+            onclick="startGame()"
+            class="start-btn"
+        >
+            ▶ MULAI BERMAIN
         </button>
 
-        <button onclick="logout()" class="secondary-btn">
+        <button
+            onclick="logout()"
+            class="logout-btn"
+        >
             Keluar
         </button>
 
@@ -123,142 +164,269 @@
 
 
 <!-- ================= GAME ================= -->
-<section id="gamePage" class="page">
 
-    <div class="game-container">
+<section id="gamePage" class="game-page hidden">
 
-        <div class="game-header">
+    <div class="game-header">
 
-            <div class="game-title">
-                🏃 GOBAK SODOR
+        <div class="player-info">
+
+            <div class="mini-avatar">
+                <div class="avatar-hair"></div>
+                <div class="avatar-face"></div>
+                <div class="avatar-body"></div>
             </div>
 
-            <div class="stats">
-
-                <div>
-                    ❤️
-                    <span id="lives">5</span>
-                </div>
-
-                <div>
-                    🪙
-                    <span id="coins">0</span>
-                </div>
-
-                <div>
-                    ⭐
-                    <span id="score">0</span>
-                </div>
-
-                <div>
-                    🏆 Level
-                    <span id="level">1</span>
-                </div>
-
+            <div>
+                <small>PEMAIN</small>
+                <strong id="gameUsername">
+                    Player
+                </strong>
             </div>
 
         </div>
 
 
-        <!-- ARENA -->
-        <div id="gameArea">
+        <div class="stats">
 
-            <!-- Dekorasi -->
-            <div class="tree tree1">🌳</div>
-            <div class="tree tree2">🌳</div>
-            <div class="tree tree3">🌲</div>
-            <div class="tree tree4">🌳</div>
-
-            <div class="rock rock1">🪨</div>
-            <div class="rock rock2">🪨</div>
-
-            <!-- Garis Gobak Sodor -->
-            <div class="field-line line1"></div>
-            <div class="field-line line2"></div>
-            <div class="field-line line3"></div>
-            <div class="field-line line4"></div>
-
-            <!-- Koin -->
-            <div class="coin" id="coin1">★</div>
-            <div class="coin" id="coin2">★</div>
-            <div class="coin" id="coin3">★</div>
-            <div class="coin" id="coin4">★</div>
-
-            <!-- Penjaga -->
-            <div class="guard" id="guard1">
-                <div class="guard-head"></div>
-                <div class="guard-body"></div>
-                <div class="guard-legs"></div>
+            <div class="stat-box">
+                <span>❤️</span>
+                <b id="lives">5</b>
             </div>
 
-            <div class="guard" id="guard2">
-                <div class="guard-head"></div>
-                <div class="guard-body"></div>
-                <div class="guard-legs"></div>
+            <div class="stat-box">
+                <span class="coin-mini">🪙</span>
+                <b id="coins">0</b>
             </div>
 
-            <div class="guard" id="guard3">
-                <div class="guard-head"></div>
-                <div class="guard-body"></div>
-                <div class="guard-legs"></div>
+            <div class="stat-box">
+                <span>⭐</span>
+                <b id="score">0</b>
             </div>
 
-            <!-- Pemain -->
-            <div id="player">
-
-                <div class="player-head"></div>
-
-                <div class="player-body">
-                    <div class="player-arm left"></div>
-                    <div class="player-arm right"></div>
-                </div>
-
-                <div class="player-legs">
-                    <div></div>
-                    <div></div>
-                </div>
-
+            <div class="stat-box level-box">
+                <small>LEVEL</small>
+                <b id="level">1</b>
             </div>
 
         </div>
 
+    </div>
 
-        <!-- Kontrol -->
-        <div class="controls">
 
-            <button
-                onmousedown="movePlayer('up')"
-                ontouchstart="movePlayer('up')">
-                ⬆️
+    <!-- ================= LAPANGAN ================= -->
+
+    <div id="gameArea">
+
+        <!-- POHON -->
+        <div class="decoration tree tree-left">
+            <div class="tree-leaves"></div>
+            <div class="tree-trunk"></div>
+        </div>
+
+        <div class="decoration tree tree-right">
+            <div class="tree-leaves"></div>
+            <div class="tree-trunk"></div>
+        </div>
+
+        <!-- SEMAK -->
+        <div class="decoration bush bush-left"></div>
+        <div class="decoration bush bush-right"></div>
+
+        <!-- BATU -->
+        <div class="rock rock-left"></div>
+        <div class="rock rock-right"></div>
+
+        <!-- PAGAR -->
+        <div class="fence fence-top"></div>
+        <div class="fence fence-bottom"></div>
+
+
+        <!-- GARIS LAPANGAN -->
+        <div class="field-line line-1"></div>
+        <div class="field-line line-2"></div>
+        <div class="field-line line-3"></div>
+
+
+        <!-- FINISH -->
+        <div id="finishArea">
+            FINISH
+        </div>
+
+
+        <!-- ================= KOIN ================= -->
+
+        <div id="coin1" class="coin">
+            <div class="coin-shine"></div>
+            <span>★</span>
+        </div>
+
+        <div id="coin2" class="coin">
+            <div class="coin-shine"></div>
+            <span>★</span>
+        </div>
+
+        <div id="coin3" class="coin">
+            <div class="coin-shine"></div>
+            <span>★</span>
+        </div>
+
+        <div id="coin4" class="coin">
+            <div class="coin-shine"></div>
+            <span>★</span>
+        </div>
+
+
+        <!-- ================= PENJAGA 1 ================= -->
+
+        <div id="guard1" class="character guard">
+
+            <div class="character-head">
+                <div class="hair"></div>
+                <div class="eye eye-left"></div>
+                <div class="eye eye-right"></div>
+            </div>
+
+            <div class="police-hat">
+                <div class="hat-badge">★</div>
+            </div>
+
+            <div class="character-body">
+                <div class="badge">★</div>
+            </div>
+
+            <div class="arm arm-left"></div>
+            <div class="arm arm-right"></div>
+
+            <div class="leg leg-left"></div>
+            <div class="leg leg-right"></div>
+
+        </div>
+
+
+        <!-- ================= PENJAGA 2 ================= -->
+
+        <div id="guard2" class="character guard">
+
+            <div class="character-head">
+                <div class="hair"></div>
+                <div class="eye eye-left"></div>
+                <div class="eye eye-right"></div>
+            </div>
+
+            <div class="police-hat">
+                <div class="hat-badge">★</div>
+            </div>
+
+            <div class="character-body">
+                <div class="badge">★</div>
+            </div>
+
+            <div class="arm arm-left"></div>
+            <div class="arm arm-right"></div>
+
+            <div class="leg leg-left"></div>
+            <div class="leg leg-right"></div>
+
+        </div>
+
+
+        <!-- ================= PENJAGA 3 ================= -->
+
+        <div id="guard3" class="character guard">
+
+            <div class="character-head">
+                <div class="hair"></div>
+                <div class="eye eye-left"></div>
+                <div class="eye eye-right"></div>
+            </div>
+
+            <div class="police-hat">
+                <div class="hat-badge">★</div>
+            </div>
+
+            <div class="character-body">
+                <div class="badge">★</div>
+            </div>
+
+            <div class="arm arm-left"></div>
+            <div class="arm arm-right"></div>
+
+            <div class="leg leg-left"></div>
+            <div class="leg leg-right"></div>
+
+        </div>
+
+
+        <!-- ================= PEMAIN ================= -->
+
+        <div id="player" class="character player-character">
+
+            <div class="player-head">
+                <div class="player-hair"></div>
+
+                <div class="player-eye player-eye-left"></div>
+                <div class="player-eye player-eye-right"></div>
+            </div>
+
+            <div class="player-body">
+                <div class="shirt-logo">G</div>
+            </div>
+
+            <div class="player-arm player-arm-left"></div>
+            <div class="player-arm player-arm-right"></div>
+
+            <div class="player-leg player-leg-left"></div>
+            <div class="player-leg player-leg-right"></div>
+
+            <div class="shoe shoe-left"></div>
+            <div class="shoe shoe-right"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PESAN -->
+    <div id="gameMessage" class="game-message">
+        Kumpulkan semua koin dan hindari penjaga!
+    </div>
+
+
+    <!-- KONTROL -->
+    <div class="mobile-controls">
+
+        <button onclick="movePlayer('up')">
+            ▲
+        </button>
+
+        <div>
+
+            <button onclick="movePlayer('left')">
+                ◀
             </button>
 
-            <div class="control-middle">
+            <button onclick="movePlayer('down')">
+                ▼
+            </button>
 
-                <button
-                    onmousedown="movePlayer('left')"
-                    ontouchstart="movePlayer('left')">
-                    ⬅️
-                </button>
-
-                <button
-                    onmousedown="movePlayer('down')"
-                    ontouchstart="movePlayer('down')">
-                    ⬇️
-                </button>
-
-                <button
-                    onmousedown="movePlayer('right')"
-                    ontouchstart="movePlayer('right')">
-                    ➡️
-                </button>
-
-            </div>
+            <button onclick="movePlayer('right')">
+                ▶
+            </button>
 
         </div>
 
+    </div>
 
-        <button onclick="backToMenu()" class="menu-button">
-            ⬅️ Kembali ke Menu
+
+    <div class="game-buttons">
+
+        <button onclick="restartGame()">
+            🔄 Mulai Ulang
+        </button>
+
+        <button onclick="backToMenu()">
+            🏠 Menu
         </button>
 
     </div>
@@ -266,14 +434,23 @@
 </section>
 
 
-<!-- ================= NOTIFIKASI GAME ================= -->
+<!-- ==================================================
+     NOTIFIKASI GAME
+     TIDAK MENGGUNAKAN ALERT / CONFIRM BROWSER
+================================================== -->
 
-<div id="gameNotification" class="notification-overlay">
+<div
+    id="notificationPopup"
+    class="notification-popup hidden"
+>
 
-    <div class="notification-box">
+    <div class="notification-card">
 
-        <div id="notificationIcon" class="notification-icon">
-            ⚠️
+        <div
+            id="notificationIcon"
+            class="notification-icon"
+        >
+            ℹ️
         </div>
 
         <h2 id="notificationTitle">
@@ -281,10 +458,10 @@
         </h2>
 
         <p id="notificationMessage">
-            Pesan game
+            Pesan
         </p>
 
-        <button onclick="closeGameNotification()">
+        <button onclick="closeNotification()">
             OKE
         </button>
 
@@ -293,38 +470,51 @@
 </div>
 
 
-<!-- ================= GAME OVER ================= -->
+<!-- ==================================================
+     GAME OVER
+================================================== -->
 
-<div id="gameOver" class="notification-overlay">
+<div
+    id="gameOverPopup"
+    class="game-over-popup hidden"
+>
 
-    <div class="notification-box game-over-box">
+    <div class="game-over-card">
 
-        <div class="notification-icon">
-            🎮
+        <div class="game-over-icon">
+            😵
         </div>
 
-        <h2>GAME OVER</h2>
+        <h2>GAME OVER!</h2>
 
-        <p id="gameOverMessage">
-            Permainan selesai.
+        <p>
+            Skor kamu:
+            <strong id="finalScore">0</strong>
         </p>
 
-        <button onclick="restartGame()">
-            🔄 Main Lagi
-        </button>
+        <p>
+            Level:
+            <strong id="finalLevel">1</strong>
+        </p>
 
-        <button
-            onclick="backToMenu()"
-            class="secondary-btn">
-            🏠 Menu Utama
-        </button>
+        <div class="game-over-buttons">
+
+            <button onclick="playAgain()">
+                🔄 Main Lagi
+            </button>
+
+            <button onclick="backToMenu()">
+                🏠 Menu
+            </button>
+
+        </div>
 
     </div>
 
 </div>
 
 
-<script src="script.js?v=3"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
