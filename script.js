@@ -1,71 +1,141 @@
 // ==========================================
-// ELEMENT HTML
+// ELEMENT
 // ==========================================
 
-const loginPage = document.getElementById("loginPage");
-const registerPage = document.getElementById("registerPage");
-const menuPage = document.getElementById("menuPage");
-const gamePage = document.getElementById("gamePage");
+const loginPage =
+    document.getElementById("loginPage");
+
+const registerPage =
+    document.getElementById("registerPage");
+
+const menuPage =
+    document.getElementById("menuPage");
+
+const gamePage =
+    document.getElementById("gamePage");
 
 
 // LOGIN
 
-const loginForm = document.getElementById("loginForm");
-const loginUsername = document.getElementById("loginUsername");
-const loginPassword = document.getElementById("loginPassword");
-const loginMessage = document.getElementById("loginMessage");
+const loginForm =
+    document.getElementById("loginForm");
+
+const loginUsername =
+    document.getElementById("loginUsername");
+
+const loginPassword =
+    document.getElementById("loginPassword");
+
+const loginMessage =
+    document.getElementById("loginMessage");
 
 
 // REGISTER
 
-const registerForm = document.getElementById("registerForm");
-const registerUsername = document.getElementById("registerUsername");
-const registerPassword = document.getElementById("registerPassword");
-const confirmPassword = document.getElementById("confirmPassword");
-const registerMessage = document.getElementById("registerMessage");
+const registerForm =
+    document.getElementById("registerForm");
+
+const registerUsername =
+    document.getElementById("registerUsername");
+
+const registerPassword =
+    document.getElementById("registerPassword");
+
+const confirmPassword =
+    document.getElementById("confirmPassword");
+
+const registerMessage =
+    document.getElementById("registerMessage");
 
 
 // MENU
 
-const menuUsername = document.getElementById("menuUsername");
-const playButton = document.getElementById("playButton");
-const logoutButton = document.getElementById("logoutButton");
-const howToPlayButton = document.getElementById("howToPlayButton");
-const howToPlay = document.getElementById("howToPlay");
+const menuUsername =
+    document.getElementById("menuUsername");
+
+const playButton =
+    document.getElementById("playButton");
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+const howToPlayButton =
+    document.getElementById("howToPlayButton");
+
+const howToPlay =
+    document.getElementById("howToPlay");
 
 
 // GAME
 
-const gameUsername = document.getElementById("gameUsername");
-const gameArea = document.getElementById("gameArea");
+const gameUsername =
+    document.getElementById("gameUsername");
 
-const player = document.getElementById("player");
-const guard1 = document.getElementById("guard1");
-const guard2 = document.getElementById("guard2");
+const gameArea =
+    document.getElementById("gameArea");
 
-const scoreText = document.getElementById("score");
-const livesText = document.getElementById("lives");
-const levelText = document.getElementById("level");
+const player =
+    document.getElementById("player");
 
-const gameMessage = document.getElementById("gameMessage");
+const guard1 =
+    document.getElementById("guard1");
 
-const restartButton = document.getElementById("restartButton");
-const backMenuButton = document.getElementById("backMenuButton");
+const guard2 =
+    document.getElementById("guard2");
+
+const guard3 =
+    document.getElementById("guard3");
+
+const obstacle1 =
+    document.getElementById("obstacle1");
+
+const obstacle2 =
+    document.getElementById("obstacle2");
+
+const coin1 =
+    document.getElementById("coin1");
+
+const coin2 =
+    document.getElementById("coin2");
+
+const coin3 =
+    document.getElementById("coin3");
+
+const scoreText =
+    document.getElementById("score");
+
+const coinsText =
+    document.getElementById("coins");
+
+const livesText =
+    document.getElementById("lives");
+
+const levelText =
+    document.getElementById("level");
+
+const gameMessage =
+    document.getElementById("gameMessage");
+
+const restartButton =
+    document.getElementById("restartButton");
+
+const backMenuButton =
+    document.getElementById("backMenuButton");
 
 
 // ==========================================
-// SISTEM AKUN
+// AKUN
 // ==========================================
 
 function getAccounts() {
 
-    const accounts = localStorage.getItem("gobakAccounts");
+    const data =
+        localStorage.getItem("gobakAccounts");
 
-    if (accounts) {
-        return JSON.parse(accounts);
-    }
+    return data
+        ? JSON.parse(data)
+        : [];
 
-    return [];
 }
 
 
@@ -73,151 +143,173 @@ function getAccounts() {
 // REGISTER
 // ==========================================
 
-registerForm.addEventListener("submit", function(event) {
+registerForm.addEventListener(
+    "submit",
+    function(event) {
 
-    event.preventDefault();
+        event.preventDefault();
 
-    const username = registerUsername.value.trim();
-    const password = registerPassword.value;
-    const confirm = confirmPassword.value;
+        const username =
+            registerUsername.value.trim();
 
-    registerMessage.textContent = "";
+        const password =
+            registerPassword.value;
 
-    if (username.length < 3) {
+        const confirm =
+            confirmPassword.value;
+
+
+        if (username.length < 3) {
+
+            registerMessage.textContent =
+                "Username minimal 3 karakter.";
+
+            return;
+        }
+
+
+        if (password.length < 4) {
+
+            registerMessage.textContent =
+                "Password minimal 4 karakter.";
+
+            return;
+        }
+
+
+        if (password !== confirm) {
+
+            registerMessage.textContent =
+                "Password tidak sama.";
+
+            return;
+        }
+
+
+        const accounts =
+            getAccounts();
+
+
+        const exists =
+            accounts.some(
+                account =>
+                    account.username.toLowerCase() ===
+                    username.toLowerCase()
+            );
+
+
+        if (exists) {
+
+            registerMessage.textContent =
+                "Username sudah digunakan.";
+
+            return;
+        }
+
+
+        accounts.push({
+
+            username: username,
+
+            password: password,
+
+            highScore: 0
+
+        });
+
+
+        localStorage.setItem(
+            "gobakAccounts",
+            JSON.stringify(accounts)
+        );
+
+
+        registerMessage.style.color =
+            "#159957";
 
         registerMessage.textContent =
-            "Nama pengguna minimal 3 karakter.";
+            "Akun berhasil dibuat!";
 
-        return;
+
+        setTimeout(function() {
+
+            registerPage.classList.add(
+                "hidden"
+            );
+
+            loginPage.classList.remove(
+                "hidden"
+            );
+
+            registerMessage.style.color =
+                "#d63031";
+
+        }, 900);
+
     }
-
-    if (password.length < 4) {
-
-        registerMessage.textContent =
-            "Password minimal 4 karakter.";
-
-        return;
-    }
-
-    if (password !== confirm) {
-
-        registerMessage.textContent =
-            "Password tidak sama.";
-
-        return;
-    }
-
-
-    const accounts = getAccounts();
-
-    const existingAccount = accounts.find(
-        account =>
-            account.username.toLowerCase() ===
-            username.toLowerCase()
-    );
-
-
-    if (existingAccount) {
-
-        registerMessage.textContent =
-            "Nama pengguna sudah digunakan.";
-
-        return;
-    }
-
-
-    const newAccount = {
-
-        username: username,
-
-        password: password,
-
-        highScore: 0
-
-    };
-
-
-    accounts.push(newAccount);
-
-    localStorage.setItem(
-        "gobakAccounts",
-        JSON.stringify(accounts)
-    );
-
-
-    registerMessage.style.color = "#198754";
-
-    registerMessage.textContent =
-        "Akun berhasil dibuat! Silakan login.";
-
-
-    registerForm.reset();
-
-    setTimeout(function() {
-
-        registerPage.classList.add("hidden");
-
-        loginPage.classList.remove("hidden");
-
-        registerMessage.style.color = "#dc3545";
-
-    }, 1000);
-
-});
+);
 
 
 // ==========================================
 // LOGIN
 // ==========================================
 
-loginForm.addEventListener("submit", function(event) {
+loginForm.addEventListener(
+    "submit",
+    function(event) {
 
-    event.preventDefault();
+        event.preventDefault();
 
-    const username = loginUsername.value.trim();
-    const password = loginPassword.value;
+        const username =
+            loginUsername.value.trim();
 
-    const accounts = getAccounts();
-
-
-    const account = accounts.find(
-
-        account =>
-
-            account.username.toLowerCase() ===
-            username.toLowerCase() &&
-
-            account.password === password
-
-    );
+        const password =
+            loginPassword.value;
 
 
-    if (!account) {
+        const accounts =
+            getAccounts();
 
-        loginMessage.textContent =
-            "Nama pengguna atau password salah.";
 
-        return;
+        const account =
+            accounts.find(
+
+                acc =>
+
+                    acc.username.toLowerCase() ===
+                    username.toLowerCase() &&
+
+                    acc.password ===
+                    password
+
+            );
+
+
+        if (!account) {
+
+            loginMessage.textContent =
+                "Username atau password salah.";
+
+            return;
+        }
+
+
+        localStorage.setItem(
+            "currentUser",
+            account.username
+        );
+
+
+        loginForm.reset();
+
+        showMenu(account.username);
+
     }
-
-
-    localStorage.setItem(
-        "currentUser",
-        account.username
-    );
-
-
-    loginMessage.textContent = "";
-
-    loginForm.reset();
-
-    showMenu(account.username);
-
-});
+);
 
 
 // ==========================================
-// TAMPILKAN MENU
+// MENU
 // ==========================================
 
 function showMenu(username) {
@@ -231,165 +323,237 @@ function showMenu(username) {
     menuPage.classList.remove("hidden");
 
 
-    menuUsername.textContent = username;
+    menuUsername.textContent =
+        username;
 
-    gameUsername.textContent = username;
+    gameUsername.textContent =
+        username;
 
 }
 
 
 // ==========================================
-// PINDAH LOGIN / REGISTER
+// REGISTER / LOGIN
 // ==========================================
 
 document
     .getElementById("showRegister")
-    .addEventListener("click", function() {
+    .addEventListener(
+        "click",
+        function() {
 
-        loginPage.classList.add("hidden");
+            loginPage.classList.add(
+                "hidden"
+            );
 
-        registerPage.classList.remove("hidden");
+            registerPage.classList.remove(
+                "hidden"
+            );
 
-        loginMessage.textContent = "";
-
-    });
+        }
+    );
 
 
 document
     .getElementById("showLogin")
-    .addEventListener("click", function() {
+    .addEventListener(
+        "click",
+        function() {
 
-        registerPage.classList.add("hidden");
+            registerPage.classList.add(
+                "hidden"
+            );
 
-        loginPage.classList.remove("hidden");
+            loginPage.classList.remove(
+                "hidden"
+            );
 
-        registerMessage.textContent = "";
-
-    });
+        }
+    );
 
 
 // ==========================================
 // CARA BERMAIN
 // ==========================================
 
-howToPlayButton.addEventListener("click", function() {
+howToPlayButton.addEventListener(
+    "click",
+    function() {
 
-    howToPlay.classList.toggle("hidden");
+        howToPlay.classList.toggle(
+            "hidden"
+        );
 
-});
+    }
+);
 
 
 // ==========================================
 // DATA GAME
 // ==========================================
 
-let playerX = 20;
+let playerX;
 
-let playerY = 430;
+let playerY;
 
-let score = 0;
+let score;
 
-// ⭐ NYAWA SUDAH 5
-let lives = 5;
+let coins;
 
-let level = 1;
+let lives;
 
-let gameRunning = false;
+let level;
 
-let guardDirection1 = 1;
+let gameRunning;
 
-let guardDirection2 = -1;
+let timer;
 
-let guardTimer = null;
+let lastHit = 0;
 
-let lastHitTime = 0;
+
+// POSISI PENJAGA
+
+let guardPositions = [
+    80,
+    300,
+    500
+];
+
+
+let guardDirections = [
+    1,
+    -1,
+    1
+];
 
 
 // ==========================================
-// MULAI GAME
+// START GAME
 // ==========================================
 
-playButton.addEventListener("click", function() {
-
-    startGame();
-
-});
+playButton.addEventListener(
+    "click",
+    startGame
+);
 
 
 function startGame() {
 
-    menuPage.classList.add("hidden");
+    menuPage.classList.add(
+        "hidden"
+    );
 
-    gamePage.classList.remove("hidden");
+    gamePage.classList.remove(
+        "hidden"
+    );
 
-
-    const currentUser =
-        localStorage.getItem("currentUser");
-
-    gameUsername.textContent =
-        currentUser || "Pemain";
-
-
-    // Reset game
-
-    playerX = 20;
-
-    playerY = gameArea.clientHeight - 70;
 
     score = 0;
 
-    // ⭐ NYAWA 5 SETIAP MULAI GAME
+    coins = 0;
+
     lives = 5;
 
     level = 1;
 
-    guardDirection1 = 1;
-
-    guardDirection2 = -1;
-
     gameRunning = true;
 
-    lastHitTime = 0;
+
+    gameUsername.textContent =
+        localStorage.getItem(
+            "currentUser"
+        );
 
 
-    // Posisi penjaga
+    playerX = 20;
 
-    guard1.style.left = "100px";
+    playerY =
+        gameArea.clientHeight - 70;
 
-    guard2.style.left = "400px";
 
-    guard2.style.right = "auto";
+    guardPositions = [
+        80,
+        300,
+        500
+    ];
 
+
+    guardDirections = [
+        1,
+        -1,
+        1
+    ];
+
+
+    setInitialPositions();
 
     updatePlayer();
 
     updateStatus();
 
+    resetCoins();
+
 
     gameMessage.textContent =
-        "Ayo capai garis FINISH!";
+        "Lewati 3 penjaga dan ambil koin!";
 
 
-    clearInterval(guardTimer);
+    clearInterval(timer);
 
 
-    guardTimer = setInterval(function() {
-
-        if (gameRunning) {
-
-            moveGuards();
-
-            checkCollision();
-
-        }
-
-    }, 40);
+    timer = setInterval(
+        gameLoop,
+        40
+    );
 
 }
 
 
 // ==========================================
-// POSISI PEMAIN
+// POSISI AWAL
+// ==========================================
+
+function setInitialPositions() {
+
+    guard1.style.left =
+        "80px";
+
+    guard1.style.top =
+        "90px";
+
+
+    guard2.style.left =
+        "300px";
+
+    guard2.style.top =
+        "230px";
+
+
+    guard3.style.left =
+        "500px";
+
+    guard3.style.top =
+        "370px";
+
+
+    obstacle1.style.left =
+        "180px";
+
+    obstacle1.style.top =
+        "150px";
+
+
+    obstacle2.style.left =
+        "400px";
+
+    obstacle2.style.top =
+        "300px";
+
+}
+
+
+// ==========================================
+// PEMAIN
 // ==========================================
 
 function updatePlayer() {
@@ -404,16 +568,22 @@ function updatePlayer() {
 
 
 // ==========================================
-// UPDATE SKOR, NYAWA, LEVEL
+// STATUS
 // ==========================================
 
 function updateStatus() {
 
-    scoreText.textContent = score;
+    scoreText.textContent =
+        score;
 
-    livesText.textContent = lives;
+    coinsText.textContent =
+        coins;
 
-    levelText.textContent = level;
+    livesText.textContent =
+        lives;
+
+    levelText.textContent =
+        level;
 
 }
 
@@ -422,67 +592,65 @@ function updateStatus() {
 // KEYBOARD
 // ==========================================
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener(
+    "keydown",
+    function(event) {
 
-    if (!gameRunning) {
-        return;
-    }
-
-
-    const keys = [
-
-        "ArrowUp",
-        "ArrowDown",
-        "ArrowLeft",
-        "ArrowRight",
-
-        "w",
-        "a",
-        "s",
-        "d",
-
-        "W",
-        "A",
-        "S",
-        "D"
-
-    ];
+        if (!gameRunning)
+            return;
 
 
-    if (keys.includes(event.key)) {
+        if (
+            [
+                "ArrowUp",
+                "ArrowDown",
+                "ArrowLeft",
+                "ArrowRight",
+                "w",
+                "a",
+                "s",
+                "d",
+                "W",
+                "A",
+                "S",
+                "D"
+            ].includes(event.key)
+        ) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        movePlayer(event.key);
-
-    }
-
-});
-
-
-// ==========================================
-// TOMBOL MOBILE
-// ==========================================
-
-const controlButtons =
-    document.querySelectorAll(".controls button");
-
-
-controlButtons.forEach(function(button) {
-
-    button.addEventListener("click", function() {
-
-        if (gameRunning) {
-
-            movePlayer(
-                button.dataset.key
-            );
+            movePlayer(event.key);
 
         }
 
-    });
+    }
+);
 
-});
+
+// ==========================================
+// TOMBOL HP
+// ==========================================
+
+document
+    .querySelectorAll(
+        ".controls button"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    movePlayer(
+                        button.dataset.key
+                    );
+
+                }
+            );
+
+        }
+    );
 
 
 // ==========================================
@@ -491,6 +659,10 @@ controlButtons.forEach(function(button) {
 
 function movePlayer(key) {
 
+    if (!gameRunning)
+        return;
+
+
     const step = 20;
 
 
@@ -498,218 +670,184 @@ function movePlayer(key) {
         key === "ArrowUp" ||
         key === "w" ||
         key === "W"
-    ) {
-
+    )
         playerY -= step;
-
-    }
 
 
     if (
         key === "ArrowDown" ||
         key === "s" ||
         key === "S"
-    ) {
-
+    )
         playerY += step;
-
-    }
 
 
     if (
         key === "ArrowLeft" ||
         key === "a" ||
         key === "A"
-    ) {
-
+    )
         playerX -= step;
-
-    }
 
 
     if (
         key === "ArrowRight" ||
         key === "d" ||
         key === "D"
-    ) {
-
+    )
         playerX += step;
 
-    }
 
-
-    // Batas kiri
-
-    if (playerX < 0) {
-
-        playerX = 0;
-
-    }
-
-
-    // Batas kanan
-
-    const maxX =
-        gameArea.clientWidth -
-        player.offsetWidth;
-
-    if (playerX > maxX) {
-
-        playerX = maxX;
-
-    }
-
-
-    // Batas atas
-
-    if (playerY < 0) {
-
-        playerY = 0;
-
-    }
-
-
-    // Batas bawah
-
-    const maxY =
-        gameArea.clientHeight -
-        player.offsetHeight;
-
-    if (playerY > maxY) {
-
-        playerY = maxY;
-
-    }
-
+    limitPlayer();
 
     updatePlayer();
-
-
-    // Cek finish
-
-    if (playerY <= 35) {
-
-        finishLevel();
-
-    }
-
-
-    checkCollision();
 
 }
 
 
 // ==========================================
-// PENJAGA BERGERAK
+// BATAS PEMAIN
+// ==========================================
+
+function limitPlayer() {
+
+    playerX =
+        Math.max(
+            0,
+            Math.min(
+                playerX,
+                gameArea.clientWidth -
+                player.offsetWidth
+            )
+        );
+
+
+    playerY =
+        Math.max(
+            0,
+            Math.min(
+                playerY,
+                gameArea.clientHeight -
+                player.offsetHeight
+            )
+        );
+
+}
+
+
+// ==========================================
+// GAME LOOP
+// ==========================================
+
+function gameLoop() {
+
+    if (!gameRunning)
+        return;
+
+
+    moveGuards();
+
+    checkCollision();
+
+    checkCoins();
+
+    checkFinish();
+
+}
+
+
+// ==========================================
+// PENJAGA
 // ==========================================
 
 function moveGuards() {
 
     const speed =
-        2 + (level - 1) * 0.6;
+        1.8 +
+        (level - 1) * 0.6;
 
 
-    let guard1X =
-        parseInt(guard1.style.left) || 100;
+    const guards = [
+        guard1,
+        guard2,
+        guard3
+    ];
 
 
-    let guard2X =
-        parseInt(guard2.style.left) || 400;
+    guards.forEach(
+        (guard, index) => {
+
+            guardPositions[index] +=
+                guardDirections[index] *
+                speed;
 
 
-    // Penjaga 1
-
-    guard1X +=
-        speed * guardDirection1;
-
-
-    if (
-        guard1X <= 0 ||
-        guard1X >=
-        gameArea.clientWidth -
-        guard1.offsetWidth
-    ) {
-
-        guardDirection1 *= -1;
-
-    }
+            const max =
+                gameArea.clientWidth -
+                guard.offsetWidth;
 
 
-    // Penjaga 2
+            if (
+                guardPositions[index] <= 0 ||
+                guardPositions[index] >= max
+            ) {
 
-    guard2X +=
-        speed * guardDirection2;
+                guardDirections[index] *= -1;
 
-
-    if (
-        guard2X <= 0 ||
-        guard2X >=
-        gameArea.clientWidth -
-        guard2.offsetWidth
-    ) {
-
-        guardDirection2 *= -1;
-
-    }
+            }
 
 
-    guard1.style.left =
-        guard1X + "px";
+            guard.style.left =
+                guardPositions[index] +
+                "px";
 
-
-    guard2.style.left =
-        guard2X + "px";
+        }
+    );
 
 }
 
 
 // ==========================================
-// CEK TABRAKAN
+// TABRAKAN
 // ==========================================
 
 function checkCollision() {
-
-    if (!gameRunning) {
-        return;
-    }
-
-
-    const now = Date.now();
-
-
-    // Memberikan waktu kebal setelah terkena
-    if (now - lastHitTime < 1000) {
-
-        return;
-
-    }
-
 
     const playerRect =
         player.getBoundingClientRect();
 
 
-    const guard1Rect =
-        guard1.getBoundingClientRect();
+    const objects = [
+
+        guard1,
+
+        guard2,
+
+        guard3,
+
+        obstacle1,
+
+        obstacle2
+
+    ];
 
 
-    const guard2Rect =
-        guard2.getBoundingClientRect();
-
-
-    if (
-        isColliding(
-            playerRect,
-            guard1Rect
-        ) ||
-
-        isColliding(
-            playerRect,
-            guard2Rect
-        )
+    for (
+        const object of objects
     ) {
 
-        loseLife();
+        if (
+            collision(
+                playerRect,
+                object.getBoundingClientRect()
+            )
+        ) {
+
+            loseLife();
+
+            return;
+
+        }
 
     }
 
@@ -717,20 +855,20 @@ function checkCollision() {
 
 
 // ==========================================
-// FUNGSI TABRAKAN
+// COLLISION
 // ==========================================
 
-function isColliding(rect1, rect2) {
+function collision(a, b) {
 
     return (
 
-        rect1.left < rect2.right &&
+        a.left < b.right &&
 
-        rect1.right > rect2.left &&
+        a.right > b.left &&
 
-        rect1.top < rect2.bottom &&
+        a.top < b.bottom &&
 
-        rect1.bottom > rect2.top
+        a.bottom > b.top
 
     );
 
@@ -743,22 +881,26 @@ function isColliding(rect1, rect2) {
 
 function loseLife() {
 
-    if (!gameRunning) {
+    if (
+        Date.now() - lastHit <
+        1000
+    )
         return;
-    }
 
 
-    lastHitTime = Date.now();
+    lastHit =
+        Date.now();
 
 
     lives--;
+
 
     updateStatus();
 
 
     if (lives <= 0) {
 
-        endGame();
+        gameOver();
 
         return;
 
@@ -766,7 +908,7 @@ function loseLife() {
 
 
     gameMessage.textContent =
-        "💥 Kamu terkena penjaga! Nyawa tersisa: " +
+        "💥 Aduh! Nyawa tersisa: " +
         lives;
 
 
@@ -776,7 +918,7 @@ function loseLife() {
 
 
 // ==========================================
-// RESET POSISI PEMAIN
+// RESET PLAYER
 // ==========================================
 
 function resetPlayer() {
@@ -784,8 +926,7 @@ function resetPlayer() {
     playerX = 20;
 
     playerY =
-        gameArea.clientHeight -
-        70;
+        gameArea.clientHeight - 70;
 
 
     updatePlayer();
@@ -794,31 +935,136 @@ function resetPlayer() {
 
 
 // ==========================================
-// SELESAI LEVEL
+// KOIN
 // ==========================================
 
-function finishLevel() {
+function resetCoins() {
 
-    if (!gameRunning) {
-        return;
+    const maxX =
+        gameArea.clientWidth - 50;
+
+
+    coin1.style.left =
+        Math.min(120, maxX) + "px";
+
+    coin1.style.top =
+        "140px";
+
+
+    coin2.style.left =
+        Math.min(350, maxX) + "px";
+
+    coin2.style.top =
+        "270px";
+
+
+    coin3.style.left =
+        Math.min(500, maxX) + "px";
+
+    coin3.style.top =
+        "420px";
+
+
+    coin1.style.display =
+        "flex";
+
+    coin2.style.display =
+        "flex";
+
+    coin3.style.display =
+        "flex";
+
+}
+
+
+// ==========================================
+// AMBIL KOIN
+// ==========================================
+
+function checkCoins() {
+
+    const playerRect =
+        player.getBoundingClientRect();
+
+
+    const coinElements = [
+
+        coin1,
+        coin2,
+        coin3
+
+    ];
+
+
+    coinElements.forEach(
+        coin => {
+
+            if (
+                coin.style.display ===
+                "none"
+            )
+                return;
+
+
+            if (
+                collision(
+                    playerRect,
+                    coin.getBoundingClientRect()
+                )
+            ) {
+
+                coin.style.display =
+                    "none";
+
+
+                coins++;
+
+                score += 25;
+
+
+                updateStatus();
+
+
+                gameMessage.textContent =
+                    "🪙 Koin didapat! +25 skor";
+
+            }
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// FINISH
+// ==========================================
+
+function checkFinish() {
+
+    if (playerY <= 10) {
+
+        score +=
+            100 * level;
+
+
+        level++;
+
+
+        updateStatus();
+
+
+        resetPlayer();
+
+        resetCoins();
+
+
+        gameMessage.textContent =
+            "🎉 Level naik! Sekarang Level " +
+            level +
+            "!";
+
     }
-
-
-    score += 100 * level;
-
-    level++;
-
-
-    updateStatus();
-
-
-    gameMessage.textContent =
-        "🎉 Level berhasil! Sekarang Level " +
-        level +
-        " lebih sulit!";
-
-
-    resetPlayer();
 
 }
 
@@ -827,52 +1073,40 @@ function finishLevel() {
 // GAME OVER
 // ==========================================
 
-function endGame() {
+function gameOver() {
 
     gameRunning = false;
 
-    clearInterval(guardTimer);
+    clearInterval(timer);
 
 
-    const newHighScore =
-        saveHighScore();
+    saveHighScore();
 
 
-    if (newHighScore) {
-
-        gameMessage.innerHTML =
-            "💀 GAME OVER!<br>" +
-            "Skor: " +
-            score +
-            "<br>🏆 Rekor baru!";
-
-    } else {
-
-        gameMessage.innerHTML =
-            "💀 GAME OVER!<br>" +
-            "Skor kamu: " +
-            score;
-
-    }
+    gameMessage.innerHTML =
+        "💀 GAME OVER<br>" +
+        "⭐ Skor: " +
+        score +
+        "<br>🏆 Level: " +
+        level;
 
 }
 
 
 // ==========================================
-// SIMPAN HIGH SCORE
+// HIGH SCORE
 // ==========================================
 
 function saveHighScore() {
 
     const currentUser =
-        localStorage.getItem("currentUser");
+        localStorage.getItem(
+            "currentUser"
+        );
 
 
-    if (!currentUser) {
-
-        return false;
-
-    }
+    if (!currentUser)
+        return;
 
 
     const accounts =
@@ -881,24 +1115,23 @@ function saveHighScore() {
 
     const account =
         accounts.find(
-
-            account =>
-                account.username ===
+            acc =>
+                acc.username ===
                 currentUser
-
         );
 
 
-    if (!account) {
-
-        return false;
-
-    }
+    if (!account)
+        return;
 
 
-    if (score > (account.highScore || 0)) {
+    if (
+        score >
+        (account.highScore || 0)
+    ) {
 
-        account.highScore = score;
+        account.highScore =
+            score;
 
 
         localStorage.setItem(
@@ -906,13 +1139,7 @@ function saveHighScore() {
             JSON.stringify(accounts)
         );
 
-
-        return true;
-
     }
-
-
-    return false;
 
 }
 
@@ -921,68 +1148,65 @@ function saveHighScore() {
 // RESTART
 // ==========================================
 
-restartButton.addEventListener("click", function() {
-
-    startGame();
-
-});
+restartButton.addEventListener(
+    "click",
+    startGame
+);
 
 
 // ==========================================
-// KEMBALI KE MENU
+// MENU
 // ==========================================
 
-backMenuButton.addEventListener("click", function() {
+backMenuButton.addEventListener(
+    "click",
+    function() {
 
-    clearInterval(guardTimer);
+        clearInterval(timer);
 
-    gameRunning = false;
+        gameRunning = false;
 
-    gamePage.classList.add("hidden");
+        gamePage.classList.add(
+            "hidden"
+        );
 
-    menuPage.classList.remove("hidden");
+        menuPage.classList.remove(
+            "hidden"
+        );
 
-});
+    }
+);
 
 
 // ==========================================
 // LOGOUT
 // ==========================================
 
-logoutButton.addEventListener("click", function() {
+logoutButton.addEventListener(
+    "click",
+    function() {
 
-    clearInterval(guardTimer);
+        clearInterval(timer);
 
-    gameRunning = false;
-
-
-    localStorage.removeItem("currentUser");
-
-
-    menuPage.classList.add("hidden");
-
-    gamePage.classList.add("hidden");
-
-    loginPage.classList.remove("hidden");
+        gameRunning = false;
 
 
-    loginForm.reset();
-
-    loginMessage.textContent = "";
-
-});
+        localStorage.removeItem(
+            "currentUser"
+        );
 
 
-// ==========================================
-// HALAMAN AWAL
-// ==========================================
+        menuPage.classList.add(
+            "hidden"
+        );
 
-// Selalu mulai dari halaman login
+        gamePage.classList.add(
+            "hidden"
+        );
 
-loginPage.classList.remove("hidden");
+        loginPage.classList.remove(
+            "hidden"
+        );
 
-registerPage.classList.add("hidden");
-
-menuPage.classList.add("hidden");
-
-gamePage.classList.add("hidden");
+    }
+);
