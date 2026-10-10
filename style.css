@@ -7,1133 +7,564 @@
 body {
     font-family: Arial, sans-serif;
     min-height: 100vh;
-
     background:
-        radial-gradient(
-            circle at top,
-            #7ed957,
-            transparent 40%
-        ),
         linear-gradient(
-            135deg,
-            #123b25,
-            #071d12
-        );
+            rgba(20, 80, 35, 0.75),
+            rgba(5, 45, 20, 0.9)
+        ),
+        #246b36;
 
-    color: #fff;
+    overflow-x: hidden;
 }
 
-.hidden {
-    display: none !important;
+
+/* ================= PAGE ================= */
+
+.page {
+    display: none;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-button {
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
+.page.active {
+    display: flex;
 }
 
 
 /* ================= LOGIN ================= */
 
-.auth-page {
-    min-height: 100vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-}
-
-.auth-card {
-    width: 370px;
-    max-width: 100%;
-
-    background: rgba(255,255,255,.96);
-
-    color: #16351f;
-
-    padding: 35px;
-
-    border-radius: 28px;
-
+.login-box,
+.menu-box {
+    width: 390px;
+    max-width: 95%;
+    background: rgba(255,255,255,0.96);
+    padding: 35px 30px;
+    border-radius: 25px;
     text-align: center;
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.4);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
 }
 
 .game-logo {
     width: 80px;
     height: 80px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffd700,
-            #ff9f00
-        );
-
+    margin: auto;
     border-radius: 50%;
+    background: #ffe27a;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    font-size: 40px;
+    font-size: 42px;
 
-    margin: auto;
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.2);
 }
 
-.auth-card h1 {
-    margin-top: 18px;
-
-    font-size: 30px;
-
+h1 {
+    margin-top: 15px;
     color: #17652e;
 }
 
 .subtitle {
     margin: 8px 0 25px;
-
-    color: #777;
+    color: #666;
 }
 
-.auth-card input {
+.login-box input {
     width: 100%;
-
     padding: 14px;
+    margin: 8px 0;
 
-    margin: 7px 0;
-
-    border: 2px solid #ddd;
-
+    border: 2px solid #d7e5d9;
     border-radius: 12px;
 
-    font-size: 15px;
-
     outline: none;
+    font-size: 15px;
 }
 
-.auth-card input:focus {
-    border-color: #2e9d4b;
+.login-box input:focus {
+    border-color: #22963f;
 }
+
 
 .main-btn,
-.start-btn {
+.secondary-btn,
+.menu-button {
+    border: none;
+    border-radius: 12px;
+    padding: 13px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.main-btn {
     width: 100%;
-
-    padding: 15px;
-
     margin-top: 12px;
-
-    border-radius: 14px;
 
     color: white;
 
     background:
         linear-gradient(
             135deg,
-            #20963f,
-            #0d6728
+            #27a447,
+            #0c6628
         );
-
-    font-size: 17px;
-
-    font-weight: bold;
-
-    box-shadow:
-        0 7px 15px rgba(0,0,0,.2);
 }
 
-.small-text {
-    margin-top: 20px;
+.main-btn:hover {
+    transform: translateY(-2px);
+}
 
-    color: #777;
+.secondary-btn {
+    margin-top: 12px;
+    background: #e7e7e7;
+    color: #333;
 }
 
 .link-btn {
-    background: none;
-
-    color: #168039;
-
+    border: none;
+    background: transparent;
+    color: #17652e;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.register-text {
+    margin-top: 20px;
+    color: #666;
 }
 
 
 /* ================= MENU ================= */
 
-.menu-page {
-    min-height: 100vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-}
-
-.menu-card {
-    background: rgba(255,255,255,.96);
-
-    color: #17391f;
-
-    width: 500px;
-    max-width: 100%;
-
-    text-align: center;
-
-    padding: 40px;
-
-    border-radius: 30px;
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.4);
-}
-
-.logo-big {
-    font-size: 65px;
-}
-
-.menu-card h1 {
-    font-size: 42px;
-
-    color: #17652e;
-}
-
-.welcome {
-    margin: 10px 0 25px;
+.menu-box {
+    padding: 40px 30px;
 }
 
 .menu-info {
     display: grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
     gap: 10px;
+    margin: 25px 0;
 
-    margin-bottom: 25px;
+    color: #24562f;
+    font-weight: bold;
 }
 
 .menu-info div {
-    padding: 15px 8px;
-
-    background: #eef9ee;
-
-    border-radius: 15px;
-}
-
-.menu-info span {
-    display: block;
-
-    font-size: 25px;
-
-    margin-bottom: 5px;
-}
-
-.menu-info b {
-    font-size: 12px;
-}
-
-.start-btn {
-    display: block;
-}
-
-.logout-btn {
-    margin-top: 15px;
-
-    background: #eee;
-
-    padding: 10px 20px;
-
-    border-radius: 10px;
+    background: #edf8ee;
+    padding: 12px;
+    border-radius: 12px;
 }
 
 
 /* ================= GAME ================= */
 
-.game-page {
-    min-height: 100vh;
-
-    padding: 15px;
-
-    overflow-x: hidden;
+.game-container {
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
 }
 
 .game-header {
-    max-width: 1100px;
-
-    margin: auto;
-
-    background: rgba(255,255,255,.96);
-
-    color: #17351e;
-
-    border-radius: 20px;
-
-    padding: 12px 18px;
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 
-    gap: 15px;
+    margin-bottom: 15px;
 
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.3);
+    background: rgba(255,255,255,0.96);
+    padding: 15px 20px;
+
+    border-radius: 15px;
 }
 
-.player-info {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-}
-
-.player-info small {
-    display: block;
-
-    color: #888;
-
-    font-size: 10px;
-}
-
-.player-info strong {
-    display: block;
-}
-
-.mini-avatar {
-    width: 48px;
-    height: 48px;
-
-    position: relative;
-}
-
-.avatar-face {
-    position: absolute;
-
-    width: 26px;
-    height: 26px;
-
-    background: #f0ad78;
-
-    border-radius: 50%;
-
-    left: 11px;
-    top: 4px;
-}
-
-.avatar-hair {
-    position: absolute;
-
-    width: 28px;
-    height: 13px;
-
-    background: #302018;
-
-    border-radius:
-        50% 50% 20% 20%;
-
-    left: 10px;
-    top: 1px;
-
-    z-index: 2;
-}
-
-.avatar-body {
-    position: absolute;
-
-    width: 30px;
-    height: 21px;
-
-    background: #e53232;
-
-    border-radius:
-        10px 10px 5px 5px;
-
-    left: 9px;
-    top: 27px;
+.game-title {
+    font-weight: bold;
+    color: #17652e;
 }
 
 .stats {
     display: flex;
-
-    gap: 8px;
+    gap: 15px;
+    font-weight: bold;
 }
 
-.stat-box {
-    min-width: 70px;
-
-    padding: 8px 12px;
-
-    background: #f2f8ef;
-
-    border-radius: 12px;
-
-    text-align: center;
-}
-
-.stat-box span {
-    font-size: 20px;
-}
-
-.stat-box b {
-    font-size: 16px;
-}
-
-.level-box {
-    background: #fff2b8;
+.stats span {
+    color: #17652e;
 }
 
 
-/* ================= LAPANGAN ================= */
+/* ================= ARENA ================= */
 
 #gameArea {
     position: relative;
 
-    width: min(1100px, 100%);
+    width: 100%;
+    max-width: 900px;
 
-    height: 620px;
+    height: 520px;
 
-    margin: 15px auto;
+    margin: auto;
 
     overflow: hidden;
 
-    background: #d7a35d;
+    border: 7px solid #d7ad51;
+    border-radius: 20px;
 
-    border: 7px solid #fff4d1;
-
-    border-radius: 25px;
+    background:
+        linear-gradient(
+            rgba(63,145,72,0.9),
+            rgba(42,125,58,0.95)
+        );
 
     box-shadow:
-        0 15px 35px rgba(0,0,0,.4),
-        inset 0 0 30px rgba(85,45,10,.2);
+        0 20px 50px rgba(0,0,0,0.35);
 }
 
 
-/* ================= GARIS ================= */
+/* Garis lapangan */
 
 .field-line {
     position: absolute;
-
-    left: 3%;
-
-    width: 94%;
-
-    height: 6px;
-
-    background:
-        rgba(255,255,255,.85);
-
-    border-radius: 10px;
+    background: rgba(255,255,255,0.8);
 }
 
-.line-1 {
-    top: 22%;
+.line1,
+.line2,
+.line3 {
+    left: 12%;
+    right: 12%;
+    height: 4px;
 }
 
-.line-2 {
-    top: 44%;
+.line1 {
+    top: 25%;
 }
 
-.line-3 {
-    top: 66%;
+.line2 {
+    top: 50%;
 }
 
+.line3 {
+    top: 75%;
+}
 
-/* ================= FINISH ================= */
-
-#finishArea {
-    position: absolute;
-
-    top: 1%;
-
+.line4 {
+    top: 0;
+    bottom: 0;
     left: 50%;
-
-    transform: translateX(-50%);
-
-    background: #f6c52f;
-
-    color: #704b00;
-
-    padding: 6px 25px;
-
-    border-radius: 20px;
-
-    font-weight: bold;
-
-    z-index: 5;
+    width: 4px;
 }
 
 
-/* ================= PAGAR ================= */
+/* ================= DEKORASI ================= */
 
-.fence {
+.tree,
+.rock {
     position: absolute;
-
-    width: 100%;
-
-    height: 12px;
-
-    background:
-        repeating-linear-gradient(
-            90deg,
-            #70451e 0 45px,
-            #9b642c 45px 80px
-        );
-
+    pointer-events: none;
     z-index: 1;
 }
 
-.fence-top {
-    top: 4px;
-}
-
-.fence-bottom {
-    bottom: 4px;
-}
-
-
-/* ================= POHON ================= */
-
 .tree {
-    position: absolute;
-
-    width: 70px;
-    height: 120px;
-
-    z-index: 2;
-
-    pointer-events: none;
+    font-size: 40px;
 }
 
-.tree-left {
-    left: -8px;
-    top: 40px;
-}
-
-.tree-right {
-    right: -8px;
-    top: 40px;
-}
-
-.tree-trunk {
-    position: absolute;
-
-    bottom: 0;
-
-    left: 28px;
-
-    width: 20px;
-    height: 65px;
-
-    background: #74451f;
-
-    border-radius: 5px;
-}
-
-.tree-leaves {
-    position: absolute;
-
-    top: 0;
-    left: 3px;
-
-    width: 65px;
-    height: 75px;
-
-    background: #258b3d;
-
-    border-radius: 50%;
-
-    box-shadow:
-        20px -10px 0 #39a84c,
-        35px 15px 0 #197532,
-        -5px 18px 0 #2d9d43;
-}
-
-
-/* ================= SEMAK ================= */
-
-.bush {
-    position: absolute;
-
-    width: 90px;
-    height: 45px;
-
-    background: #267c32;
-
-    border-radius: 50%;
-
-    z-index: 2;
-
-    pointer-events: none;
-}
-
-.bush-left {
+.tree1 {
     left: 10px;
-    bottom: 30px;
+    top: 10px;
 }
 
-.bush-right {
-    right: 10px;
-    bottom: 30px;
+.tree2 {
+    right: 15px;
+    top: 15px;
 }
 
+.tree3 {
+    left: 15px;
+    bottom: 15px;
+}
 
-/* ================= BATU ================= */
+.tree4 {
+    right: 15px;
+    bottom: 15px;
+}
 
 .rock {
-    position: absolute;
-
-    width: 45px;
-    height: 30px;
-
-    background: #777;
-
-    border-radius:
-        55% 45% 35% 50%;
-
-    z-index: 2;
-
-    pointer-events: none;
+    font-size: 25px;
 }
 
-.rock-left {
-    left: 85px;
-    top: 160px;
+.rock1 {
+    left: 28%;
+    top: 12%;
 }
 
-.rock-right {
-    right: 85px;
-    top: 280px;
+.rock2 {
+    right: 25%;
+    bottom: 12%;
 }
 
 
-/* ================= KOIN ================= */
+/* ================= COIN ================= */
 
 .coin {
     position: absolute;
 
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
 
     background:
         radial-gradient(
-            circle at 30% 25%,
-            #fff5a3 0 8%,
-            #ffd83d 20%,
-            #f5aa00 65%,
-            #bd7000 100%
+            circle at 35% 30%,
+            #fff4a0,
+            #ffd42a 35%,
+            #e4a800 80%
         );
 
-    border: 3px solid #e49a00;
+    border: 3px solid #fff0a0;
 
-    border-radius: 50%;
+    color: #a66a00;
 
     display: flex;
-
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
-    color: #fff6a0;
+    font-size: 16px;
+    font-weight: bold;
 
-    font-size: 20px;
+    z-index: 5;
 
     box-shadow:
-        0 5px 8px rgba(0,0,0,.3),
-        inset 0 0 5px #fff4a3;
+        0 5px 12px rgba(0,0,0,0.3);
 
-    z-index: 8;
-
-    animation:
-        coinFloat 1.2s
-        ease-in-out
-        infinite alternate;
-}
-
-.coin-shine {
-    position: absolute;
-
-    width: 8px;
-    height: 8px;
-
-    background:
-        rgba(255,255,255,.8);
-
-    border-radius: 50%;
-
-    top: 5px;
-    left: 7px;
-}
-
-.coin span {
-    position: relative;
+    animation: coinFloat 1s infinite alternate;
 }
 
 @keyframes coinFloat {
-
     from {
         transform: translateY(0);
     }
 
     to {
-        transform: translateY(-7px);
+        transform: translateY(-5px);
     }
 }
 
 
-/* ================= KARAKTER ================= */
+/* ================= PLAYER ================= */
 
-.character {
+#player {
     position: absolute;
 
-    width: 48px;
-    height: 72px;
+    width: 42px;
+    height: 70px;
 
     z-index: 10;
 
-    pointer-events: none;
-}
+    left: 30px;
+    bottom: 25px;
 
-
-/* ================= PENJAGA ================= */
-
-.character-head {
-    position: absolute;
-
-    width: 29px;
-    height: 29px;
-
-    border-radius: 50%;
-
-    left: 9px;
-    top: 5px;
-
-    background: #e9a36f;
-
-    z-index: 4;
-}
-
-.eye {
-    position: absolute;
-
-    width: 4px;
-    height: 4px;
-
-    background: #222;
-
-    border-radius: 50%;
-
-    top: 13px;
-}
-
-.eye-left {
-    left: 7px;
-}
-
-.eye-right {
-    right: 7px;
-}
-
-.hair {
-    position: absolute;
-
-    width: 30px;
-    height: 12px;
-
-    top: -2px;
-    left: 0;
-
-    background: #211a16;
-
-    border-radius:
-        50% 50% 20% 20%;
-}
-
-.police-hat {
-    position: absolute;
-
-    width: 35px;
-    height: 12px;
-
-    top: 0;
-    left: 6px;
-
-    background: #142b58;
-
-    border-radius:
-        50% 50% 5px 5px;
-
-    z-index: 7;
-}
-
-.police-hat::after {
-    content: "";
-
-    position: absolute;
-
-    width: 43px;
-    height: 5px;
-
-    background: #0d2042;
-
-    left: -4px;
-    bottom: -3px;
-
-    border-radius: 5px;
-}
-
-.hat-badge {
-    position: absolute;
-
-    color: #ffd52f;
-
-    font-size: 8px;
-
-    left: 14px;
-    top: 1px;
-}
-
-.character-body {
-    position: absolute;
-
-    width: 30px;
-    height: 30px;
-
-    top: 31px;
-    left: 9px;
-
-    background: #173d78;
-
-    border-radius: 7px;
-
-    border: 2px solid #102c57;
-}
-
-.badge {
-    color: #ffd32f;
-
-    font-size: 9px;
-
-    text-align: center;
-
-    margin-top: 5px;
-}
-
-.arm {
-    position: absolute;
-
-    width: 9px;
-    height: 25px;
-
-    top: 34px;
-
-    background: #173d78;
-
-    border-radius: 8px;
-}
-
-.arm-left {
-    left: 2px;
-
-    transform: rotate(12deg);
-}
-
-.arm-right {
-    right: 2px;
-
-    transform: rotate(-12deg);
-}
-
-.leg {
-    position: absolute;
-
-    width: 10px;
-    height: 17px;
-
-    top: 59px;
-
-    background: #142b58;
-
-    border-radius:
-        0 0 6px 6px;
-}
-
-.leg-left {
-    left: 11px;
-}
-
-.leg-right {
-    right: 11px;
-}
-
-
-/* ================= PEMAIN ================= */
-
-.player-character {
-    width: 48px;
-    height: 62px;
+    transition: left 0.08s, top 0.08s;
 }
 
 .player-head {
-    position: absolute;
+    width: 22px;
+    height: 22px;
 
-    width: 27px;
-    height: 27px;
-
-    left: 10px;
-    top: 1px;
-
-    background: #e9a36f;
-
-    border-radius: 50%;
-}
-
-.player-hair {
-    position: absolute;
-
-    width: 31px;
-    height: 15px;
-
-    left: -1px;
-    top: -3px;
-
-    background: #302019;
-
-    border-radius:
-        60% 50% 20% 20%;
-}
-
-.player-eye {
-    position: absolute;
-
-    width: 4px;
-    height: 4px;
-
-    background: #222;
+    margin: auto;
 
     border-radius: 50%;
 
-    top: 12px;
-}
-
-.player-eye-left {
-    left: 6px;
-}
-
-.player-eye-right {
-    right: 6px;
+    background: #d89565;
+    border: 2px solid #743e26;
 }
 
 .player-body {
-    position: absolute;
+    width: 28px;
+    height: 27px;
 
-    width: 29px;
-    height: 25px;
+    margin: -1px auto 0;
 
-    left: 10px;
-    top: 27px;
-
-    background: #e53b35;
+    background: #1877d2;
 
     border-radius: 8px;
-
-    border: 2px solid #a82220;
-}
-
-.shirt-logo {
-    color: white;
-
-    font-size: 10px;
-
-    text-align: center;
-
-    font-weight: bold;
-
-    margin-top: 5px;
 }
 
 .player-arm {
     position: absolute;
 
-    width: 8px;
-    height: 22px;
+    width: 7px;
+    height: 23px;
 
-    top: 29px;
+    background: #d89565;
 
-    background: #e53b35;
+    top: 24px;
 
     border-radius: 8px;
 }
 
-.player-arm-left {
-    left: 3px;
-
-    transform: rotate(10deg);
+.player-arm.left {
+    left: 1px;
+    transform: rotate(20deg);
 }
 
-.player-arm-right {
-    right: 3px;
-
-    transform: rotate(-10deg);
+.player-arm.right {
+    right: 1px;
+    transform: rotate(-20deg);
 }
 
-.player-leg {
+.player-legs {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.player-legs div {
+    width: 8px;
+    height: 22px;
+
+    background: #333;
+
+    border-radius: 5px;
+}
+
+
+/* ================= GUARD ================= */
+
+.guard {
     position: absolute;
 
-    width: 10px;
-    height: 16px;
+    width: 45px;
+    height: 72px;
 
-    top: 49px;
+    z-index: 9;
 
-    background: #194b86;
-
-    border-radius: 4px;
+    transition:
+        left 0.15s,
+        top 0.15s;
 }
 
-.player-leg-left {
-    left: 11px;
+.guard-head {
+    width: 23px;
+    height: 23px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    background: #d89565;
+    border: 2px solid #743e26;
 }
 
-.player-leg-right {
-    right: 11px;
-}
+.guard-body {
+    width: 31px;
+    height: 29px;
 
-.shoe {
-    position: absolute;
+    margin: -1px auto 0;
 
-    width: 14px;
-    height: 6px;
-
-    background: #222;
+    background: #222d70;
 
     border-radius: 7px;
-
-    top: 61px;
 }
 
-.shoe-left {
-    left: 7px;
-}
+.guard-body::before {
+    content: "★";
 
-.shoe-right {
-    right: 7px;
-}
+    display: block;
 
-
-/* ================= PESAN ================= */
-
-.game-message {
-    max-width: 700px;
-
-    margin: 5px auto;
-
+    color: #ffd72e;
     text-align: center;
 
-    background:
-        rgba(0,0,0,.4);
+    font-size: 12px;
+    padding-top: 7px;
+}
 
-    padding: 10px;
+.guard-legs {
+    width: 20px;
+    height: 21px;
 
-    border-radius: 12px;
+    margin: auto;
 
-    font-weight: bold;
+    border-left: 7px solid #111;
+    border-right: 7px solid #111;
 }
 
 
-/* ================= KONTROL ================= */
+/* ================= CONTROLS ================= */
 
-.mobile-controls {
-    text-align: center;
-
-    margin: 12px auto;
+.controls {
+    margin: 15px auto;
 }
 
-.mobile-controls button {
-    width: 52px;
-    height: 45px;
+.controls button {
+    width: 55px;
+    height: 48px;
 
     margin: 3px;
 
+    border: none;
     border-radius: 12px;
-
-    background: #fff;
-
-    color: #174b27;
-
-    font-size: 20px;
-
-    font-weight: bold;
-
-    box-shadow:
-        0 5px 10px rgba(0,0,0,.3);
-}
-
-
-/* ================= TOMBOL ================= */
-
-.game-buttons {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 10px;
-
-    margin-bottom: 20px;
-}
-
-.game-buttons button {
-    padding: 10px 18px;
-
-    border-radius: 10px;
 
     background: white;
 
-    color: #174b27;
+    font-size: 22px;
 
-    font-weight: bold;
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px rgba(0,0,0,0.2);
+}
+
+.control-middle {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+}
+
+.menu-button {
+    background: rgba(255,255,255,0.9);
+    color: #17652e;
 }
 
 
-/* ==================================================
-   NOTIFIKASI DALAM GAME
-   PENGGANTI ALERT BROWSER
-================================================== */
+/* ================================================= */
+/* NOTIFIKASI GAME */
+/* ================================================= */
 
-.notification-popup {
+.notification-overlay {
     position: fixed;
 
     inset: 0;
 
     background:
-        rgba(0,0,0,.65);
+        rgba(0,0,0,0.65);
 
-    display: flex;
+    display: none;
 
     align-items: center;
     justify-content: center;
 
     padding: 20px;
 
-    z-index: 10000;
+    z-index: 99999;
 }
 
-.notification-popup.hidden {
-    display: none;
+.notification-overlay.show {
+    display: flex;
 }
 
-.notification-card {
-    width: 360px;
-    max-width: 100%;
+
+.notification-box {
+    width: 380px;
+    max-width: 95%;
 
     background: white;
-
-    color: #17351e;
 
     padding: 30px 25px;
 
@@ -1142,52 +573,70 @@ button {
     text-align: center;
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,.5);
+        0 20px 60px rgba(0,0,0,0.5);
 
     animation:
-        notificationShow .25s ease;
+        notificationAppear 0.25s ease;
 }
 
+
+@keyframes notificationAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.75);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
 .notification-icon {
-    width: 65px;
-    height: 65px;
+    width: 70px;
+    height: 70px;
 
-    margin: 0 auto 12px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background: #fff3bf;
+    margin: auto;
 
     border-radius: 50%;
 
-    font-size: 35px;
+    background: #fff1b8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
 }
 
-.notification-card h2 {
-    margin-bottom: 10px;
+
+.notification-box h2 {
+    margin-top: 15px;
 
     color: #17652e;
 
-    font-size: 24px;
+    font-size: 25px;
 }
 
-.notification-card p {
-    margin-bottom: 22px;
+
+.notification-box p {
+    margin: 12px 0 22px;
 
     color: #555;
 
     line-height: 1.5;
-
-    font-size: 15px;
 }
 
-.notification-card button {
-    min-width: 100px;
 
-    padding: 11px 22px;
+.notification-box button {
+    min-width: 120px;
+
+    border: none;
+
+    padding: 12px 25px;
 
     border-radius: 12px;
 
@@ -1202,153 +651,45 @@ button {
 
     font-weight: bold;
 
-    font-size: 15px;
-}
-
-@keyframes notificationShow {
-
-    from {
-        opacity: 0;
-
-        transform: scale(.85);
-    }
-
-    to {
-        opacity: 1;
-
-        transform: scale(1);
-    }
+    cursor: pointer;
 }
 
 
-/* ==================================================
-   GAME OVER
-================================================== */
+.game-over-box button {
+    display: block;
 
-.game-over-popup {
-    position: fixed;
+    width: 100%;
 
-    inset: 0;
-
-    background:
-        rgba(0,0,0,.65);
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-
-    z-index: 9999;
-}
-
-.game-over-popup.hidden {
-    display: none;
-}
-
-.game-over-card {
-    width: 350px;
-    max-width: 100%;
-
-    background: white;
-
-    color: #17351e;
-
-    padding: 30px;
-
-    border-radius: 25px;
-
-    text-align: center;
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.5);
-}
-
-.game-over-icon {
-    font-size: 55px;
-
-    margin-bottom: 5px;
-}
-
-.game-over-card h2 {
-    color: #d83232;
-
-    font-size: 28px;
-
-    margin-bottom: 18px;
-}
-
-.game-over-card p {
-    margin: 8px 0;
-
-    font-size: 16px;
-}
-
-.game-over-buttons {
-    display: flex;
-
-    gap: 10px;
-
-    justify-content: center;
-
-    margin-top: 22px;
-}
-
-.game-over-buttons button {
-    padding: 11px 16px;
-
-    border-radius: 10px;
-
-    background: #17652e;
-
-    color: white;
-
-    font-weight: bold;
-}
-
-.game-over-buttons button:last-child {
-    background: #777;
+    margin-top: 10px;
 }
 
 
 /* ================= RESPONSIVE ================= */
 
-@media (max-width: 700px) {
+@media (max-width: 650px) {
 
     .game-header {
         flex-direction: column;
+        gap: 10px;
     }
 
     .stats {
-        width: 100%;
-
-        justify-content: center;
-
         flex-wrap: wrap;
-    }
-
-    .stat-box {
-        min-width: 60px;
+        justify-content: center;
+        gap: 8px;
     }
 
     #gameArea {
-        height: 560px;
+        height: 430px;
     }
 
     .tree {
-        transform: scale(.75);
+        font-size: 30px;
     }
 
-    .rock {
-        transform: scale(.75);
+    .coin {
+        width: 30px;
+        height: 30px;
     }
 
-    .menu-info {
-        grid-template-columns: 1fr;
-    }
-
-    .menu-card h1 {
-        font-size: 32px;
-    }
 }
