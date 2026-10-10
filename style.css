@@ -7,564 +7,1133 @@
 body {
     font-family: Arial, sans-serif;
     min-height: 100vh;
+
     background:
-        linear-gradient(
-            rgba(20, 80, 35, 0.75),
-            rgba(5, 45, 20, 0.9)
+        radial-gradient(
+            circle at top,
+            #7ed957,
+            transparent 40%
         ),
-        #246b36;
+        linear-gradient(
+            135deg,
+            #123b25,
+            #071d12
+        );
 
-    overflow-x: hidden;
+    color: #fff;
 }
 
-
-/* ================= PAGE ================= */
-
-.page {
-    display: none;
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+.hidden {
+    display: none !important;
 }
 
-.page.active {
-    display: flex;
+button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
 }
 
 
 /* ================= LOGIN ================= */
 
-.login-box,
-.menu-box {
-    width: 390px;
-    max-width: 95%;
-    background: rgba(255,255,255,0.96);
-    padding: 35px 30px;
-    border-radius: 25px;
+.auth-page {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.auth-card {
+    width: 370px;
+    max-width: 100%;
+
+    background: rgba(255,255,255,.96);
+
+    color: #16351f;
+
+    padding: 35px;
+
+    border-radius: 28px;
+
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.4);
 }
 
 .game-logo {
     width: 80px;
     height: 80px;
-    margin: auto;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd700,
+            #ff9f00
+        );
+
     border-radius: 50%;
-    background: #ffe27a;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    font-size: 42px;
+    font-size: 40px;
 
-    box-shadow:
-        0 8px 20px rgba(0,0,0,0.2);
+    margin: auto;
 }
 
-h1 {
-    margin-top: 15px;
+.auth-card h1 {
+    margin-top: 18px;
+
+    font-size: 30px;
+
     color: #17652e;
 }
 
 .subtitle {
     margin: 8px 0 25px;
-    color: #666;
+
+    color: #777;
 }
 
-.login-box input {
+.auth-card input {
     width: 100%;
-    padding: 14px;
-    margin: 8px 0;
 
-    border: 2px solid #d7e5d9;
+    padding: 14px;
+
+    margin: 7px 0;
+
+    border: 2px solid #ddd;
+
     border-radius: 12px;
+
+    font-size: 15px;
 
     outline: none;
-    font-size: 15px;
 }
 
-.login-box input:focus {
-    border-color: #22963f;
+.auth-card input:focus {
+    border-color: #2e9d4b;
 }
-
 
 .main-btn,
-.secondary-btn,
-.menu-button {
-    border: none;
-    border-radius: 12px;
-    padding: 13px 20px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 15px;
-}
-
-.main-btn {
+.start-btn {
     width: 100%;
+
+    padding: 15px;
+
     margin-top: 12px;
+
+    border-radius: 14px;
 
     color: white;
 
     background:
         linear-gradient(
             135deg,
-            #27a447,
-            #0c6628
+            #20963f,
+            #0d6728
         );
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 7px 15px rgba(0,0,0,.2);
 }
 
-.main-btn:hover {
-    transform: translateY(-2px);
-}
+.small-text {
+    margin-top: 20px;
 
-.secondary-btn {
-    margin-top: 12px;
-    background: #e7e7e7;
-    color: #333;
+    color: #777;
 }
 
 .link-btn {
-    border: none;
-    background: transparent;
-    color: #17652e;
-    font-weight: bold;
-    cursor: pointer;
-}
+    background: none;
 
-.register-text {
-    margin-top: 20px;
-    color: #666;
+    color: #168039;
+
+    font-weight: bold;
 }
 
 
 /* ================= MENU ================= */
 
-.menu-box {
-    padding: 40px 30px;
+.menu-page {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.menu-card {
+    background: rgba(255,255,255,.96);
+
+    color: #17391f;
+
+    width: 500px;
+    max-width: 100%;
+
+    text-align: center;
+
+    padding: 40px;
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.4);
+}
+
+.logo-big {
+    font-size: 65px;
+}
+
+.menu-card h1 {
+    font-size: 42px;
+
+    color: #17652e;
+}
+
+.welcome {
+    margin: 10px 0 25px;
 }
 
 .menu-info {
     display: grid;
-    gap: 10px;
-    margin: 25px 0;
 
-    color: #24562f;
-    font-weight: bold;
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 10px;
+
+    margin-bottom: 25px;
 }
 
 .menu-info div {
-    background: #edf8ee;
-    padding: 12px;
-    border-radius: 12px;
+    padding: 15px 8px;
+
+    background: #eef9ee;
+
+    border-radius: 15px;
+}
+
+.menu-info span {
+    display: block;
+
+    font-size: 25px;
+
+    margin-bottom: 5px;
+}
+
+.menu-info b {
+    font-size: 12px;
+}
+
+.start-btn {
+    display: block;
+}
+
+.logout-btn {
+    margin-top: 15px;
+
+    background: #eee;
+
+    padding: 10px 20px;
+
+    border-radius: 10px;
 }
 
 
 /* ================= GAME ================= */
 
-.game-container {
-    width: 100%;
-    max-width: 1000px;
-    text-align: center;
+.game-page {
+    min-height: 100vh;
+
+    padding: 15px;
+
+    overflow-x: hidden;
 }
 
 .game-header {
+    max-width: 1100px;
+
+    margin: auto;
+
+    background: rgba(255,255,255,.96);
+
+    color: #17351e;
+
+    border-radius: 20px;
+
+    padding: 12px 18px;
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
-    margin-bottom: 15px;
+    gap: 15px;
 
-    background: rgba(255,255,255,0.96);
-    padding: 15px 20px;
-
-    border-radius: 15px;
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.3);
 }
 
-.game-title {
-    font-weight: bold;
-    color: #17652e;
+.player-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.player-info small {
+    display: block;
+
+    color: #888;
+
+    font-size: 10px;
+}
+
+.player-info strong {
+    display: block;
+}
+
+.mini-avatar {
+    width: 48px;
+    height: 48px;
+
+    position: relative;
+}
+
+.avatar-face {
+    position: absolute;
+
+    width: 26px;
+    height: 26px;
+
+    background: #f0ad78;
+
+    border-radius: 50%;
+
+    left: 11px;
+    top: 4px;
+}
+
+.avatar-hair {
+    position: absolute;
+
+    width: 28px;
+    height: 13px;
+
+    background: #302018;
+
+    border-radius:
+        50% 50% 20% 20%;
+
+    left: 10px;
+    top: 1px;
+
+    z-index: 2;
+}
+
+.avatar-body {
+    position: absolute;
+
+    width: 30px;
+    height: 21px;
+
+    background: #e53232;
+
+    border-radius:
+        10px 10px 5px 5px;
+
+    left: 9px;
+    top: 27px;
 }
 
 .stats {
     display: flex;
-    gap: 15px;
-    font-weight: bold;
+
+    gap: 8px;
 }
 
-.stats span {
-    color: #17652e;
+.stat-box {
+    min-width: 70px;
+
+    padding: 8px 12px;
+
+    background: #f2f8ef;
+
+    border-radius: 12px;
+
+    text-align: center;
+}
+
+.stat-box span {
+    font-size: 20px;
+}
+
+.stat-box b {
+    font-size: 16px;
+}
+
+.level-box {
+    background: #fff2b8;
 }
 
 
-/* ================= ARENA ================= */
+/* ================= LAPANGAN ================= */
 
 #gameArea {
     position: relative;
 
-    width: 100%;
-    max-width: 900px;
+    width: min(1100px, 100%);
 
-    height: 520px;
+    height: 620px;
 
-    margin: auto;
+    margin: 15px auto;
 
     overflow: hidden;
 
-    border: 7px solid #d7ad51;
-    border-radius: 20px;
+    background: #d7a35d;
 
-    background:
-        linear-gradient(
-            rgba(63,145,72,0.9),
-            rgba(42,125,58,0.95)
-        );
+    border: 7px solid #fff4d1;
+
+    border-radius: 25px;
 
     box-shadow:
-        0 20px 50px rgba(0,0,0,0.35);
+        0 15px 35px rgba(0,0,0,.4),
+        inset 0 0 30px rgba(85,45,10,.2);
 }
 
 
-/* Garis lapangan */
+/* ================= GARIS ================= */
 
 .field-line {
     position: absolute;
-    background: rgba(255,255,255,0.8);
+
+    left: 3%;
+
+    width: 94%;
+
+    height: 6px;
+
+    background:
+        rgba(255,255,255,.85);
+
+    border-radius: 10px;
 }
 
-.line1,
-.line2,
-.line3 {
-    left: 12%;
-    right: 12%;
-    height: 4px;
+.line-1 {
+    top: 22%;
 }
 
-.line1 {
-    top: 25%;
+.line-2 {
+    top: 44%;
 }
 
-.line2 {
-    top: 50%;
-}
-
-.line3 {
-    top: 75%;
-}
-
-.line4 {
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 4px;
+.line-3 {
+    top: 66%;
 }
 
 
-/* ================= DEKORASI ================= */
+/* ================= FINISH ================= */
 
-.tree,
-.rock {
+#finishArea {
     position: absolute;
-    pointer-events: none;
+
+    top: 1%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: #f6c52f;
+
+    color: #704b00;
+
+    padding: 6px 25px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+
+    z-index: 5;
+}
+
+
+/* ================= PAGAR ================= */
+
+.fence {
+    position: absolute;
+
+    width: 100%;
+
+    height: 12px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #70451e 0 45px,
+            #9b642c 45px 80px
+        );
+
     z-index: 1;
 }
 
+.fence-top {
+    top: 4px;
+}
+
+.fence-bottom {
+    bottom: 4px;
+}
+
+
+/* ================= POHON ================= */
+
 .tree {
-    font-size: 40px;
+    position: absolute;
+
+    width: 70px;
+    height: 120px;
+
+    z-index: 2;
+
+    pointer-events: none;
 }
 
-.tree1 {
+.tree-left {
+    left: -8px;
+    top: 40px;
+}
+
+.tree-right {
+    right: -8px;
+    top: 40px;
+}
+
+.tree-trunk {
+    position: absolute;
+
+    bottom: 0;
+
+    left: 28px;
+
+    width: 20px;
+    height: 65px;
+
+    background: #74451f;
+
+    border-radius: 5px;
+}
+
+.tree-leaves {
+    position: absolute;
+
+    top: 0;
+    left: 3px;
+
+    width: 65px;
+    height: 75px;
+
+    background: #258b3d;
+
+    border-radius: 50%;
+
+    box-shadow:
+        20px -10px 0 #39a84c,
+        35px 15px 0 #197532,
+        -5px 18px 0 #2d9d43;
+}
+
+
+/* ================= SEMAK ================= */
+
+.bush {
+    position: absolute;
+
+    width: 90px;
+    height: 45px;
+
+    background: #267c32;
+
+    border-radius: 50%;
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+.bush-left {
     left: 10px;
-    top: 10px;
+    bottom: 30px;
 }
 
-.tree2 {
-    right: 15px;
-    top: 15px;
+.bush-right {
+    right: 10px;
+    bottom: 30px;
 }
 
-.tree3 {
-    left: 15px;
-    bottom: 15px;
-}
 
-.tree4 {
-    right: 15px;
-    bottom: 15px;
-}
+/* ================= BATU ================= */
 
 .rock {
-    font-size: 25px;
+    position: absolute;
+
+    width: 45px;
+    height: 30px;
+
+    background: #777;
+
+    border-radius:
+        55% 45% 35% 50%;
+
+    z-index: 2;
+
+    pointer-events: none;
 }
 
-.rock1 {
-    left: 28%;
-    top: 12%;
+.rock-left {
+    left: 85px;
+    top: 160px;
 }
 
-.rock2 {
-    right: 25%;
-    bottom: 12%;
+.rock-right {
+    right: 85px;
+    top: 280px;
 }
 
 
-/* ================= COIN ================= */
+/* ================= KOIN ================= */
 
 .coin {
     position: absolute;
 
-    width: 34px;
-    height: 34px;
-
-    border-radius: 50%;
+    width: 38px;
+    height: 38px;
 
     background:
         radial-gradient(
-            circle at 35% 30%,
-            #fff4a0,
-            #ffd42a 35%,
-            #e4a800 80%
+            circle at 30% 25%,
+            #fff5a3 0 8%,
+            #ffd83d 20%,
+            #f5aa00 65%,
+            #bd7000 100%
         );
 
-    border: 3px solid #fff0a0;
+    border: 3px solid #e49a00;
 
-    color: #a66a00;
+    border-radius: 50%;
 
     display: flex;
-    justify-content: center;
+
     align-items: center;
+    justify-content: center;
 
-    font-size: 16px;
-    font-weight: bold;
+    color: #fff6a0;
 
-    z-index: 5;
+    font-size: 20px;
 
     box-shadow:
-        0 5px 12px rgba(0,0,0,0.3);
+        0 5px 8px rgba(0,0,0,.3),
+        inset 0 0 5px #fff4a3;
 
-    animation: coinFloat 1s infinite alternate;
+    z-index: 8;
+
+    animation:
+        coinFloat 1.2s
+        ease-in-out
+        infinite alternate;
+}
+
+.coin-shine {
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    background:
+        rgba(255,255,255,.8);
+
+    border-radius: 50%;
+
+    top: 5px;
+    left: 7px;
+}
+
+.coin span {
+    position: relative;
 }
 
 @keyframes coinFloat {
+
     from {
         transform: translateY(0);
     }
 
     to {
-        transform: translateY(-5px);
+        transform: translateY(-7px);
     }
 }
 
 
-/* ================= PLAYER ================= */
+/* ================= KARAKTER ================= */
 
-#player {
+.character {
     position: absolute;
 
-    width: 42px;
-    height: 70px;
+    width: 48px;
+    height: 72px;
 
     z-index: 10;
 
-    left: 30px;
-    bottom: 25px;
-
-    transition: left 0.08s, top 0.08s;
+    pointer-events: none;
 }
 
-.player-head {
-    width: 22px;
-    height: 22px;
 
-    margin: auto;
+/* ================= PENJAGA ================= */
+
+.character-head {
+    position: absolute;
+
+    width: 29px;
+    height: 29px;
 
     border-radius: 50%;
 
-    background: #d89565;
-    border: 2px solid #743e26;
+    left: 9px;
+    top: 5px;
+
+    background: #e9a36f;
+
+    z-index: 4;
+}
+
+.eye {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    background: #222;
+
+    border-radius: 50%;
+
+    top: 13px;
+}
+
+.eye-left {
+    left: 7px;
+}
+
+.eye-right {
+    right: 7px;
+}
+
+.hair {
+    position: absolute;
+
+    width: 30px;
+    height: 12px;
+
+    top: -2px;
+    left: 0;
+
+    background: #211a16;
+
+    border-radius:
+        50% 50% 20% 20%;
+}
+
+.police-hat {
+    position: absolute;
+
+    width: 35px;
+    height: 12px;
+
+    top: 0;
+    left: 6px;
+
+    background: #142b58;
+
+    border-radius:
+        50% 50% 5px 5px;
+
+    z-index: 7;
+}
+
+.police-hat::after {
+    content: "";
+
+    position: absolute;
+
+    width: 43px;
+    height: 5px;
+
+    background: #0d2042;
+
+    left: -4px;
+    bottom: -3px;
+
+    border-radius: 5px;
+}
+
+.hat-badge {
+    position: absolute;
+
+    color: #ffd52f;
+
+    font-size: 8px;
+
+    left: 14px;
+    top: 1px;
+}
+
+.character-body {
+    position: absolute;
+
+    width: 30px;
+    height: 30px;
+
+    top: 31px;
+    left: 9px;
+
+    background: #173d78;
+
+    border-radius: 7px;
+
+    border: 2px solid #102c57;
+}
+
+.badge {
+    color: #ffd32f;
+
+    font-size: 9px;
+
+    text-align: center;
+
+    margin-top: 5px;
+}
+
+.arm {
+    position: absolute;
+
+    width: 9px;
+    height: 25px;
+
+    top: 34px;
+
+    background: #173d78;
+
+    border-radius: 8px;
+}
+
+.arm-left {
+    left: 2px;
+
+    transform: rotate(12deg);
+}
+
+.arm-right {
+    right: 2px;
+
+    transform: rotate(-12deg);
+}
+
+.leg {
+    position: absolute;
+
+    width: 10px;
+    height: 17px;
+
+    top: 59px;
+
+    background: #142b58;
+
+    border-radius:
+        0 0 6px 6px;
+}
+
+.leg-left {
+    left: 11px;
+}
+
+.leg-right {
+    right: 11px;
+}
+
+
+/* ================= PEMAIN ================= */
+
+.player-character {
+    width: 48px;
+    height: 62px;
+}
+
+.player-head {
+    position: absolute;
+
+    width: 27px;
+    height: 27px;
+
+    left: 10px;
+    top: 1px;
+
+    background: #e9a36f;
+
+    border-radius: 50%;
+}
+
+.player-hair {
+    position: absolute;
+
+    width: 31px;
+    height: 15px;
+
+    left: -1px;
+    top: -3px;
+
+    background: #302019;
+
+    border-radius:
+        60% 50% 20% 20%;
+}
+
+.player-eye {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    background: #222;
+
+    border-radius: 50%;
+
+    top: 12px;
+}
+
+.player-eye-left {
+    left: 6px;
+}
+
+.player-eye-right {
+    right: 6px;
 }
 
 .player-body {
-    width: 28px;
-    height: 27px;
+    position: absolute;
 
-    margin: -1px auto 0;
+    width: 29px;
+    height: 25px;
 
-    background: #1877d2;
+    left: 10px;
+    top: 27px;
+
+    background: #e53b35;
 
     border-radius: 8px;
+
+    border: 2px solid #a82220;
+}
+
+.shirt-logo {
+    color: white;
+
+    font-size: 10px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    margin-top: 5px;
 }
 
 .player-arm {
     position: absolute;
 
-    width: 7px;
-    height: 23px;
+    width: 8px;
+    height: 22px;
 
-    background: #d89565;
+    top: 29px;
 
-    top: 24px;
+    background: #e53b35;
 
     border-radius: 8px;
 }
 
-.player-arm.left {
-    left: 1px;
-    transform: rotate(20deg);
+.player-arm-left {
+    left: 3px;
+
+    transform: rotate(10deg);
 }
 
-.player-arm.right {
-    right: 1px;
-    transform: rotate(-20deg);
+.player-arm-right {
+    right: 3px;
+
+    transform: rotate(-10deg);
 }
 
-.player-legs {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-}
-
-.player-legs div {
-    width: 8px;
-    height: 22px;
-
-    background: #333;
-
-    border-radius: 5px;
-}
-
-
-/* ================= GUARD ================= */
-
-.guard {
+.player-leg {
     position: absolute;
 
-    width: 45px;
-    height: 72px;
+    width: 10px;
+    height: 16px;
 
-    z-index: 9;
+    top: 49px;
 
-    transition:
-        left 0.15s,
-        top 0.15s;
+    background: #194b86;
+
+    border-radius: 4px;
 }
 
-.guard-head {
-    width: 23px;
-    height: 23px;
-
-    margin: auto;
-
-    border-radius: 50%;
-
-    background: #d89565;
-    border: 2px solid #743e26;
+.player-leg-left {
+    left: 11px;
 }
 
-.guard-body {
-    width: 31px;
-    height: 29px;
+.player-leg-right {
+    right: 11px;
+}
 
-    margin: -1px auto 0;
+.shoe {
+    position: absolute;
 
-    background: #222d70;
+    width: 14px;
+    height: 6px;
+
+    background: #222;
 
     border-radius: 7px;
+
+    top: 61px;
 }
 
-.guard-body::before {
-    content: "★";
+.shoe-left {
+    left: 7px;
+}
 
-    display: block;
+.shoe-right {
+    right: 7px;
+}
 
-    color: #ffd72e;
+
+/* ================= PESAN ================= */
+
+.game-message {
+    max-width: 700px;
+
+    margin: 5px auto;
+
     text-align: center;
 
-    font-size: 12px;
-    padding-top: 7px;
-}
+    background:
+        rgba(0,0,0,.4);
 
-.guard-legs {
-    width: 20px;
-    height: 21px;
+    padding: 10px;
 
-    margin: auto;
+    border-radius: 12px;
 
-    border-left: 7px solid #111;
-    border-right: 7px solid #111;
+    font-weight: bold;
 }
 
 
-/* ================= CONTROLS ================= */
+/* ================= KONTROL ================= */
 
-.controls {
-    margin: 15px auto;
+.mobile-controls {
+    text-align: center;
+
+    margin: 12px auto;
 }
 
-.controls button {
-    width: 55px;
-    height: 48px;
+.mobile-controls button {
+    width: 52px;
+    height: 45px;
 
     margin: 3px;
 
-    border: none;
     border-radius: 12px;
+
+    background: #fff;
+
+    color: #174b27;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 5px 10px rgba(0,0,0,.3);
+}
+
+
+/* ================= TOMBOL ================= */
+
+.game-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.game-buttons button {
+    padding: 10px 18px;
+
+    border-radius: 10px;
 
     background: white;
 
-    font-size: 22px;
+    color: #174b27;
 
-    cursor: pointer;
-
-    box-shadow:
-        0 5px 12px rgba(0,0,0,0.2);
-}
-
-.control-middle {
-    display: flex;
-    justify-content: center;
-    gap: 3px;
-}
-
-.menu-button {
-    background: rgba(255,255,255,0.9);
-    color: #17652e;
+    font-weight: bold;
 }
 
 
-/* ================================================= */
-/* NOTIFIKASI GAME */
-/* ================================================= */
+/* ==================================================
+   NOTIFIKASI DALAM GAME
+   PENGGANTI ALERT BROWSER
+================================================== */
 
-.notification-overlay {
+.notification-popup {
     position: fixed;
 
     inset: 0;
 
     background:
-        rgba(0,0,0,0.65);
+        rgba(0,0,0,.65);
 
-    display: none;
+    display: flex;
 
     align-items: center;
     justify-content: center;
 
     padding: 20px;
 
-    z-index: 99999;
+    z-index: 10000;
 }
 
-.notification-overlay.show {
-    display: flex;
+.notification-popup.hidden {
+    display: none;
 }
 
-
-.notification-box {
-    width: 380px;
-    max-width: 95%;
+.notification-card {
+    width: 360px;
+    max-width: 100%;
 
     background: white;
+
+    color: #17351e;
 
     padding: 30px 25px;
 
@@ -573,70 +1142,52 @@ h1 {
     text-align: center;
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,0.5);
+        0 20px 60px rgba(0,0,0,.5);
 
     animation:
-        notificationAppear 0.25s ease;
+        notificationShow .25s ease;
 }
-
-
-@keyframes notificationAppear {
-
-    from {
-        opacity: 0;
-        transform: scale(0.75);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-}
-
 
 .notification-icon {
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
 
-    margin: auto;
-
-    border-radius: 50%;
-
-    background: #fff1b8;
+    margin: 0 auto 12px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    font-size: 38px;
+    background: #fff3bf;
+
+    border-radius: 50%;
+
+    font-size: 35px;
 }
 
-
-.notification-box h2 {
-    margin-top: 15px;
+.notification-card h2 {
+    margin-bottom: 10px;
 
     color: #17652e;
 
-    font-size: 25px;
+    font-size: 24px;
 }
 
-
-.notification-box p {
-    margin: 12px 0 22px;
+.notification-card p {
+    margin-bottom: 22px;
 
     color: #555;
 
     line-height: 1.5;
+
+    font-size: 15px;
 }
 
+.notification-card button {
+    min-width: 100px;
 
-.notification-box button {
-    min-width: 120px;
-
-    border: none;
-
-    padding: 12px 25px;
+    padding: 11px 22px;
 
     border-radius: 12px;
 
@@ -651,45 +1202,153 @@ h1 {
 
     font-weight: bold;
 
-    cursor: pointer;
+    font-size: 15px;
+}
+
+@keyframes notificationShow {
+
+    from {
+        opacity: 0;
+
+        transform: scale(.85);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: scale(1);
+    }
 }
 
 
-.game-over-box button {
-    display: block;
+/* ==================================================
+   GAME OVER
+================================================== */
 
-    width: 100%;
+.game-over-popup {
+    position: fixed;
 
-    margin-top: 10px;
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.65);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 9999;
+}
+
+.game-over-popup.hidden {
+    display: none;
+}
+
+.game-over-card {
+    width: 350px;
+    max-width: 100%;
+
+    background: white;
+
+    color: #17351e;
+
+    padding: 30px;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.5);
+}
+
+.game-over-icon {
+    font-size: 55px;
+
+    margin-bottom: 5px;
+}
+
+.game-over-card h2 {
+    color: #d83232;
+
+    font-size: 28px;
+
+    margin-bottom: 18px;
+}
+
+.game-over-card p {
+    margin: 8px 0;
+
+    font-size: 16px;
+}
+
+.game-over-buttons {
+    display: flex;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    margin-top: 22px;
+}
+
+.game-over-buttons button {
+    padding: 11px 16px;
+
+    border-radius: 10px;
+
+    background: #17652e;
+
+    color: white;
+
+    font-weight: bold;
+}
+
+.game-over-buttons button:last-child {
+    background: #777;
 }
 
 
 /* ================= RESPONSIVE ================= */
 
-@media (max-width: 650px) {
+@media (max-width: 700px) {
 
     .game-header {
         flex-direction: column;
-        gap: 10px;
     }
 
     .stats {
-        flex-wrap: wrap;
+        width: 100%;
+
         justify-content: center;
-        gap: 8px;
+
+        flex-wrap: wrap;
+    }
+
+    .stat-box {
+        min-width: 60px;
     }
 
     #gameArea {
-        height: 430px;
+        height: 560px;
     }
 
     .tree {
-        font-size: 30px;
+        transform: scale(.75);
     }
 
-    .coin {
-        width: 30px;
-        height: 30px;
+    .rock {
+        transform: scale(.75);
     }
 
+    .menu-info {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-card h1 {
+        font-size: 32px;
+    }
 }
