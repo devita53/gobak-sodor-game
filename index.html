@@ -10,6 +10,7 @@
 <body>
 
 <!-- ================= LOGIN ================= -->
+
 <section id="loginPage" class="auth-page">
 
     <div class="auth-card">
@@ -17,7 +18,10 @@
         <div class="game-logo">🏃</div>
 
         <h1>GEROBAK SODOR</h1>
-        <p class="subtitle">Adventure Game</p>
+
+        <p class="subtitle">
+            Adventure Game
+        </p>
 
         <input
             type="text"
@@ -37,7 +41,10 @@
 
         <p class="small-text">
             Belum punya akun?
-            <button onclick="showRegister()" class="link-btn">
+            <button
+                onclick="showRegister()"
+                class="link-btn"
+            >
                 Daftar
             </button>
         </p>
@@ -48,6 +55,7 @@
 
 
 <!-- ================= REGISTER ================= -->
+
 <section id="registerPage" class="auth-page hidden">
 
     <div class="auth-card">
@@ -55,7 +63,10 @@
         <div class="game-logo">🎮</div>
 
         <h1>BUAT AKUN</h1>
-        <p class="subtitle">Buat akun untuk bermain</p>
+
+        <p class="subtitle">
+            Buat akun untuk bermain
+        </p>
 
         <input
             type="text"
@@ -75,13 +86,19 @@
             placeholder="Ulangi kata sandi"
         >
 
-        <button onclick="register()" class="main-btn">
+        <button
+            onclick="register()"
+            class="main-btn"
+        >
             DAFTAR
         </button>
 
         <p class="small-text">
             Sudah punya akun?
-            <button onclick="showLogin()" class="link-btn">
+            <button
+                onclick="showLogin()"
+                class="link-btn"
+            >
                 Masuk
             </button>
         </p>
@@ -92,6 +109,7 @@
 
 
 <!-- ================= MENU ================= -->
+
 <section id="menuPage" class="menu-page hidden">
 
     <div class="menu-card">
@@ -126,11 +144,17 @@
 
         </div>
 
-        <button onclick="startGame()" class="start-btn">
+        <button
+            onclick="startGame()"
+            class="start-btn"
+        >
             ▶ MULAI BERMAIN
         </button>
 
-        <button onclick="logout()" class="logout-btn">
+        <button
+            onclick="logout()"
+            class="logout-btn"
+        >
             Keluar
         </button>
 
@@ -140,9 +164,9 @@
 
 
 <!-- ================= GAME ================= -->
+
 <section id="gamePage" class="game-page hidden">
 
-    <!-- HEADER -->
     <div class="game-header">
 
         <div class="player-info">
@@ -155,7 +179,9 @@
 
             <div>
                 <small>PEMAIN</small>
-                <strong id="gameUsername">Player</strong>
+                <strong id="gameUsername">
+                    Player
+                </strong>
             </div>
 
         </div>
@@ -169,7 +195,7 @@
             </div>
 
             <div class="stat-box">
-                <span class="coin-mini"></span>
+                <span class="coin-mini">🪙</span>
                 <b id="coins">0</b>
             </div>
 
@@ -188,29 +214,28 @@
     </div>
 
 
-    <!-- ================= ARENA ================= -->
+    <!-- ================= LAPANGAN ================= -->
+
     <div id="gameArea">
 
-        <!-- DEKORASI -->
+        <!-- POHON -->
         <div class="decoration tree tree-left">
             <div class="tree-leaves"></div>
             <div class="tree-trunk"></div>
         </div>
-
-        <div class="decoration bush bush-left"></div>
-
-        <div class="rock rock-left"></div>
-
 
         <div class="decoration tree tree-right">
             <div class="tree-leaves"></div>
             <div class="tree-trunk"></div>
         </div>
 
+        <!-- SEMAK -->
+        <div class="decoration bush bush-left"></div>
         <div class="decoration bush bush-right"></div>
 
+        <!-- BATU -->
+        <div class="rock rock-left"></div>
         <div class="rock rock-right"></div>
-
 
         <!-- PAGAR -->
         <div class="fence fence-top"></div>
@@ -362,13 +387,13 @@
     </div>
 
 
-    <!-- PESAN GAME -->
+    <!-- PESAN -->
     <div id="gameMessage" class="game-message">
         Kumpulkan semua koin dan hindari penjaga!
     </div>
 
 
-    <!-- KONTROL HP -->
+    <!-- KONTROL -->
     <div class="mobile-controls">
 
         <button onclick="movePlayer('up')">
@@ -394,7 +419,6 @@
     </div>
 
 
-    <!-- TOMBOL -->
     <div class="game-buttons">
 
         <button onclick="restartGame()">
@@ -410,9 +434,50 @@
 </section>
 
 
-<!-- ================= GAME OVER ================= -->
+<!-- ==================================================
+     NOTIFIKASI GAME
+     TIDAK MENGGUNAKAN ALERT / CONFIRM BROWSER
+================================================== -->
 
-<div id="gameOverPopup" class="game-over-popup hidden">
+<div
+    id="notificationPopup"
+    class="notification-popup hidden"
+>
+
+    <div class="notification-card">
+
+        <div
+            id="notificationIcon"
+            class="notification-icon"
+        >
+            ℹ️
+        </div>
+
+        <h2 id="notificationTitle">
+            Informasi
+        </h2>
+
+        <p id="notificationMessage">
+            Pesan
+        </p>
+
+        <button onclick="closeNotification()">
+            OKE
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     GAME OVER
+================================================== -->
+
+<div
+    id="gameOverPopup"
+    class="game-over-popup hidden"
+>
 
     <div class="game-over-card">
 
