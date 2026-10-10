@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gobak Sodor Adventure</title>
+    <title>Gerobak Sodor Adventure</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,14 +11,25 @@
 
 <!-- ================= LOGIN ================= -->
 <section id="loginPage" class="auth-page">
+
     <div class="auth-card">
+
         <div class="game-logo">🏃</div>
 
         <h1>GOBAK SODOR</h1>
         <p class="subtitle">Adventure Game</p>
 
-        <input type="text" id="loginUsername" placeholder="Nama pengguna">
-        <input type="password" id="loginPassword" placeholder="Kata sandi">
+        <input
+            type="text"
+            id="loginUsername"
+            placeholder="Nama pengguna"
+        >
+
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Kata sandi"
+        >
 
         <button onclick="login()" class="main-btn">
             MASUK
@@ -30,21 +41,39 @@
                 Daftar
             </button>
         </p>
+
     </div>
+
 </section>
 
 
 <!-- ================= REGISTER ================= -->
 <section id="registerPage" class="auth-page hidden">
+
     <div class="auth-card">
+
         <div class="game-logo">🎮</div>
 
         <h1>BUAT AKUN</h1>
         <p class="subtitle">Buat akun untuk bermain</p>
 
-        <input type="text" id="registerUsername" placeholder="Nama pengguna">
-        <input type="password" id="registerPassword" placeholder="Kata sandi">
-        <input type="password" id="registerConfirm" placeholder="Ulangi kata sandi">
+        <input
+            type="text"
+            id="registerUsername"
+            placeholder="Nama pengguna"
+        >
+
+        <input
+            type="password"
+            id="registerPassword"
+            placeholder="Kata sandi"
+        >
+
+        <input
+            type="password"
+            id="registerConfirm"
+            placeholder="Ulangi kata sandi"
+        >
 
         <button onclick="register()" class="main-btn">
             DAFTAR
@@ -56,7 +85,9 @@
                 Masuk
             </button>
         </p>
+
     </div>
+
 </section>
 
 
@@ -77,6 +108,7 @@
         </p>
 
         <div class="menu-info">
+
             <div>
                 <span>❤️</span>
                 <b>5 Nyawa</b>
@@ -91,6 +123,7 @@
                 <span>🪙</span>
                 <b>Koin Acak</b>
             </div>
+
         </div>
 
         <button onclick="startGame()" class="start-btn">
@@ -113,6 +146,7 @@
     <div class="game-header">
 
         <div class="player-info">
+
             <div class="mini-avatar">
                 <div class="avatar-hair"></div>
                 <div class="avatar-face"></div>
@@ -123,7 +157,9 @@
                 <small>PEMAIN</small>
                 <strong id="gameUsername">Player</strong>
             </div>
+
         </div>
+
 
         <div class="stats">
 
@@ -152,10 +188,10 @@
     </div>
 
 
-    <!-- GAME AREA -->
+    <!-- ================= ARENA ================= -->
     <div id="gameArea">
 
-        <!-- DEKORASI KIRI -->
+        <!-- DEKORASI -->
         <div class="decoration tree tree-left">
             <div class="tree-leaves"></div>
             <div class="tree-trunk"></div>
@@ -165,7 +201,7 @@
 
         <div class="rock rock-left"></div>
 
-        <!-- DEKORASI KANAN -->
+
         <div class="decoration tree tree-right">
             <div class="tree-leaves"></div>
             <div class="tree-trunk"></div>
@@ -181,19 +217,20 @@
         <div class="fence fence-bottom"></div>
 
 
-        <!-- JALUR GOBAK SODOR -->
+        <!-- GARIS LAPANGAN -->
         <div class="field-line line-1"></div>
         <div class="field-line line-2"></div>
         <div class="field-line line-3"></div>
 
 
-        <!-- GARIS FINISH -->
+        <!-- FINISH -->
         <div id="finishArea">
             FINISH
         </div>
 
 
         <!-- ================= KOIN ================= -->
+
         <div id="coin1" class="coin">
             <div class="coin-shine"></div>
             <span>★</span>
@@ -216,6 +253,7 @@
 
 
         <!-- ================= PENJAGA 1 ================= -->
+
         <div id="guard1" class="character guard">
 
             <div class="character-head">
@@ -242,6 +280,7 @@
 
 
         <!-- ================= PENJAGA 2 ================= -->
+
         <div id="guard2" class="character guard">
 
             <div class="character-head">
@@ -268,6 +307,7 @@
 
 
         <!-- ================= PENJAGA 3 ================= -->
+
         <div id="guard3" class="character guard">
 
             <div class="character-head">
@@ -294,10 +334,12 @@
 
 
         <!-- ================= PEMAIN ================= -->
+
         <div id="player" class="character player-character">
 
             <div class="player-head">
                 <div class="player-hair"></div>
+
                 <div class="player-eye player-eye-left"></div>
                 <div class="player-eye player-eye-right"></div>
             </div>
@@ -320,21 +362,33 @@
     </div>
 
 
-    <!-- PESAN -->
+    <!-- PESAN GAME -->
     <div id="gameMessage" class="game-message">
-        Kumpulkan semua koin!
+        Kumpulkan semua koin dan hindari penjaga!
     </div>
 
 
     <!-- KONTROL HP -->
     <div class="mobile-controls">
 
-        <button onclick="movePlayer('up')">▲</button>
+        <button onclick="movePlayer('up')">
+            ▲
+        </button>
 
         <div>
-            <button onclick="movePlayer('left')">◀</button>
-            <button onclick="movePlayer('down')">▼</button>
-            <button onclick="movePlayer('right')">▶</button>
+
+            <button onclick="movePlayer('left')">
+                ◀
+            </button>
+
+            <button onclick="movePlayer('down')">
+                ▼
+            </button>
+
+            <button onclick="movePlayer('right')">
+                ▶
+            </button>
+
         </div>
 
     </div>
@@ -354,6 +408,45 @@
     </div>
 
 </section>
+
+
+<!-- ================= GAME OVER ================= -->
+
+<div id="gameOverPopup" class="game-over-popup hidden">
+
+    <div class="game-over-card">
+
+        <div class="game-over-icon">
+            😵
+        </div>
+
+        <h2>GAME OVER!</h2>
+
+        <p>
+            Skor kamu:
+            <strong id="finalScore">0</strong>
+        </p>
+
+        <p>
+            Level:
+            <strong id="finalLevel">1</strong>
+        </p>
+
+        <div class="game-over-buttons">
+
+            <button onclick="playAgain()">
+                🔄 Main Lagi
+            </button>
+
+            <button onclick="backToMenu()">
+                🏠 Menu
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 
 <script src="script.js"></script>
