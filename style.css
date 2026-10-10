@@ -1,0 +1,353 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f5132, #198754);
+    min-height: 100vh;
+    color: #222;
+}
+
+
+/* ================= UMUM ================= */
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* ================= LOGIN & REGISTER ================= */
+
+.auth-box {
+    background: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 35px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.auth-box h1 {
+    color: #146c43;
+    margin-bottom: 10px;
+}
+
+.auth-box p {
+    margin: 12px 0;
+}
+
+.auth-box form {
+    margin-top: 20px;
+}
+
+.auth-box input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.auth-box button[type="submit"] {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background: #198754;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.auth-box button[type="submit"]:hover {
+    background: #146c43;
+}
+
+.link-button {
+    border: none;
+    background: none;
+    color: #198754;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.message {
+    min-height: 20px;
+    color: #dc3545;
+}
+
+
+/* ================= MENU ================= */
+
+.menu-box {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 35px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.menu-box h1 {
+    color: #146c43;
+    margin-bottom: 15px;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.menu-buttons button {
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #198754;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.menu-buttons button:hover {
+    background: #146c43;
+}
+
+.menu-buttons .logout {
+    background: #dc3545;
+}
+
+.how-to {
+    margin-top: 20px;
+    padding: 18px;
+    background: #f1f8f4;
+    border-radius: 12px;
+    text-align: left;
+    line-height: 1.7;
+}
+
+
+/* ================= GAME ================= */
+
+.game-container {
+    width: 100%;
+    max-width: 700px;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.game-header {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.game-header div {
+    background: #e9f7ef;
+    padding: 10px 5px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.game-header strong {
+    color: #146c43;
+}
+
+
+/* ================= AREA GAME ================= */
+
+#gameArea {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 500px;
+    margin: auto;
+    overflow: hidden;
+    border: 6px solid #14532d;
+    border-radius: 12px;
+    background:
+        linear-gradient(
+            to bottom,
+            #6cc551 0%,
+            #52b347 100%
+        );
+}
+
+
+/* Garis permainan */
+
+.line {
+    position: absolute;
+    width: 100%;
+    height: 7px;
+    background: white;
+    left: 0;
+}
+
+.line1 {
+    top: 100px;
+}
+
+.line2 {
+    top: 200px;
+}
+
+.line3 {
+    top: 300px;
+}
+
+.line4 {
+    top: 400px;
+}
+
+
+/* Finish */
+
+.finish {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffc107;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+/* Pemain */
+
+#player {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    z-index: 10;
+}
+
+
+/* Penjaga */
+
+#guard1,
+#guard2 {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    z-index: 9;
+}
+
+#guard1 {
+    left: 100px;
+    top: 155px;
+}
+
+#guard2 {
+    left: 400px;
+    top: 355px;
+}
+
+
+/* Pesan */
+
+#gameMessage {
+    margin: 15px 0;
+    min-height: 25px;
+    font-weight: bold;
+}
+
+
+/* ================= KONTROL ================= */
+
+.controls {
+    margin: 15px 0;
+}
+
+.controls button {
+    width: 55px;
+    height: 50px;
+    margin: 3px;
+    border: none;
+    border-radius: 10px;
+    background: #198754;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.controls button:hover {
+    background: #146c43;
+}
+
+
+/* ================= BUTTON GAME ================= */
+
+.game-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.game-buttons button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #198754;
+    color: white;
+}
+
+.game-buttons button:hover {
+    background: #146c43;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 600px) {
+
+    .game-header {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #gameArea {
+        height: 450px;
+    }
+
+    .auth-box,
+    .menu-box {
+        padding: 25px 20px;
+    }
+
+    .game-container {
+        padding: 12px;
+    }
+}
