@@ -7,9 +7,19 @@
 body {
     font-family: Arial, sans-serif;
     min-height: 100vh;
+
     background:
-        radial-gradient(circle at top, #7ed957, transparent 40%),
-        linear-gradient(135deg, #123b25, #071d12);
+        radial-gradient(
+            circle at top,
+            #7ed957,
+            transparent 40%
+        ),
+        linear-gradient(
+            135deg,
+            #123b25,
+            #071d12
+        );
+
     color: #fff;
 }
 
@@ -31,54 +41,84 @@ button {
 
 .auth-page {
     min-height: 100vh;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     padding: 20px;
 }
 
 .auth-card {
     width: 370px;
     max-width: 100%;
+
     background: rgba(255, 255, 255, 0.96);
+
     color: #16351f;
+
     padding: 35px;
+
     border-radius: 28px;
+
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.4);
 }
 
 .game-logo {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, #ffd700, #ff9f00);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd700,
+            #ff9f00
+        );
+
     border-radius: 50%;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     font-size: 40px;
+
     margin: auto;
-    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.2);
 }
 
 .auth-card h1 {
     margin-top: 18px;
+
     font-size: 30px;
+
     color: #17652e;
 }
 
 .subtitle {
     margin: 8px 0 25px;
+
     color: #777;
 }
 
 .auth-card input {
     width: 100%;
+
     padding: 14px;
+
     margin: 7px 0;
+
     border: 2px solid #ddd;
+
     border-radius: 12px;
+
     font-size: 15px;
+
     outline: none;
 }
 
@@ -89,14 +129,28 @@ button {
 .main-btn,
 .start-btn {
     width: 100%;
+
     padding: 15px;
+
     margin-top: 12px;
+
     border-radius: 14px;
+
     color: white;
-    background: linear-gradient(135deg, #20963f, #0d6728);
+
+    background:
+        linear-gradient(
+            135deg,
+            #20963f,
+            #0d6728
+        );
+
     font-size: 17px;
+
     font-weight: bold;
-    box-shadow: 0 7px 15px rgba(0,0,0,.2);
+
+    box-shadow:
+        0 7px 15px rgba(0,0,0,.2);
 }
 
 .main-btn:hover,
@@ -106,12 +160,15 @@ button {
 
 .small-text {
     margin-top: 20px;
+
     color: #777;
 }
 
 .link-btn {
     background: none;
+
     color: #168039;
+
     font-weight: bold;
 }
 
@@ -120,21 +177,30 @@ button {
 
 .menu-page {
     min-height: 100vh;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     padding: 20px;
 }
 
 .menu-card {
     background: rgba(255,255,255,.96);
+
     color: #17391f;
+
     width: 500px;
     max-width: 100%;
+
     text-align: center;
+
     padding: 40px;
+
     border-radius: 30px;
-    box-shadow: 0 25px 70px rgba(0,0,0,.4);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.4);
 }
 
 .logo-big {
@@ -143,6 +209,7 @@ button {
 
 .menu-card h1 {
     font-size: 42px;
+
     color: #17652e;
 }
 
@@ -152,20 +219,28 @@ button {
 
 .menu-info {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap: 10px;
+
     margin-bottom: 25px;
 }
 
 .menu-info div {
     padding: 15px 8px;
+
     background: #eef9ee;
+
     border-radius: 15px;
 }
 
 .menu-info span {
     display: block;
+
     font-size: 25px;
+
     margin-bottom: 5px;
 }
 
@@ -179,8 +254,11 @@ button {
 
 .logout-btn {
     margin-top: 15px;
+
     background: #eee;
+
     padding: 10px 20px;
+
     border-radius: 10px;
 }
 
@@ -189,33 +267,50 @@ button {
 
 .game-page {
     min-height: 100vh;
+
     padding: 15px;
+
     overflow-x: hidden;
 }
 
 .game-header {
     max-width: 1100px;
+
     margin: auto;
+
     background: rgba(255,255,255,.96);
+
     color: #17351e;
+
     border-radius: 20px;
+
     padding: 12px 18px;
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
+
     gap: 15px;
-    box-shadow: 0 8px 25px rgba(0,0,0,.3);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.3);
 }
 
 .player-info {
     display: flex;
+
     align-items: center;
+
     gap: 10px;
 }
 
 .player-info small {
     display: block;
+
     color: #888;
+
     font-size: 10px;
 }
 
@@ -226,50 +321,71 @@ button {
 .mini-avatar {
     width: 48px;
     height: 48px;
+
     position: relative;
 }
 
 .avatar-face {
     position: absolute;
+
     width: 26px;
     height: 26px;
+
     background: #f0ad78;
+
     border-radius: 50%;
+
     left: 11px;
     top: 4px;
 }
 
 .avatar-hair {
     position: absolute;
+
     width: 28px;
     height: 13px;
+
     background: #302018;
-    border-radius: 50% 50% 20% 20%;
+
+    border-radius:
+        50% 50% 20% 20%;
+
     left: 10px;
     top: 1px;
+
     z-index: 2;
 }
 
 .avatar-body {
     position: absolute;
+
     width: 30px;
     height: 21px;
+
     background: #e53232;
-    border-radius: 10px 10px 5px 5px;
+
+    border-radius:
+        10px 10px 5px 5px;
+
     left: 9px;
     top: 27px;
 }
 
 .stats {
     display: flex;
+
     gap: 8px;
 }
 
 .stat-box {
     min-width: 70px;
+
     padding: 8px 12px;
+
     background: #f2f8ef;
+
     border-radius: 12px;
+
     text-align: center;
 }
 
@@ -290,9 +406,13 @@ button {
 
 #gameArea {
     position: relative;
+
     width: min(1100px, 100%);
+
     height: 620px;
+
     margin: 15px auto;
+
     overflow: hidden;
 
     background:
@@ -303,6 +423,7 @@ button {
         #d7a35d;
 
     border: 7px solid #fff4d1;
+
     border-radius: 25px;
 
     box-shadow:
@@ -315,10 +436,16 @@ button {
 
 .field-line {
     position: absolute;
+
     left: 3%;
+
     width: 94%;
+
     height: 6px;
-    background: rgba(255,255,255,.85);
+
+    background:
+        rgba(255,255,255,.85);
+
     border-radius: 10px;
 }
 
@@ -334,16 +461,28 @@ button {
     top: 66%;
 }
 
+
+/* ================= FINISH ================= */
+
 #finishArea {
     position: absolute;
+
     top: 1%;
+
     left: 50%;
+
     transform: translateX(-50%);
+
     background: #f6c52f;
+
     color: #704b00;
+
     padding: 6px 25px;
+
     border-radius: 20px;
+
     font-weight: bold;
+
     z-index: 5;
 }
 
@@ -352,13 +491,18 @@ button {
 
 .fence {
     position: absolute;
+
     width: 100%;
+
     height: 12px;
-    background: repeating-linear-gradient(
-        90deg,
-        #70451e 0 45px,
-        #9b642c 45px 80px
-    );
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #70451e 0 45px,
+            #9b642c 45px 80px
+        );
+
     z-index: 1;
 }
 
@@ -375,9 +519,12 @@ button {
 
 .tree {
     position: absolute;
+
     width: 70px;
     height: 120px;
+
     z-index: 2;
+
     pointer-events: none;
 }
 
@@ -393,22 +540,32 @@ button {
 
 .tree-trunk {
     position: absolute;
+
     bottom: 0;
+
     left: 28px;
+
     width: 20px;
     height: 65px;
+
     background: #74451f;
+
     border-radius: 5px;
 }
 
 .tree-leaves {
     position: absolute;
+
     top: 0;
     left: 3px;
+
     width: 65px;
     height: 75px;
+
     background: #258b3d;
+
     border-radius: 50%;
+
     box-shadow:
         20px -10px 0 #39a84c,
         35px 15px 0 #197532,
@@ -420,11 +577,16 @@ button {
 
 .bush {
     position: absolute;
+
     width: 90px;
     height: 45px;
+
     background: #267c32;
+
     border-radius: 50%;
+
     z-index: 2;
+
     pointer-events: none;
 }
 
@@ -443,11 +605,17 @@ button {
 
 .rock {
     position: absolute;
+
     width: 45px;
     height: 30px;
+
     background: #777;
-    border-radius: 55% 45% 35% 50%;
+
+    border-radius:
+        55% 45% 35% 50%;
+
     z-index: 2;
+
     pointer-events: none;
 }
 
@@ -466,6 +634,7 @@ button {
 
 .coin {
     position: absolute;
+
     width: 38px;
     height: 38px;
 
@@ -479,13 +648,16 @@ button {
         );
 
     border: 3px solid #e49a00;
+
     border-radius: 50%;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     color: #fff6a0;
+
     font-size: 20px;
 
     box-shadow:
@@ -494,15 +666,23 @@ button {
 
     z-index: 8;
 
-    animation: coinFloat 1.2s ease-in-out infinite alternate;
+    animation:
+        coinFloat 1.2s
+        ease-in-out
+        infinite alternate;
 }
 
 .coin-shine {
     position: absolute;
+
     width: 8px;
     height: 8px;
-    background: rgba(255,255,255,.8);
+
+    background:
+        rgba(255,255,255,.8);
+
     border-radius: 50%;
+
     top: 5px;
     left: 7px;
 }
@@ -512,6 +692,7 @@ button {
 }
 
 @keyframes coinFloat {
+
     from {
         transform: translateY(0);
     }
@@ -526,149 +707,177 @@ button {
 
 .character {
     position: absolute;
+
     width: 48px;
     height: 72px;
+
     z-index: 10;
+
     pointer-events: none;
 }
 
 
-/* kepala */
+/* ================= PENJAGA ================= */
 
-.character-head,
-.player-head {
+.character-head {
     position: absolute;
+
     width: 29px;
     height: 29px;
+
     border-radius: 50%;
+
     left: 9px;
     top: 5px;
+
     background: #e9a36f;
+
     z-index: 4;
 }
 
-
-/* mata */
-
-.eye,
-.player-eye {
+.eye {
     position: absolute;
+
     width: 4px;
     height: 4px;
+
     background: #222;
+
     border-radius: 50%;
+
     top: 13px;
 }
 
-.eye-left,
-.player-eye-left {
+.eye-left {
     left: 7px;
 }
 
-.eye-right,
-.player-eye-right {
+.eye-right {
     right: 7px;
 }
 
-
-/* penjaga rambut */
-
 .hair {
     position: absolute;
+
     width: 30px;
     height: 12px;
+
     top: -2px;
     left: 0;
+
     background: #211a16;
-    border-radius: 50% 50% 20% 20%;
+
+    border-radius:
+        50% 50% 20% 20%;
 }
-
-
-/* topi polisi */
 
 .police-hat {
     position: absolute;
+
     width: 35px;
     height: 12px;
+
     top: 0;
     left: 6px;
+
     background: #142b58;
-    border-radius: 50% 50% 5px 5px;
+
+    border-radius:
+        50% 50% 5px 5px;
+
     z-index: 7;
 }
 
 .police-hat::after {
     content: "";
+
     position: absolute;
+
     width: 43px;
     height: 5px;
+
     background: #0d2042;
+
     left: -4px;
     bottom: -3px;
+
     border-radius: 5px;
 }
 
 .hat-badge {
     position: absolute;
+
     color: #ffd52f;
+
     font-size: 8px;
+
     left: 14px;
     top: 1px;
 }
 
-
-/* badan penjaga */
-
 .character-body {
     position: absolute;
+
     width: 30px;
     height: 30px;
+
     top: 31px;
     left: 9px;
+
     background: #173d78;
+
     border-radius: 7px;
+
     border: 2px solid #102c57;
 }
 
 .badge {
     color: #ffd32f;
+
     font-size: 9px;
+
     text-align: center;
+
     margin-top: 5px;
 }
 
-
-/* tangan penjaga */
-
 .arm {
     position: absolute;
+
     width: 9px;
     height: 25px;
+
     top: 34px;
+
     background: #173d78;
+
     border-radius: 8px;
 }
 
 .arm-left {
     left: 2px;
+
     transform: rotate(12deg);
 }
 
 .arm-right {
     right: 2px;
+
     transform: rotate(-12deg);
 }
 
-
-/* kaki penjaga */
-
 .leg {
     position: absolute;
+
     width: 10px;
     height: 17px;
+
     top: 59px;
+
     background: #142b58;
-    border-radius: 0 0 6px 6px;
+
+    border-radius:
+        0 0 6px 6px;
 }
 
 .leg-left {
@@ -680,83 +889,126 @@ button {
 }
 
 
-/* ================= PEMAIN ================= */
+/* ================= PEMAIN LEBIH PENDEK ================= */
 
 .player-character {
-    width: 50px;
-    height: 76px;
+    width: 48px;
+    height: 62px;
 }
 
 .player-head {
+    position: absolute;
+
+    width: 27px;
+    height: 27px;
+
     left: 10px;
-    top: 2px;
-    width: 30px;
-    height: 30px;
+    top: 1px;
+
+    background: #e9a36f;
+
+    border-radius: 50%;
 }
 
 .player-hair {
     position: absolute;
+
     width: 31px;
     height: 15px;
+
     left: -1px;
     top: -3px;
+
     background: #302019;
-    border-radius: 60% 50% 20% 20%;
+
+    border-radius:
+        60% 50% 20% 20%;
 }
 
+.player-eye {
+    position: absolute;
 
-/* badan pemain */
+    width: 4px;
+    height: 4px;
+
+    background: #222;
+
+    border-radius: 50%;
+
+    top: 12px;
+}
+
+.player-eye-left {
+    left: 6px;
+}
+
+.player-eye-right {
+    right: 6px;
+}
 
 .player-body {
     position: absolute;
-    width: 31px;
-    height: 31px;
+
+    width: 29px;
+    height: 25px;
+
     left: 10px;
-    top: 31px;
+    top: 27px;
+
     background: #e53b35;
-    border-radius: 9px;
+
+    border-radius: 8px;
+
     border: 2px solid #a82220;
 }
 
 .shirt-logo {
     color: white;
-    font-size: 11px;
+
+    font-size: 10px;
+
     text-align: center;
+
     font-weight: bold;
-    margin-top: 7px;
+
+    margin-top: 5px;
 }
-
-
-/* tangan pemain */
 
 .player-arm {
     position: absolute;
-    width: 9px;
-    height: 27px;
-    top: 34px;
+
+    width: 8px;
+    height: 22px;
+
+    top: 29px;
+
     background: #e53b35;
+
     border-radius: 8px;
 }
 
 .player-arm-left {
-    left: 2px;
+    left: 3px;
+
     transform: rotate(10deg);
 }
 
 .player-arm-right {
-    right: 2px;
+    right: 3px;
+
     transform: rotate(-10deg);
 }
 
-
-/* kaki pemain */
-
 .player-leg {
     position: absolute;
-    width: 11px;
-    height: 20px;
-    top: 59px;
+
+    width: 10px;
+    height: 16px;
+
+    top: 49px;
+
     background: #194b86;
+
     border-radius: 4px;
 }
 
@@ -768,16 +1020,17 @@ button {
     right: 11px;
 }
 
-
-/* sepatu */
-
 .shoe {
     position: absolute;
-    width: 15px;
-    height: 7px;
+
+    width: 14px;
+    height: 6px;
+
     background: #222;
+
     border-radius: 7px;
-    top: 70px;
+
+    top: 61px;
 }
 
 .shoe-left {
@@ -793,11 +1046,18 @@ button {
 
 .game-message {
     max-width: 700px;
+
     margin: 5px auto;
+
     text-align: center;
-    background: rgba(0,0,0,.4);
+
+    background:
+        rgba(0,0,0,.4);
+
     padding: 10px;
+
     border-radius: 12px;
+
     font-weight: bold;
 }
 
@@ -806,19 +1066,28 @@ button {
 
 .mobile-controls {
     text-align: center;
+
     margin: 12px auto;
 }
 
 .mobile-controls button {
     width: 52px;
     height: 45px;
+
     margin: 3px;
+
     border-radius: 12px;
+
     background: #fff;
+
     color: #174b27;
+
     font-size: 20px;
+
     font-weight: bold;
-    box-shadow: 0 5px 10px rgba(0,0,0,.3);
+
+    box-shadow:
+        0 5px 10px rgba(0,0,0,.3);
 }
 
 .mobile-controls button:active {
@@ -830,17 +1099,132 @@ button {
 
 .game-buttons {
     display: flex;
+
     justify-content: center;
+
     gap: 10px;
+
     margin-bottom: 20px;
 }
 
 .game-buttons button {
     padding: 10px 18px;
+
     border-radius: 10px;
+
     background: white;
+
     color: #174b27;
+
     font-weight: bold;
+}
+
+
+/* ================= GAME OVER ================= */
+
+.game-over-popup {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.65);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 9999;
+
+    padding: 20px;
+}
+
+.game-over-popup.hidden {
+    display: none;
+}
+
+.game-over-card {
+    width: 350px;
+    max-width: 100%;
+
+    background: white;
+
+    color: #17351e;
+
+    padding: 30px;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.5);
+
+    animation:
+        popupMasuk .25s ease;
+}
+
+.game-over-icon {
+    font-size: 55px;
+
+    margin-bottom: 5px;
+}
+
+.game-over-card h2 {
+    color: #d83232;
+
+    font-size: 28px;
+
+    margin-bottom: 18px;
+}
+
+.game-over-card p {
+    margin: 8px 0;
+
+    font-size: 16px;
+}
+
+.game-over-buttons {
+    display: flex;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    margin-top: 22px;
+}
+
+.game-over-buttons button {
+    padding: 11px 16px;
+
+    border-radius: 10px;
+
+    background: #17652e;
+
+    color: white;
+
+    font-weight: bold;
+}
+
+.game-over-buttons button:last-child {
+    background: #777;
+}
+
+@keyframes popupMasuk {
+
+    from {
+        opacity: 0;
+
+        transform: scale(.85);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: scale(1);
+    }
 }
 
 
@@ -854,7 +1238,9 @@ button {
 
     .stats {
         width: 100%;
+
         justify-content: center;
+
         flex-wrap: wrap;
     }
 
