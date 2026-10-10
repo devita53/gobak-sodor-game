@@ -31,13 +31,6 @@ const gamePage =
    TIDAK MENGGUNAKAN ALERT BROWSER
 ===================================================== */
 
-/*
-   Jika ada alert lama dari kode sebelumnya,
-   akan diarahkan ke notifikasi dalam game.
-   Jadi tidak muncul lagi:
-   "devita53.github.io says"
-*/
-
 window.alert = function(message) {
 
     showNotification(
@@ -75,26 +68,23 @@ function showNotification(
             "notificationThumbnail"
         );
 
+    const buttonElement =
+        document.querySelector(
+            "#notificationPopup .notification-card button"
+        );
 
-    /* Judul notifikasi */
+
     titleElement.textContent =
         title;
 
 
-    /* Isi pesan */
     messageElement.textContent =
         message;
 
 
-    /* Icon notifikasi */
     iconElement.textContent =
         icon;
 
-
-    /*
-       Thumbnail mengikuti jenis
-       notifikasi.
-    */
 
     if (thumbnailElement) {
 
@@ -104,10 +94,85 @@ function showNotification(
     }
 
 
-    /*
-       Tampilkan popup notifikasi
-       dari dalam game.
-    */
+    if (buttonElement) {
+
+        buttonElement.textContent =
+            "OKE";
+
+        buttonElement.onclick =
+            closeNotification;
+    }
+
+
+    document
+        .getElementById(
+            "notificationPopup"
+        )
+        .classList.remove("hidden");
+}
+
+
+/* =====================================================
+   PETUNJUK BERMAIN
+===================================================== */
+
+function showInstructions() {
+
+    const titleElement =
+        document.getElementById(
+            "notificationTitle"
+        );
+
+    const messageElement =
+        document.getElementById(
+            "notificationMessage"
+        );
+
+    const iconElement =
+        document.getElementById(
+            "notificationIcon"
+        );
+
+    const thumbnailElement =
+        document.getElementById(
+            "notificationThumbnail"
+        );
+
+    const buttonElement =
+        document.querySelector(
+            "#notificationPopup .notification-card button"
+        );
+
+
+    titleElement.textContent =
+        "CARA BERMAIN";
+
+    iconElement.textContent =
+        "🎮";
+
+    thumbnailElement.textContent =
+        "🎮";
+
+
+    messageElement.innerHTML =
+        "1. Gerakkan pemain dengan tombol panah / WASD.<br>" +
+        "2. Kumpulkan semua koin untuk membuka FINISH.<br>" +
+        "3. Hindari 3 penjaga.<br>" +
+        "4. Kamu memiliki 5 nyawa.<br>" +
+        "5. Setiap level memiliki batas waktu.<br>" +
+        "6. Penjaga semakin cepat setiap level.<br>" +
+        "7. Selesaikan sampai LEVEL 10 untuk menang.";
+
+
+    if (buttonElement) {
+
+        buttonElement.textContent =
+            "MULAI";
+
+        buttonElement.onclick =
+            beginCountdown;
+    }
+
 
     document
         .getElementById(
@@ -397,6 +462,9 @@ let score = 0;
 
 let coins = 0;
 
+/* TOTAL KOIN SELAMA PERMAINAN */
+let totalCoins = 0;
+
 let lives = 5;
 
 let level = 1;
@@ -405,7 +473,40 @@ let gameRunning = false;
 
 let gameTimer = null;
 
+let levelTimer = null;
+
+let countdownTimer = null;
+
 let lastHit = 0;
+
+let levelTimeLeft = 22;
+
+
+/* =====================================================
+   PENGATURAN KESULITAN
+===================================================== */
+
+const MAX_LEVEL = 10;
+
+const START_TIME = 22;
+
+const MIN_TIME = 13;
+
+
+/*
+   Level 1 = 22 detik
+   Level 2 = 21 detik
+   ...
+   Level 10 = 13 detik
+*/
+
+function getLevelTime() {
+
+    return Math.max(
+        MIN_TIME,
+        START_TIME - (level - 1)
+    );
+}
 
 
 let guardPositions = [
@@ -440,6 +541,13 @@ function startGame() {
         .classList.add("hidden");
 
 
+    clearInterval(gameTimer);
+
+    clearInterval(levelTimer);
+
+    clearInterval(countdownTimer);
+
+
     closeNotification();
 
 
@@ -452,11 +560,16 @@ function startGame() {
 
     coins = 0;
 
+    /* RESET TOTAL KOIN SAAT GAME BARU */
+    totalCoins = 0;
+
     lives = 5;
 
     level = 1;
 
-    gameRunning = true;
+    gameRunning = false;
+
+    lastHit = 0;
 
 
     updateUI();
@@ -505,7 +618,110 @@ function startGame() {
     randomizeCoins();
 
 
+    levelTimeLeft =
+        getLevelTime();
+
+
+    showMessage(
+        "Bersiap untuk bermain!"
+    );
+
+
+    showInstructions();
+}
+
+
+/* =====================================================
+   COUNTDOWN 3 - 2 - 1
+===================================================== */
+
+function beginCountdown() {
+
+    closeNotification();
+
+
+    clearInterval(countdownTimer);
+
     clearInterval(gameTimer);
+
+    clearInterval(levelTimer);
+
+
+    gameRunning = false;
+
+
+    let count = 3;
+
+
+    document.getElementById(
+        "gameMessage"
+    ).textContent =
+        count;
+
+
+    countdownTimer =
+        setInterval(
+            function() {
+
+                count--;
+
+
+                if (count > 0) {
+
+                    document.getElementById(
+                        "gameMessage"
+                    ).textContent =
+                        count;
+
+                    return;
+                }
+
+
+                clearInterval(
+                    countdownTimer
+                );
+
+
+                document.getElementById(
+                    "gameMessage"
+                ).textContent =
+                    "MULAI!";
+
+
+                setTimeout(
+                    function() {
+
+                        startLevel();
+
+                    },
+                    600
+                );
+
+            },
+            900
+        );
+}
+
+
+/* =====================================================
+   MEMULAI LEVEL
+===================================================== */
+
+function startLevel() {
+
+    gameRunning = true;
+
+
+    levelTimeLeft =
+        getLevelTime();
+
+
+    updateTimerMessage();
+
+
+    clearInterval(gameTimer);
+
+    clearInterval(levelTimer);
 
 
     gameTimer =
@@ -515,9 +731,37 @@ function startGame() {
         );
 
 
-    showMessage(
-        "Kumpulkan semua koin dan hindari 3 penjaga!"
-    );
+    levelTimer =
+        setInterval(
+            function() {
+
+                if (!gameRunning) {
+                    return;
+                }
+
+
+                levelTimeLeft--;
+
+
+                if (
+                    levelTimeLeft <= 0
+                ) {
+
+                    levelTimeLeft = 0;
+
+                    updateTimerMessage();
+
+                    gameOver();
+
+                    return;
+                }
+
+
+                updateTimerMessage();
+
+            },
+            1000
+        );
 }
 
 
@@ -836,8 +1080,8 @@ function moveGuards() {
 
 
     const speed =
-        1.5 +
-        ((level - 1) * 0.45);
+        1.8 +
+        ((level - 1) * 0.6);
 
 
     for (
@@ -894,6 +1138,9 @@ function checkCoinCollision() {
                     "none";
 
                 coins++;
+
+                /* TAMBAH TOTAL KOIN */
+                totalCoins++;
 
                 score += 25;
 
@@ -1053,6 +1300,18 @@ function checkFinish() {
 
 function nextLevel() {
 
+    if (level >= MAX_LEVEL) {
+
+        score += 100;
+
+        updateUI();
+
+        winGame();
+
+        return;
+    }
+
+
     level++;
 
     score += 100;
@@ -1062,15 +1321,16 @@ function nextLevel() {
 
     updateUI();
 
+
+    levelTimeLeft =
+        getLevelTime();
+
+
     resetPlayer();
 
 
-    /* KOIN BERPINDAH */
-
     randomizeCoins();
 
-
-    /* PENJAGA BERUBAH POSISI */
 
     const width =
         gameArea.clientWidth;
@@ -1142,16 +1402,132 @@ function nextLevel() {
     positionGuards();
 
 
-    /* Acak ulang koin setelah penjaga berubah */
-
     randomizeCoins();
+
+
+    clearInterval(levelTimer);
+
+
+    levelTimer =
+        setInterval(
+            function() {
+
+                if (!gameRunning) {
+                    return;
+                }
+
+
+                levelTimeLeft--;
+
+
+                if (
+                    levelTimeLeft <= 0
+                ) {
+
+                    levelTimeLeft = 0;
+
+                    updateTimerMessage();
+
+                    gameOver();
+
+                    return;
+                }
+
+
+                updateTimerMessage();
+
+            },
+            1000
+        );
 
 
     showMessage(
         "🎉 LEVEL " +
         level +
-        "! Koin berpindah dan penjaga semakin cepat!"
+        "! Penjaga semakin cepat!"
     );
+}
+
+
+/* =====================================================
+   MENANG LEVEL 10
+===================================================== */
+
+function winGame() {
+
+    gameRunning = false;
+
+
+    clearInterval(gameTimer);
+
+    clearInterval(levelTimer);
+
+    clearInterval(countdownTimer);
+
+
+    saveHighScore();
+
+
+    const titleElement =
+        document.getElementById(
+            "notificationTitle"
+        );
+
+    const messageElement =
+        document.getElementById(
+            "notificationMessage"
+        );
+
+    const iconElement =
+        document.getElementById(
+            "notificationIcon"
+        );
+
+    const thumbnailElement =
+        document.getElementById(
+            "notificationThumbnail"
+        );
+
+    const buttonElement =
+        document.querySelector(
+            "#notificationPopup .notification-card button"
+        );
+
+
+    titleElement.textContent =
+        "MENANG!";
+
+
+    messageElement.textContent =
+        "Selamat! Kamu berhasil menyelesaikan semua 10 level Gobak Sodor dengan skor " +
+        score +
+        " dan total koin " +
+        totalCoins +
+        ".";
+
+
+    iconElement.textContent =
+        "🏆";
+
+    thumbnailElement.textContent =
+        "🏆";
+
+
+    if (buttonElement) {
+
+        buttonElement.textContent =
+            "KEMBALI KE MENU";
+
+        buttonElement.onclick =
+            backToMenu;
+    }
+
+
+    document
+        .getElementById(
+            "notificationPopup"
+        )
+        .classList.remove("hidden");
 }
 
 
@@ -1222,6 +1598,26 @@ function updateUI() {
 let messageTimeout;
 
 
+function updateTimerMessage() {
+
+    if (!gameRunning) {
+        return;
+    }
+
+
+    const messageBox =
+        document.getElementById(
+            "gameMessage"
+        );
+
+
+    messageBox.textContent =
+        "⏱️ Waktu: " +
+        levelTimeLeft +
+        " detik | Kumpulkan semua koin dan hindari penjaga!";
+}
+
+
 function showMessage(message) {
 
     const messageBox =
@@ -1245,8 +1641,8 @@ function showMessage(message) {
 
                 if (gameRunning) {
 
-                    messageBox.textContent =
-                        "Kumpulkan semua koin dan hindari penjaga!";
+                    updateTimerMessage();
+
                 }
 
             },
@@ -1261,9 +1657,19 @@ function showMessage(message) {
 
 function gameOver() {
 
+    if (!gameRunning) {
+        return;
+    }
+
+
     gameRunning = false;
 
+
     clearInterval(gameTimer);
+
+    clearInterval(levelTimer);
+
+    clearInterval(countdownTimer);
 
 
     saveHighScore();
@@ -1279,6 +1685,21 @@ function gameOver() {
         "finalLevel"
     ).textContent =
         level;
+
+
+    /* TAMPILKAN TOTAL KOIN */
+    const finalCoinsElement =
+        document.getElementById(
+            "finalCoins"
+        );
+
+
+    if (finalCoinsElement) {
+
+        finalCoinsElement.textContent =
+            totalCoins;
+
+    }
 
 
     document
@@ -1351,6 +1772,11 @@ function restartGame() {
 
     clearInterval(gameTimer);
 
+    clearInterval(levelTimer);
+
+    clearInterval(countdownTimer);
+
+
     startGame();
 }
 
@@ -1363,7 +1789,12 @@ function backToMenu() {
 
     gameRunning = false;
 
+
     clearInterval(gameTimer);
+
+    clearInterval(levelTimer);
+
+    clearInterval(countdownTimer);
 
 
     document
