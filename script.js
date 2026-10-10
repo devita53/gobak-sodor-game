@@ -13,20 +13,31 @@ let currentUser = null;
    HALAMAN
 ===================================================== */
 
-const loginPage = document.getElementById("loginPage");
-const registerPage = document.getElementById("registerPage");
-const menuPage = document.getElementById("menuPage");
-const gamePage = document.getElementById("gamePage");
+const loginPage =
+    document.getElementById("loginPage");
+
+const registerPage =
+    document.getElementById("registerPage");
+
+const menuPage =
+    document.getElementById("menuPage");
+
+const gamePage =
+    document.getElementById("gamePage");
 
 
 function showLogin() {
+
     loginPage.classList.remove("hidden");
+
     registerPage.classList.add("hidden");
 }
 
 
 function showRegister() {
+
     loginPage.classList.add("hidden");
+
     registerPage.classList.remove("hidden");
 }
 
@@ -38,49 +49,70 @@ function showRegister() {
 function register() {
 
     const username =
-        document.getElementById("registerUsername").value.trim();
+        document
+            .getElementById("registerUsername")
+            .value
+            .trim();
 
     const password =
-        document.getElementById("registerPassword").value;
+        document
+            .getElementById("registerPassword")
+            .value;
 
     const confirm =
-        document.getElementById("registerConfirm").value;
+        document
+            .getElementById("registerConfirm")
+            .value;
 
 
     if (username.length < 3) {
+
         alert("Nama pengguna minimal 3 karakter!");
+
         return;
     }
 
 
     if (password.length < 4) {
+
         alert("Kata sandi minimal 4 karakter!");
+
         return;
     }
 
 
     if (password !== confirm) {
+
         alert("Konfirmasi kata sandi tidak sama!");
+
         return;
     }
 
 
-    const existing = accounts.find(
-        account =>
-            account.username.toLowerCase() === username.toLowerCase()
-    );
+    const existing =
+        accounts.find(
+            account =>
+                account.username.toLowerCase() ===
+                username.toLowerCase()
+        );
 
 
     if (existing) {
+
         alert("Nama pengguna sudah digunakan!");
+
         return;
     }
 
 
     accounts.push({
+
         username: username,
+
         password: password,
+
         highScore: 0
+
     });
 
 
@@ -90,11 +122,23 @@ function register() {
     );
 
 
-    alert("Akun berhasil dibuat! Silakan masuk.");
+    alert(
+        "Akun berhasil dibuat! Silakan masuk."
+    );
 
-    document.getElementById("registerUsername").value = "";
-    document.getElementById("registerPassword").value = "";
-    document.getElementById("registerConfirm").value = "";
+
+    document.getElementById(
+        "registerUsername"
+    ).value = "";
+
+    document.getElementById(
+        "registerPassword"
+    ).value = "";
+
+    document.getElementById(
+        "registerConfirm"
+    ).value = "";
+
 
     showLogin();
 }
@@ -107,33 +151,49 @@ function register() {
 function login() {
 
     const username =
-        document.getElementById("loginUsername").value.trim();
+        document
+            .getElementById("loginUsername")
+            .value
+            .trim();
 
     const password =
-        document.getElementById("loginPassword").value;
+        document
+            .getElementById("loginPassword")
+            .value;
 
 
-    const account = accounts.find(
-        account =>
-            account.username.toLowerCase() === username.toLowerCase() &&
-            account.password === password
-    );
+    const account =
+        accounts.find(
+            account =>
+                account.username.toLowerCase() ===
+                username.toLowerCase() &&
+                account.password === password
+        );
 
 
     if (!account) {
-        alert("Nama pengguna atau kata sandi salah!");
+
+        alert(
+            "Nama pengguna atau kata sandi salah!"
+        );
+
         return;
     }
 
 
     currentUser = account;
 
-    document.getElementById("menuUsername").textContent =
+
+    document.getElementById(
+        "menuUsername"
+    ).textContent =
         currentUser.username;
 
 
     loginPage.classList.add("hidden");
+
     registerPage.classList.add("hidden");
+
     menuPage.classList.remove("hidden");
 }
 
@@ -147,13 +207,21 @@ function logout() {
     currentUser = null;
 
     gamePage.classList.add("hidden");
+
     menuPage.classList.add("hidden");
+
     registerPage.classList.add("hidden");
 
     loginPage.classList.remove("hidden");
 
-    document.getElementById("loginUsername").value = "";
-    document.getElementById("loginPassword").value = "";
+
+    document.getElementById(
+        "loginUsername"
+    ).value = "";
+
+    document.getElementById(
+        "loginPassword"
+    ).value = "";
 }
 
 
@@ -161,27 +229,45 @@ function logout() {
    DATA GAME
 ===================================================== */
 
-const gameArea = document.getElementById("gameArea");
-const player = document.getElementById("player");
+const gameArea =
+    document.getElementById("gameArea");
 
-const guard1 = document.getElementById("guard1");
-const guard2 = document.getElementById("guard2");
-const guard3 = document.getElementById("guard3");
+const player =
+    document.getElementById("player");
+
+const guard1 =
+    document.getElementById("guard1");
+
+const guard2 =
+    document.getElementById("guard2");
+
+const guard3 =
+    document.getElementById("guard3");
+
 
 const coinsElements = [
+
     document.getElementById("coin1"),
+
     document.getElementById("coin2"),
+
     document.getElementById("coin3"),
+
     document.getElementById("coin4")
+
 ];
 
 
 let playerX = 0;
+
 let playerY = 0;
 
 let score = 0;
+
 let coins = 0;
+
 let lives = 5;
+
 let level = 1;
 
 let gameRunning = false;
@@ -191,12 +277,25 @@ let gameTimer = null;
 let lastHit = 0;
 
 
-/* posisi penjaga */
-let guardPositions = [80, 350, 620];
+let guardPositions = [
+    80,
+    300,
+    500
+];
 
-let guardDirections = [1, -1, 1];
 
-let guardRows = [120, 300, 440];
+let guardDirections = [
+    1,
+    -1,
+    1
+];
+
+
+let guardRows = [
+    120,
+    300,
+    440
+];
 
 
 /* =====================================================
@@ -205,42 +304,62 @@ let guardRows = [120, 300, 440];
 
 function startGame() {
 
+    document
+        .getElementById("gameOverPopup")
+        .classList.add("hidden");
+
+
     menuPage.classList.add("hidden");
+
     gamePage.classList.remove("hidden");
 
 
-    document.getElementById("gameUsername").textContent =
+    document.getElementById(
+        "gameUsername"
+    ).textContent =
         currentUser.username;
 
 
     score = 0;
+
     coins = 0;
+
     lives = 5;
+
     level = 1;
 
     gameRunning = true;
 
+
     updateUI();
 
 
-    /* posisi awal pemain */
-    playerX = gameArea.clientWidth / 2 - 25;
+    playerX =
+        gameArea.clientWidth / 2 - 24;
 
-    playerY = gameArea.clientHeight - 90;
+    playerY =
+        gameArea.clientHeight - 80;
 
 
-    /* posisi penjaga */
     guardPositions = [
+
         100,
+
         gameArea.clientWidth / 2,
+
         gameArea.clientWidth - 150
+
     ];
 
 
     guardRows = [
+
         130,
+
         300,
+
         450
+
     ];
 
 
@@ -260,7 +379,12 @@ function startGame() {
 
     clearInterval(gameTimer);
 
-    gameTimer = setInterval(gameLoop, 30);
+
+    gameTimer =
+        setInterval(
+            gameLoop,
+            30
+        );
 
 
     showMessage(
@@ -275,8 +399,11 @@ function startGame() {
 
 function positionPlayer() {
 
-    player.style.left = playerX + "px";
-    player.style.top = playerY + "px";
+    player.style.left =
+        playerX + "px";
+
+    player.style.top =
+        playerY + "px";
 }
 
 
@@ -286,16 +413,25 @@ function positionPlayer() {
 
 function positionGuards() {
 
-    guard1.style.left = guardPositions[0] + "px";
-    guard1.style.top = guardRows[0] + "px";
+    guard1.style.left =
+        guardPositions[0] + "px";
+
+    guard1.style.top =
+        guardRows[0] + "px";
 
 
-    guard2.style.left = guardPositions[1] + "px";
-    guard2.style.top = guardRows[1] + "px";
+    guard2.style.left =
+        guardPositions[1] + "px";
+
+    guard2.style.top =
+        guardRows[1] + "px";
 
 
-    guard3.style.left = guardPositions[2] + "px";
-    guard3.style.top = guardRows[2] + "px";
+    guard3.style.left =
+        guardPositions[2] + "px";
+
+    guard3.style.top =
+        guardRows[2] + "px";
 }
 
 
@@ -305,16 +441,24 @@ function positionGuards() {
 
 function randomizeCoins() {
 
-    const width = gameArea.clientWidth;
-    const height = gameArea.clientHeight;
+    const width =
+        gameArea.clientWidth;
+
+    const height =
+        gameArea.clientHeight;
 
 
     const positions = [];
 
 
-    for (let i = 0; i < coinsElements.length; i++) {
+    for (
+        let i = 0;
+        i < coinsElements.length;
+        i++
+    ) {
 
         let x;
+
         let y;
 
         let validPosition = false;
@@ -322,49 +466,76 @@ function randomizeCoins() {
 
         while (!validPosition) {
 
-            x = Math.random() * (width - 100) + 50;
+            x =
+                Math.random() *
+                (width - 100) +
+                50;
 
-            y = Math.random() * (height - 180) + 80;
+
+            y =
+                Math.random() *
+                (height - 180) +
+                80;
 
 
             validPosition = true;
 
 
-            /*
-                Jangan terlalu dekat dengan
-                posisi penjaga.
-            */
+            /* Jarak dari penjaga */
 
-            for (let g = 0; g < guardPositions.length; g++) {
+            for (
+                let g = 0;
+                g < guardPositions.length;
+                g++
+            ) {
 
-                const distance = Math.sqrt(
-                    Math.pow(x - guardPositions[g], 2) +
-                    Math.pow(y - guardRows[g], 2)
-                );
+                const distance =
+                    Math.sqrt(
+                        Math.pow(
+                            x -
+                            guardPositions[g],
+                            2
+                        ) +
+                        Math.pow(
+                            y -
+                            guardRows[g],
+                            2
+                        )
+                    );
 
 
                 if (distance < 100) {
+
                     validPosition = false;
+
                     break;
                 }
             }
 
 
-            /*
-                Jangan terlalu dekat dengan
-                koin lain.
-            */
+            /* Jarak dari koin lain */
 
-            for (const pos of positions) {
+            for (
+                const pos of positions
+            ) {
 
-                const distance = Math.sqrt(
-                    Math.pow(x - pos.x, 2) +
-                    Math.pow(y - pos.y, 2)
-                );
+                const distance =
+                    Math.sqrt(
+                        Math.pow(
+                            x - pos.x,
+                            2
+                        ) +
+                        Math.pow(
+                            y - pos.y,
+                            2
+                        )
+                    );
 
 
                 if (distance < 70) {
+
                     validPosition = false;
+
                     break;
                 }
             }
@@ -377,10 +548,14 @@ function randomizeCoins() {
         });
 
 
-        coinsElements[i].style.left = x + "px";
-        coinsElements[i].style.top = y + "px";
+        coinsElements[i].style.left =
+            x + "px";
 
-        coinsElements[i].style.display = "flex";
+        coinsElements[i].style.top =
+            y + "px";
+
+        coinsElements[i].style.display =
+            "flex";
     }
 }
 
@@ -398,43 +573,55 @@ function movePlayer(direction) {
 
 
     if (direction === "up") {
+
         playerY -= speed;
     }
 
 
     if (direction === "down") {
+
         playerY += speed;
     }
 
 
     if (direction === "left") {
+
         playerX -= speed;
     }
 
 
     if (direction === "right") {
+
         playerX += speed;
     }
 
 
-    /* batas arena */
+    playerX =
+        Math.max(
+            10,
 
-    playerX = Math.max(
-        10,
-        Math.min(
-            gameArea.clientWidth - player.offsetWidth - 10,
-            playerX
-        )
-    );
+            Math.min(
+                gameArea.clientWidth -
+                player.offsetWidth -
+                10,
+
+                playerX
+            )
+        );
 
 
-    playerY = Math.max(
-        35,
-        Math.min(
-            gameArea.clientHeight - player.offsetHeight - 10,
-            playerY
-        )
-    );
+    playerY =
+        Math.max(
+            35,
+
+            Math.min(
+                gameArea.clientHeight -
+                player.offsetHeight -
+                10,
+
+                playerY
+            )
+        );
 
 
     positionPlayer();
@@ -445,49 +632,62 @@ function movePlayer(direction) {
    KEYBOARD
 ===================================================== */
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener(
+    "keydown",
+    function(event) {
 
-    if (!gameRunning) return;
+        if (!gameRunning) return;
 
 
-    const key = event.key.toLowerCase();
+        const key =
+            event.key.toLowerCase();
 
 
-    if (
-        key === "arrowup" ||
-        key === "w"
-    ) {
-        event.preventDefault();
-        movePlayer("up");
+        if (
+            key === "arrowup" ||
+            key === "w"
+        ) {
+
+            event.preventDefault();
+
+            movePlayer("up");
+        }
+
+
+        if (
+            key === "arrowdown" ||
+            key === "s"
+        ) {
+
+            event.preventDefault();
+
+            movePlayer("down");
+        }
+
+
+        if (
+            key === "arrowleft" ||
+            key === "a"
+        ) {
+
+            event.preventDefault();
+
+            movePlayer("left");
+        }
+
+
+        if (
+            key === "arrowright" ||
+            key === "d"
+        ) {
+
+            event.preventDefault();
+
+            movePlayer("right");
+        }
+
     }
-
-
-    if (
-        key === "arrowdown" ||
-        key === "s"
-    ) {
-        event.preventDefault();
-        movePlayer("down");
-    }
-
-
-    if (
-        key === "arrowleft" ||
-        key === "a"
-    ) {
-        event.preventDefault();
-        movePlayer("left");
-    }
-
-
-    if (
-        key === "arrowright" ||
-        key === "d"
-    ) {
-        event.preventDefault();
-        movePlayer("right");
-    }
-});
+);
 
 
 /* =====================================================
@@ -515,27 +715,30 @@ function gameLoop() {
 
 function moveGuards() {
 
-    const width = gameArea.clientWidth;
+    const width =
+        gameArea.clientWidth;
 
-
-    /*
-        Kecepatan semakin bertambah
-        setiap level.
-    */
 
     const speed =
-        1.5 + ((level - 1) * 0.45);
+        1.5 +
+        ((level - 1) * 0.45);
 
 
-    for (let i = 0; i < 3; i++) {
+    for (
+        let i = 0;
+        i < 3;
+        i++
+    ) {
 
         guardPositions[i] +=
-            speed * guardDirections[i];
+            speed *
+            guardDirections[i];
 
 
         if (
             guardPositions[i] <= 20 ||
-            guardPositions[i] >= width - 70
+            guardPositions[i] >=
+            width - 70
         ) {
 
             guardDirections[i] *= -1;
@@ -548,34 +751,47 @@ function moveGuards() {
 
 
 /* =====================================================
-   TABRAKAN DENGAN KOIN
+   TABRAKAN KOIN
 ===================================================== */
 
 function checkCoinCollision() {
 
-    coinsElements.forEach(function(coin) {
+    coinsElements.forEach(
+        function(coin) {
 
-        if (coin.style.display === "none") {
-            return;
+            if (
+                coin.style.display ===
+                "none"
+            ) {
+
+                return;
+            }
+
+
+            if (
+                isColliding(
+                    player,
+                    coin
+                )
+            ) {
+
+                coin.style.display =
+                    "none";
+
+                coins++;
+
+                score += 25;
+
+                updateUI();
+
+
+                showMessage(
+                    "🪙 Koin berhasil dikumpulkan! +25"
+                );
+            }
+
         }
-
-
-        if (isColliding(player, coin)) {
-
-            coin.style.display = "none";
-
-            coins++;
-
-            score += 25;
-
-            updateUI();
-
-
-            showMessage(
-                "🪙 Koin berhasil dikumpulkan! +25"
-            );
-        }
-    });
+    );
 }
 
 
@@ -586,25 +802,35 @@ function checkCoinCollision() {
 function checkGuardCollision() {
 
     const guards = [
+
         guard1,
+
         guard2,
+
         guard3
+
     ];
 
 
-    for (const guard of guards) {
+    for (
+        const guard of guards
+    ) {
 
-        if (isColliding(player, guard)) {
+        if (
+            isColliding(
+                player,
+                guard
+            )
+        ) {
 
-            const now = Date.now();
+            const now =
+                Date.now();
 
 
-            /*
-                Supaya nyawa tidak berkurang
-                berkali-kali dalam waktu singkat.
-            */
-
-            if (now - lastHit > 1200) {
+            if (
+                now - lastHit >
+                1200
+            ) {
 
                 lastHit = now;
 
@@ -652,10 +878,10 @@ function loseLife() {
 function resetPlayer() {
 
     playerX =
-        gameArea.clientWidth / 2 - 25;
+        gameArea.clientWidth / 2 - 24;
 
     playerY =
-        gameArea.clientHeight - 90;
+        gameArea.clientHeight - 80;
 
 
     positionPlayer();
@@ -669,7 +895,9 @@ function resetPlayer() {
 function allCoinsCollected() {
 
     return coinsElements.every(
-        coin => coin.style.display === "none"
+        coin =>
+            coin.style.display ===
+            "none"
     );
 }
 
@@ -680,17 +908,14 @@ function allCoinsCollected() {
 
 function checkFinish() {
 
-    /*
-        Pemain harus mengumpulkan semua koin
-        sebelum bisa naik level.
-    */
-
     if (
         playerY <= 45 &&
         allCoinsCollected()
     ) {
 
         nextLevel();
+
+        return;
     }
 
 
@@ -702,6 +927,7 @@ function checkFinish() {
         showMessage(
             "🪙 Kumpulkan semua koin terlebih dahulu!"
         );
+
 
         playerY = 65;
 
@@ -726,43 +952,95 @@ function nextLevel() {
     updateUI();
 
 
-    /*
-        Reset posisi pemain.
-    */
-
     resetPlayer();
 
 
     /*
-        Koin DIACAK LAGI.
+        KOIN DIACAK KEMBALI
+        SETIAP LEVEL
     */
 
     randomizeCoins();
 
 
     /*
-        Posisi penjaga juga berubah.
+        POSISI PENJAGA BERUBAH
     */
 
+    const width =
+        gameArea.clientWidth;
+
+
     guardPositions = [
-        Math.random() * 200 + 30,
-        Math.random() * 200 + 250,
-        Math.random() * 150 + 500
+
+        Math.random() *
+        Math.max(100, width - 150),
+
+        Math.random() *
+        Math.max(100, width - 150),
+
+        Math.random() *
+        Math.max(100, width - 150)
+
     ];
 
 
     guardRows = [
-        100 + Math.random() * 80,
-        260 + Math.random() * 100,
-        400 + Math.random() * 80
+
+        100 +
+        Math.random() * 80,
+
+        260 +
+        Math.random() * 100,
+
+        400 +
+        Math.random() * 80
+
     ];
+
+
+    /* Pastikan posisi penjaga tidak keluar arena */
+
+    guardPositions =
+        guardPositions.map(
+            position =>
+                Math.max(
+                    20,
+                    Math.min(
+                        width - 70,
+                        position
+                    )
+                )
+        );
+
+
+    guardRows =
+        guardRows.map(
+            position =>
+                Math.max(
+                    70,
+                    Math.min(
+                        gameArea.clientHeight - 100,
+                        position
+                    )
+                )
+        );
 
 
     positionGuards();
 
 
+    /*
+        Acak lagi koin setelah
+        posisi penjaga berubah.
+    */
+
+    randomizeCoins();
+
+
     showMessage(
-        "🎉 LEVEL " + level +
+        "🎉 LEVEL " +
+        level +
         "! Koin berpindah dan penjaga semakin cepat!"
     );
 }
@@ -774,15 +1052,25 @@ function nextLevel() {
 
 function isColliding(a, b) {
 
-    const aRect = a.getBoundingClientRect();
-    const bRect = b.getBoundingClientRect();
+    const aRect =
+        a.getBoundingClientRect();
+
+    const bRect =
+        b.getBoundingClientRect();
 
 
     return !(
-        aRect.right < bRect.left ||
-        aRect.left > bRect.right ||
-        aRect.bottom < bRect.top ||
-        aRect.top > bRect.bottom
+        aRect.right <
+        bRect.left ||
+
+        aRect.left >
+        bRect.right ||
+
+        aRect.bottom <
+        bRect.top ||
+
+        aRect.top >
+        bRect.bottom
     );
 }
 
@@ -793,22 +1081,33 @@ function isColliding(a, b) {
 
 function updateUI() {
 
-    document.getElementById("lives").textContent =
+    document.getElementById(
+        "lives"
+    ).textContent =
         lives;
 
-    document.getElementById("coins").textContent =
+
+    document.getElementById(
+        "coins"
+    ).textContent =
         coins;
 
-    document.getElementById("score").textContent =
+
+    document.getElementById(
+        "score"
+    ).textContent =
         score;
 
-    document.getElementById("level").textContent =
+
+    document.getElementById(
+        "level"
+    ).textContent =
         level;
 }
 
 
 /* =====================================================
-   PESAN
+   PESAN GAME
 ===================================================== */
 
 let messageTimeout;
@@ -817,24 +1116,33 @@ let messageTimeout;
 function showMessage(message) {
 
     const messageBox =
-        document.getElementById("gameMessage");
+        document.getElementById(
+            "gameMessage"
+        );
 
 
-    messageBox.textContent = message;
+    messageBox.textContent =
+        message;
 
 
-    clearTimeout(messageTimeout);
+    clearTimeout(
+        messageTimeout
+    );
 
 
-    messageTimeout = setTimeout(function() {
+    messageTimeout =
+        setTimeout(
+            function() {
 
-        if (gameRunning) {
+                if (gameRunning) {
 
-            messageBox.textContent =
-                "Kumpulkan semua koin dan hindari penjaga!";
-        }
+                    messageBox.textContent =
+                        "Kumpulkan semua koin dan hindari penjaga!";
+                }
 
-    }, 1800);
+            },
+            1800
+        );
 }
 
 
@@ -852,22 +1160,45 @@ function gameOver() {
     saveHighScore();
 
 
-    const again = confirm(
-        "GAME OVER!\n\n" +
-        "Skor kamu: " + score +
-        "\nLevel: " + level +
-        "\n\nMain lagi?"
-    );
+    document.getElementById(
+        "finalScore"
+    ).textContent =
+        score;
 
 
-    if (again) {
+    document.getElementById(
+        "finalLevel"
+    ).textContent =
+        level;
 
-        startGame();
 
-    } else {
+    /*
+        Tampilkan popup dari GAME,
+        bukan notifikasi browser.
+    */
 
-        backToMenu();
-    }
+    document
+        .getElementById(
+            "gameOverPopup"
+        )
+        .classList.remove("hidden");
+}
+
+
+/* =====================================================
+   MAIN LAGI
+===================================================== */
+
+function playAgain() {
+
+    document
+        .getElementById(
+            "gameOverPopup"
+        )
+        .classList.add("hidden");
+
+
+    startGame();
 }
 
 
@@ -880,18 +1211,25 @@ function saveHighScore() {
     if (!currentUser) return;
 
 
-    const account = accounts.find(
-        account =>
-            account.username === currentUser.username
-    );
+    const account =
+        accounts.find(
+            account =>
+                account.username ===
+                currentUser.username
+        );
 
 
     if (!account) return;
 
 
-    if (score > (account.highScore || 0)) {
+    if (
+        score >
+        (account.highScore || 0)
+    ) {
 
-        account.highScore = score;
+        account.highScore =
+            score;
+
 
         localStorage.setItem(
             "gobakAccounts",
@@ -923,6 +1261,14 @@ function backToMenu() {
 
     clearInterval(gameTimer);
 
+
+    document
+        .getElementById(
+            "gameOverPopup"
+        )
+        .classList.add("hidden");
+
+
     gamePage.classList.add("hidden");
 
     menuPage.classList.remove("hidden");
@@ -933,16 +1279,23 @@ function backToMenu() {
    RESIZE
 ===================================================== */
 
-window.addEventListener("resize", function() {
+window.addEventListener(
+    "resize",
+    function() {
 
-    if (!gameRunning) return;
-
-
-    playerX = Math.min(
-        playerX,
-        gameArea.clientWidth - player.offsetWidth - 10
-    );
+        if (!gameRunning) return;
 
 
-    positionPlayer();
-});
+        playerX =
+            Math.min(
+                playerX,
+
+                gameArea.clientWidth -
+                player.offsetWidth -
+                10
+            );
+
+
+        positionPlayer();
+    }
+);
