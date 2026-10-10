@@ -436,7 +436,7 @@
 
 <!-- ==================================================
      NOTIFIKASI GAME
-     TIDAK MENGGUNAKAN ALERT / CONFIRM BROWSER
+     NOTIFIKASI DARI DALAM GAME
 ================================================== -->
 
 <div
@@ -445,6 +445,14 @@
 >
 
     <div class="notification-card">
+
+        <!-- THUMBNAIL NOTIFIKASI -->
+        <div
+            id="notificationThumbnail"
+            class="notification-thumbnail"
+        >
+            🎮
+        </div>
 
         <div
             id="notificationIcon"
@@ -461,7 +469,10 @@
             Pesan
         </p>
 
-        <button onclick="closeNotification()">
+        <button
+            type="button"
+            onclick="closeNotification()"
+        >
             OKE
         </button>
 
@@ -514,7 +525,8 @@
 </div>
 
 
-<script src="script.js"></script>
+<!-- VERSI BARU AGAR GITHUB TIDAK MEMAKAI JS LAMA -->
+<script src="script.js?v=6"></script>
 
 </body>
 </html>
