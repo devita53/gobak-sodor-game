@@ -1,455 +1,1270 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerobak Sodor Adventure</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-<body>
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
 
-<!-- ================= LOGIN ================= -->
-<section id="loginPage" class="auth-page">
+    background:
+        radial-gradient(
+            circle at top,
+            #7ed957,
+            transparent 40%
+        ),
+        linear-gradient(
+            135deg,
+            #123b25,
+            #071d12
+        );
 
-    <div class="auth-card">
+    color: #fff;
+}
 
-        <div class="game-logo">🏃</div>
 
-        <h1>GOBAK SODOR</h1>
-        <p class="subtitle">Adventure Game</p>
+/* ================= UMUM ================= */
 
-        <input
-            type="text"
-            id="loginUsername"
-            placeholder="Nama pengguna"
-        >
+.hidden {
+    display: none !important;
+}
 
-        <input
-            type="password"
-            id="loginPassword"
-            placeholder="Kata sandi"
-        >
+button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
 
-        <button onclick="login()" class="main-btn">
-            MASUK
-        </button>
 
-        <p class="small-text">
-            Belum punya akun?
-            <button onclick="showRegister()" class="link-btn">
-                Daftar
-            </button>
-        </p>
+/* ================= LOGIN ================= */
 
-    </div>
+.auth-page {
+    min-height: 100vh;
 
-</section>
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    padding: 20px;
+}
 
-<!-- ================= REGISTER ================= -->
-<section id="registerPage" class="auth-page hidden">
+.auth-card {
+    width: 370px;
+    max-width: 100%;
 
-    <div class="auth-card">
+    background: rgba(255, 255, 255, 0.96);
 
-        <div class="game-logo">🎮</div>
+    color: #16351f;
 
-        <h1>BUAT AKUN</h1>
-        <p class="subtitle">Buat akun untuk bermain</p>
+    padding: 35px;
 
-        <input
-            type="text"
-            id="registerUsername"
-            placeholder="Nama pengguna"
-        >
+    border-radius: 28px;
 
-        <input
-            type="password"
-            id="registerPassword"
-            placeholder="Kata sandi"
-        >
+    text-align: center;
 
-        <input
-            type="password"
-            id="registerConfirm"
-            placeholder="Ulangi kata sandi"
-        >
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.4);
+}
 
-        <button onclick="register()" class="main-btn">
-            DAFTAR
-        </button>
+.game-logo {
+    width: 80px;
+    height: 80px;
 
-        <p class="small-text">
-            Sudah punya akun?
-            <button onclick="showLogin()" class="link-btn">
-                Masuk
-            </button>
-        </p>
+    background:
+        linear-gradient(
+            135deg,
+            #ffd700,
+            #ff9f00
+        );
 
-    </div>
+    border-radius: 50%;
 
-</section>
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    font-size: 40px;
 
-<!-- ================= MENU ================= -->
-<section id="menuPage" class="menu-page hidden">
+    margin: auto;
 
-    <div class="menu-card">
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.2);
+}
 
-        <div class="logo-big">
-            🏃
-        </div>
+.auth-card h1 {
+    margin-top: 18px;
 
-        <h1>GOBAK SODOR</h1>
+    font-size: 30px;
 
-        <p class="welcome">
-            Selamat datang,
-            <strong id="menuUsername"></strong>!
-        </p>
+    color: #17652e;
+}
 
-        <div class="menu-info">
+.subtitle {
+    margin: 8px 0 25px;
 
-            <div>
-                <span>❤️</span>
-                <b>5 Nyawa</b>
-            </div>
+    color: #777;
+}
 
-            <div>
-                <span>👮</span>
-                <b>3 Penjaga</b>
-            </div>
+.auth-card input {
+    width: 100%;
 
-            <div>
-                <span>🪙</span>
-                <b>Koin Acak</b>
-            </div>
+    padding: 14px;
 
-        </div>
+    margin: 7px 0;
 
-        <button onclick="startGame()" class="start-btn">
-            ▶ MULAI BERMAIN
-        </button>
+    border: 2px solid #ddd;
 
-        <button onclick="logout()" class="logout-btn">
-            Keluar
-        </button>
+    border-radius: 12px;
 
-    </div>
+    font-size: 15px;
 
-</section>
+    outline: none;
+}
 
+.auth-card input:focus {
+    border-color: #2e9d4b;
+}
 
-<!-- ================= GAME ================= -->
-<section id="gamePage" class="game-page hidden">
+.main-btn,
+.start-btn {
+    width: 100%;
 
-    <!-- HEADER -->
-    <div class="game-header">
+    padding: 15px;
 
-        <div class="player-info">
+    margin-top: 12px;
 
-            <div class="mini-avatar">
-                <div class="avatar-hair"></div>
-                <div class="avatar-face"></div>
-                <div class="avatar-body"></div>
-            </div>
+    border-radius: 14px;
 
-            <div>
-                <small>PEMAIN</small>
-                <strong id="gameUsername">Player</strong>
-            </div>
+    color: white;
 
-        </div>
+    background:
+        linear-gradient(
+            135deg,
+            #20963f,
+            #0d6728
+        );
 
+    font-size: 17px;
 
-        <div class="stats">
+    font-weight: bold;
 
-            <div class="stat-box">
-                <span>❤️</span>
-                <b id="lives">5</b>
-            </div>
+    box-shadow:
+        0 7px 15px rgba(0,0,0,.2);
+}
 
-            <div class="stat-box">
-                <span class="coin-mini"></span>
-                <b id="coins">0</b>
-            </div>
+.main-btn:hover,
+.start-btn:hover {
+    transform: translateY(-2px);
+}
 
-            <div class="stat-box">
-                <span>⭐</span>
-                <b id="score">0</b>
-            </div>
+.small-text {
+    margin-top: 20px;
 
-            <div class="stat-box level-box">
-                <small>LEVEL</small>
-                <b id="level">1</b>
-            </div>
+    color: #777;
+}
 
-        </div>
+.link-btn {
+    background: none;
 
-    </div>
+    color: #168039;
 
+    font-weight: bold;
+}
 
-    <!-- ================= ARENA ================= -->
-    <div id="gameArea">
 
-        <!-- DEKORASI -->
-        <div class="decoration tree tree-left">
-            <div class="tree-leaves"></div>
-            <div class="tree-trunk"></div>
-        </div>
+/* ================= MENU ================= */
 
-        <div class="decoration bush bush-left"></div>
+.menu-page {
+    min-height: 100vh;
 
-        <div class="rock rock-left"></div>
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    padding: 20px;
+}
 
-        <div class="decoration tree tree-right">
-            <div class="tree-leaves"></div>
-            <div class="tree-trunk"></div>
-        </div>
+.menu-card {
+    background: rgba(255,255,255,.96);
 
-        <div class="decoration bush bush-right"></div>
+    color: #17391f;
 
-        <div class="rock rock-right"></div>
+    width: 500px;
+    max-width: 100%;
 
+    text-align: center;
 
-        <!-- PAGAR -->
-        <div class="fence fence-top"></div>
-        <div class="fence fence-bottom"></div>
+    padding: 40px;
 
+    border-radius: 30px;
 
-        <!-- GARIS LAPANGAN -->
-        <div class="field-line line-1"></div>
-        <div class="field-line line-2"></div>
-        <div class="field-line line-3"></div>
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.4);
+}
 
+.logo-big {
+    font-size: 65px;
+}
 
-        <!-- FINISH -->
-        <div id="finishArea">
-            FINISH
-        </div>
+.menu-card h1 {
+    font-size: 42px;
 
+    color: #17652e;
+}
 
-        <!-- ================= KOIN ================= -->
+.welcome {
+    margin: 10px 0 25px;
+}
 
-        <div id="coin1" class="coin">
-            <div class="coin-shine"></div>
-            <span>★</span>
-        </div>
+.menu-info {
+    display: grid;
 
-        <div id="coin2" class="coin">
-            <div class="coin-shine"></div>
-            <span>★</span>
-        </div>
+    grid-template-columns:
+        repeat(3,1fr);
 
-        <div id="coin3" class="coin">
-            <div class="coin-shine"></div>
-            <span>★</span>
-        </div>
+    gap: 10px;
 
-        <div id="coin4" class="coin">
-            <div class="coin-shine"></div>
-            <span>★</span>
-        </div>
+    margin-bottom: 25px;
+}
 
+.menu-info div {
+    padding: 15px 8px;
 
-        <!-- ================= PENJAGA 1 ================= -->
+    background: #eef9ee;
 
-        <div id="guard1" class="character guard">
+    border-radius: 15px;
+}
 
-            <div class="character-head">
-                <div class="hair"></div>
-                <div class="eye eye-left"></div>
-                <div class="eye eye-right"></div>
-            </div>
+.menu-info span {
+    display: block;
 
-            <div class="police-hat">
-                <div class="hat-badge">★</div>
-            </div>
+    font-size: 25px;
 
-            <div class="character-body">
-                <div class="badge">★</div>
-            </div>
+    margin-bottom: 5px;
+}
 
-            <div class="arm arm-left"></div>
-            <div class="arm arm-right"></div>
+.menu-info b {
+    font-size: 12px;
+}
 
-            <div class="leg leg-left"></div>
-            <div class="leg leg-right"></div>
+.start-btn {
+    display: block;
+}
 
-        </div>
+.logout-btn {
+    margin-top: 15px;
 
+    background: #eee;
 
-        <!-- ================= PENJAGA 2 ================= -->
+    padding: 10px 20px;
 
-        <div id="guard2" class="character guard">
+    border-radius: 10px;
+}
 
-            <div class="character-head">
-                <div class="hair"></div>
-                <div class="eye eye-left"></div>
-                <div class="eye eye-right"></div>
-            </div>
 
-            <div class="police-hat">
-                <div class="hat-badge">★</div>
-            </div>
+/* ================= GAME ================= */
 
-            <div class="character-body">
-                <div class="badge">★</div>
-            </div>
+.game-page {
+    min-height: 100vh;
 
-            <div class="arm arm-left"></div>
-            <div class="arm arm-right"></div>
+    padding: 15px;
 
-            <div class="leg leg-left"></div>
-            <div class="leg leg-right"></div>
+    overflow-x: hidden;
+}
 
-        </div>
+.game-header {
+    max-width: 1100px;
 
+    margin: auto;
 
-        <!-- ================= PENJAGA 3 ================= -->
+    background: rgba(255,255,255,.96);
 
-        <div id="guard3" class="character guard">
+    color: #17351e;
 
-            <div class="character-head">
-                <div class="hair"></div>
-                <div class="eye eye-left"></div>
-                <div class="eye eye-right"></div>
-            </div>
+    border-radius: 20px;
 
-            <div class="police-hat">
-                <div class="hat-badge">★</div>
-            </div>
+    padding: 12px 18px;
 
-            <div class="character-body">
-                <div class="badge">★</div>
-            </div>
+    display: flex;
 
-            <div class="arm arm-left"></div>
-            <div class="arm arm-right"></div>
+    justify-content: space-between;
 
-            <div class="leg leg-left"></div>
-            <div class="leg leg-right"></div>
+    align-items: center;
 
-        </div>
+    gap: 15px;
 
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.3);
+}
 
-        <!-- ================= PEMAIN ================= -->
+.player-info {
+    display: flex;
 
-        <div id="player" class="character player-character">
+    align-items: center;
 
-            <div class="player-head">
-                <div class="player-hair"></div>
+    gap: 10px;
+}
 
-                <div class="player-eye player-eye-left"></div>
-                <div class="player-eye player-eye-right"></div>
-            </div>
+.player-info small {
+    display: block;
 
-            <div class="player-body">
-                <div class="shirt-logo">G</div>
-            </div>
+    color: #888;
 
-            <div class="player-arm player-arm-left"></div>
-            <div class="player-arm player-arm-right"></div>
+    font-size: 10px;
+}
 
-            <div class="player-leg player-leg-left"></div>
-            <div class="player-leg player-leg-right"></div>
+.player-info strong {
+    display: block;
+}
 
-            <div class="shoe shoe-left"></div>
-            <div class="shoe shoe-right"></div>
+.mini-avatar {
+    width: 48px;
+    height: 48px;
 
-        </div>
+    position: relative;
+}
 
-    </div>
+.avatar-face {
+    position: absolute;
 
+    width: 26px;
+    height: 26px;
 
-    <!-- PESAN GAME -->
-    <div id="gameMessage" class="game-message">
-        Kumpulkan semua koin dan hindari penjaga!
-    </div>
+    background: #f0ad78;
 
+    border-radius: 50%;
 
-    <!-- KONTROL HP -->
-    <div class="mobile-controls">
+    left: 11px;
+    top: 4px;
+}
 
-        <button onclick="movePlayer('up')">
-            ▲
-        </button>
+.avatar-hair {
+    position: absolute;
 
-        <div>
+    width: 28px;
+    height: 13px;
 
-            <button onclick="movePlayer('left')">
-                ◀
-            </button>
+    background: #302018;
 
-            <button onclick="movePlayer('down')">
-                ▼
-            </button>
+    border-radius:
+        50% 50% 20% 20%;
 
-            <button onclick="movePlayer('right')">
-                ▶
-            </button>
+    left: 10px;
+    top: 1px;
 
-        </div>
+    z-index: 2;
+}
 
-    </div>
+.avatar-body {
+    position: absolute;
 
+    width: 30px;
+    height: 21px;
 
-    <!-- TOMBOL -->
-    <div class="game-buttons">
+    background: #e53232;
 
-        <button onclick="restartGame()">
-            🔄 Mulai Ulang
-        </button>
+    border-radius:
+        10px 10px 5px 5px;
 
-        <button onclick="backToMenu()">
-            🏠 Menu
-        </button>
+    left: 9px;
+    top: 27px;
+}
 
-    </div>
+.stats {
+    display: flex;
 
-</section>
+    gap: 8px;
+}
 
+.stat-box {
+    min-width: 70px;
 
-<!-- ================= GAME OVER ================= -->
+    padding: 8px 12px;
 
-<div id="gameOverPopup" class="game-over-popup hidden">
+    background: #f2f8ef;
 
-    <div class="game-over-card">
+    border-radius: 12px;
 
-        <div class="game-over-icon">
-            😵
-        </div>
+    text-align: center;
+}
 
-        <h2>GAME OVER!</h2>
+.stat-box span {
+    font-size: 20px;
+}
 
-        <p>
-            Skor kamu:
-            <strong id="finalScore">0</strong>
-        </p>
+.stat-box b {
+    font-size: 16px;
+}
 
-        <p>
-            Level:
-            <strong id="finalLevel">1</strong>
-        </p>
+.level-box {
+    background: #fff2b8;
+}
 
-        <div class="game-over-buttons">
 
-            <button onclick="playAgain()">
-                🔄 Main Lagi
-            </button>
+/* ================= ARENA ================= */
 
-            <button onclick="backToMenu()">
-                🏠 Menu
-            </button>
+#gameArea {
+    position: relative;
 
-        </div>
+    width: min(1100px, 100%);
 
-    </div>
+    height: 620px;
 
-</div>
+    margin: 15px auto;
 
+    overflow: hidden;
 
-<script src="script.js"></script>
+    background:
+        linear-gradient(
+            rgba(100, 170, 70, .15),
+            rgba(100, 170, 70, .15)
+        ),
+        #d7a35d;
 
-</body>
-</html>
+    border: 7px solid #fff4d1;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.4),
+        inset 0 0 30px rgba(85,45,10,.2);
+}
+
+
+/* ================= GARIS LAPANGAN ================= */
+
+.field-line {
+    position: absolute;
+
+    left: 3%;
+
+    width: 94%;
+
+    height: 6px;
+
+    background:
+        rgba(255,255,255,.85);
+
+    border-radius: 10px;
+}
+
+.line-1 {
+    top: 22%;
+}
+
+.line-2 {
+    top: 44%;
+}
+
+.line-3 {
+    top: 66%;
+}
+
+
+/* ================= FINISH ================= */
+
+#finishArea {
+    position: absolute;
+
+    top: 1%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: #f6c52f;
+
+    color: #704b00;
+
+    padding: 6px 25px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+
+    z-index: 5;
+}
+
+
+/* ================= PAGAR ================= */
+
+.fence {
+    position: absolute;
+
+    width: 100%;
+
+    height: 12px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #70451e 0 45px,
+            #9b642c 45px 80px
+        );
+
+    z-index: 1;
+}
+
+.fence-top {
+    top: 4px;
+}
+
+.fence-bottom {
+    bottom: 4px;
+}
+
+
+/* ================= POHON ================= */
+
+.tree {
+    position: absolute;
+
+    width: 70px;
+    height: 120px;
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+.tree-left {
+    left: -8px;
+    top: 40px;
+}
+
+.tree-right {
+    right: -8px;
+    top: 40px;
+}
+
+.tree-trunk {
+    position: absolute;
+
+    bottom: 0;
+
+    left: 28px;
+
+    width: 20px;
+    height: 65px;
+
+    background: #74451f;
+
+    border-radius: 5px;
+}
+
+.tree-leaves {
+    position: absolute;
+
+    top: 0;
+    left: 3px;
+
+    width: 65px;
+    height: 75px;
+
+    background: #258b3d;
+
+    border-radius: 50%;
+
+    box-shadow:
+        20px -10px 0 #39a84c,
+        35px 15px 0 #197532,
+        -5px 18px 0 #2d9d43;
+}
+
+
+/* ================= SEMAK ================= */
+
+.bush {
+    position: absolute;
+
+    width: 90px;
+    height: 45px;
+
+    background: #267c32;
+
+    border-radius: 50%;
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+.bush-left {
+    left: 10px;
+    bottom: 30px;
+}
+
+.bush-right {
+    right: 10px;
+    bottom: 30px;
+}
+
+
+/* ================= BATU ================= */
+
+.rock {
+    position: absolute;
+
+    width: 45px;
+    height: 30px;
+
+    background: #777;
+
+    border-radius:
+        55% 45% 35% 50%;
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+.rock-left {
+    left: 85px;
+    top: 160px;
+}
+
+.rock-right {
+    right: 85px;
+    top: 280px;
+}
+
+
+/* ================= KOIN ================= */
+
+.coin {
+    position: absolute;
+
+    width: 38px;
+    height: 38px;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #fff5a3 0 8%,
+            #ffd83d 20%,
+            #f5aa00 65%,
+            #bd7000 100%
+        );
+
+    border: 3px solid #e49a00;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #fff6a0;
+
+    font-size: 20px;
+
+    box-shadow:
+        0 5px 8px rgba(0,0,0,.3),
+        inset 0 0 5px #fff4a3;
+
+    z-index: 8;
+
+    animation:
+        coinFloat 1.2s
+        ease-in-out
+        infinite alternate;
+}
+
+.coin-shine {
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    background:
+        rgba(255,255,255,.8);
+
+    border-radius: 50%;
+
+    top: 5px;
+    left: 7px;
+}
+
+.coin span {
+    position: relative;
+}
+
+@keyframes coinFloat {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-7px);
+    }
+}
+
+
+/* ================= KARAKTER ================= */
+
+.character {
+    position: absolute;
+
+    width: 48px;
+    height: 72px;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+
+/* ================= PENJAGA ================= */
+
+.character-head {
+    position: absolute;
+
+    width: 29px;
+    height: 29px;
+
+    border-radius: 50%;
+
+    left: 9px;
+    top: 5px;
+
+    background: #e9a36f;
+
+    z-index: 4;
+}
+
+.eye {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    background: #222;
+
+    border-radius: 50%;
+
+    top: 13px;
+}
+
+.eye-left {
+    left: 7px;
+}
+
+.eye-right {
+    right: 7px;
+}
+
+.hair {
+    position: absolute;
+
+    width: 30px;
+    height: 12px;
+
+    top: -2px;
+    left: 0;
+
+    background: #211a16;
+
+    border-radius:
+        50% 50% 20% 20%;
+}
+
+.police-hat {
+    position: absolute;
+
+    width: 35px;
+    height: 12px;
+
+    top: 0;
+    left: 6px;
+
+    background: #142b58;
+
+    border-radius:
+        50% 50% 5px 5px;
+
+    z-index: 7;
+}
+
+.police-hat::after {
+    content: "";
+
+    position: absolute;
+
+    width: 43px;
+    height: 5px;
+
+    background: #0d2042;
+
+    left: -4px;
+    bottom: -3px;
+
+    border-radius: 5px;
+}
+
+.hat-badge {
+    position: absolute;
+
+    color: #ffd52f;
+
+    font-size: 8px;
+
+    left: 14px;
+    top: 1px;
+}
+
+.character-body {
+    position: absolute;
+
+    width: 30px;
+    height: 30px;
+
+    top: 31px;
+    left: 9px;
+
+    background: #173d78;
+
+    border-radius: 7px;
+
+    border: 2px solid #102c57;
+}
+
+.badge {
+    color: #ffd32f;
+
+    font-size: 9px;
+
+    text-align: center;
+
+    margin-top: 5px;
+}
+
+.arm {
+    position: absolute;
+
+    width: 9px;
+    height: 25px;
+
+    top: 34px;
+
+    background: #173d78;
+
+    border-radius: 8px;
+}
+
+.arm-left {
+    left: 2px;
+
+    transform: rotate(12deg);
+}
+
+.arm-right {
+    right: 2px;
+
+    transform: rotate(-12deg);
+}
+
+.leg {
+    position: absolute;
+
+    width: 10px;
+    height: 17px;
+
+    top: 59px;
+
+    background: #142b58;
+
+    border-radius:
+        0 0 6px 6px;
+}
+
+.leg-left {
+    left: 11px;
+}
+
+.leg-right {
+    right: 11px;
+}
+
+
+/* ================= PEMAIN LEBIH PENDEK ================= */
+
+.player-character {
+    width: 48px;
+    height: 62px;
+}
+
+.player-head {
+    position: absolute;
+
+    width: 27px;
+    height: 27px;
+
+    left: 10px;
+    top: 1px;
+
+    background: #e9a36f;
+
+    border-radius: 50%;
+}
+
+.player-hair {
+    position: absolute;
+
+    width: 31px;
+    height: 15px;
+
+    left: -1px;
+    top: -3px;
+
+    background: #302019;
+
+    border-radius:
+        60% 50% 20% 20%;
+}
+
+.player-eye {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    background: #222;
+
+    border-radius: 50%;
+
+    top: 12px;
+}
+
+.player-eye-left {
+    left: 6px;
+}
+
+.player-eye-right {
+    right: 6px;
+}
+
+.player-body {
+    position: absolute;
+
+    width: 29px;
+    height: 25px;
+
+    left: 10px;
+    top: 27px;
+
+    background: #e53b35;
+
+    border-radius: 8px;
+
+    border: 2px solid #a82220;
+}
+
+.shirt-logo {
+    color: white;
+
+    font-size: 10px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    margin-top: 5px;
+}
+
+.player-arm {
+    position: absolute;
+
+    width: 8px;
+    height: 22px;
+
+    top: 29px;
+
+    background: #e53b35;
+
+    border-radius: 8px;
+}
+
+.player-arm-left {
+    left: 3px;
+
+    transform: rotate(10deg);
+}
+
+.player-arm-right {
+    right: 3px;
+
+    transform: rotate(-10deg);
+}
+
+.player-leg {
+    position: absolute;
+
+    width: 10px;
+    height: 16px;
+
+    top: 49px;
+
+    background: #194b86;
+
+    border-radius: 4px;
+}
+
+.player-leg-left {
+    left: 11px;
+}
+
+.player-leg-right {
+    right: 11px;
+}
+
+.shoe {
+    position: absolute;
+
+    width: 14px;
+    height: 6px;
+
+    background: #222;
+
+    border-radius: 7px;
+
+    top: 61px;
+}
+
+.shoe-left {
+    left: 7px;
+}
+
+.shoe-right {
+    right: 7px;
+}
+
+
+/* ================= PESAN ================= */
+
+.game-message {
+    max-width: 700px;
+
+    margin: 5px auto;
+
+    text-align: center;
+
+    background:
+        rgba(0,0,0,.4);
+
+    padding: 10px;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+}
+
+
+/* ================= KONTROL ================= */
+
+.mobile-controls {
+    text-align: center;
+
+    margin: 12px auto;
+}
+
+.mobile-controls button {
+    width: 52px;
+    height: 45px;
+
+    margin: 3px;
+
+    border-radius: 12px;
+
+    background: #fff;
+
+    color: #174b27;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 5px 10px rgba(0,0,0,.3);
+}
+
+.mobile-controls button:active {
+    transform: scale(.92);
+}
+
+
+/* ================= TOMBOL GAME ================= */
+
+.game-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.game-buttons button {
+    padding: 10px 18px;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #174b27;
+
+    font-weight: bold;
+}
+
+
+/* ================= GAME OVER ================= */
+
+.game-over-popup {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.65);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 9999;
+
+    padding: 20px;
+}
+
+.game-over-popup.hidden {
+    display: none;
+}
+
+.game-over-card {
+    width: 350px;
+    max-width: 100%;
+
+    background: white;
+
+    color: #17351e;
+
+    padding: 30px;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.5);
+
+    animation:
+        popupMasuk .25s ease;
+}
+
+.game-over-icon {
+    font-size: 55px;
+
+    margin-bottom: 5px;
+}
+
+.game-over-card h2 {
+    color: #d83232;
+
+    font-size: 28px;
+
+    margin-bottom: 18px;
+}
+
+.game-over-card p {
+    margin: 8px 0;
+
+    font-size: 16px;
+}
+
+.game-over-buttons {
+    display: flex;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    margin-top: 22px;
+}
+
+.game-over-buttons button {
+    padding: 11px 16px;
+
+    border-radius: 10px;
+
+    background: #17652e;
+
+    color: white;
+
+    font-weight: bold;
+}
+
+.game-over-buttons button:last-child {
+    background: #777;
+}
+
+@keyframes popupMasuk {
+
+    from {
+        opacity: 0;
+
+        transform: scale(.85);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: scale(1);
+    }
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 700px) {
+
+    .game-header {
+        flex-direction: column;
+    }
+
+    .stats {
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+    }
+
+    .stat-box {
+        min-width: 60px;
+    }
+
+    #gameArea {
+        height: 560px;
+    }
+
+    .tree {
+        transform: scale(.75);
+    }
+
+    .rock {
+        transform: scale(.75);
+    }
+
+    .menu-info {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-card h1 {
+        font-size: 32px;
+    }
+}
