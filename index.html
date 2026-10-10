@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gobak Sodor Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= LOGIN ================= -->
+    <section id="loginPage" class="page">
+        <div class="auth-box">
+            <h1>🎮 Gobak Sodor</h1>
+            <p>Masuk untuk mulai bermain</p>
+
+            <form id="loginForm">
+                <input
+                    type="text"
+                    id="loginUsername"
+                    placeholder="Nama pengguna"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Password"
+                    required
+                >
+
+                <button type="submit">Masuk</button>
+            </form>
+
+            <p id="loginMessage" class="message"></p>
+
+            <p>
+                Belum punya akun?
+                <button id="showRegister" class="link-button">
+                    Daftar
+                </button>
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ================= REGISTER ================= -->
+    <section id="registerPage" class="page hidden">
+        <div class="auth-box">
+            <h1>📝 Buat Akun</h1>
+            <p>Daftar sebelum bermain</p>
+
+            <form id="registerForm">
+                <input
+                    type="text"
+                    id="registerUsername"
+                    placeholder="Nama pengguna"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Password"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Ulangi password"
+                    required
+                >
+
+                <button type="submit">Daftar</button>
+            </form>
+
+            <p id="registerMessage" class="message"></p>
+
+            <p>
+                Sudah punya akun?
+                <button id="showLogin" class="link-button">
+                    Login
+                </button>
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ================= MENU ================= -->
+    <section id="menuPage" class="page hidden">
+        <div class="menu-box">
+
+            <h1>🎮 Gobak Sodor</h1>
+
+            <p>
+                Selamat datang,
+                <strong id="menuUsername"></strong>!
+            </p>
+
+            <div class="menu-buttons">
+                <button id="playButton">
+                    ▶ Mulai Bermain
+                </button>
+
+                <button id="howToPlayButton">
+                    📖 Cara Bermain
+                </button>
+
+                <button id="logoutButton" class="logout">
+                    🚪 Keluar
+                </button>
+            </div>
+
+            <div id="howToPlay" class="how-to hidden">
+                <h3>📖 Cara Bermain</h3>
+
+                <p>🎯 Tujuan: Capai garis paling atas.</p>
+                <p>🧑 Kamu adalah pemain.</p>
+                <p>🛡️ Hindari penjaga.</p>
+                <p>❤️ Kamu memiliki <b>5 nyawa</b>.</p>
+                <p>⭐ Berhasil mencapai atas akan menambah skor.</p>
+                <p>🔥 Semakin tinggi level, penjaga semakin cepat.</p>
+
+                <p>
+                    Gunakan tombol
+                    <b>W A S D</b>
+                    atau tombol arah di layar.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ================= GAME ================= -->
+    <section id="gamePage" class="page hidden">
+
+        <div class="game-container">
+
+            <div class="game-header">
+
+                <div>
+                    👤
+                    <span id="gameUsername"></span>
+                </div>
+
+                <div>
+                    ⭐ Skor:
+                    <strong id="score">0</strong>
+                </div>
+
+                <div>
+                    ❤️ Nyawa:
+                    <strong id="lives">5</strong>
+                </div>
+
+                <div>
+                    🏆 Level:
+                    <strong id="level">1</strong>
+                </div>
+
+            </div>
+
+
+            <!-- AREA PERMAINAN -->
+            <div id="gameArea">
+
+                <!-- Garis Gobak Sodor -->
+                <div class="line line1"></div>
+                <div class="line line2"></div>
+                <div class="line line3"></div>
+                <div class="line line4"></div>
+
+                <!-- Pemain -->
+                <div id="player">🧑</div>
+
+                <!-- Penjaga -->
+                <div id="guard1">🛡️</div>
+                <div id="guard2">🛡️</div>
+
+                <!-- Tujuan -->
+                <div class="finish">🏁 FINISH</div>
+
+            </div>
+
+
+            <p id="gameMessage">
+                Capai bagian atas untuk mendapatkan skor!
+            </p>
+
+
+            <!-- KONTROL -->
+            <div class="controls">
+
+                <button data-key="ArrowUp">⬆️</button>
+
+                <div>
+                    <button data-key="ArrowLeft">⬅️</button>
+                    <button data-key="ArrowDown">⬇️</button>
+                    <button data-key="ArrowRight">➡️</button>
+                </div>
+
+            </div>
+
+
+            <div class="game-buttons">
+
+                <button id="restartButton">
+                    🔄 Mulai Ulang
+                </button>
+
+                <button id="backMenuButton">
+                    🏠 Menu
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
