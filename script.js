@@ -1,480 +1,246 @@
-// ==========================================
-// ELEMENT
-// ==========================================
+/* =====================================================
+   DATA AKUN
+===================================================== */
 
-const loginPage =
-    document.getElementById("loginPage");
+let accounts = JSON.parse(
+    localStorage.getItem("gobakAccounts") || "[]"
+);
 
-const registerPage =
-    document.getElementById("registerPage");
-
-const menuPage =
-    document.getElementById("menuPage");
-
-const gamePage =
-    document.getElementById("gamePage");
+let currentUser = null;
 
 
-// LOGIN
+/* =====================================================
+   HALAMAN
+===================================================== */
 
-const loginForm =
-    document.getElementById("loginForm");
-
-const loginUsername =
-    document.getElementById("loginUsername");
-
-const loginPassword =
-    document.getElementById("loginPassword");
-
-const loginMessage =
-    document.getElementById("loginMessage");
+const loginPage = document.getElementById("loginPage");
+const registerPage = document.getElementById("registerPage");
+const menuPage = document.getElementById("menuPage");
+const gamePage = document.getElementById("gamePage");
 
 
-// REGISTER
-
-const registerForm =
-    document.getElementById("registerForm");
-
-const registerUsername =
-    document.getElementById("registerUsername");
-
-const registerPassword =
-    document.getElementById("registerPassword");
-
-const confirmPassword =
-    document.getElementById("confirmPassword");
-
-const registerMessage =
-    document.getElementById("registerMessage");
-
-
-// MENU
-
-const menuUsername =
-    document.getElementById("menuUsername");
-
-const playButton =
-    document.getElementById("playButton");
-
-const logoutButton =
-    document.getElementById("logoutButton");
-
-const howToPlayButton =
-    document.getElementById("howToPlayButton");
-
-const howToPlay =
-    document.getElementById("howToPlay");
-
-
-// GAME
-
-const gameUsername =
-    document.getElementById("gameUsername");
-
-const gameArea =
-    document.getElementById("gameArea");
-
-const player =
-    document.getElementById("player");
-
-const guard1 =
-    document.getElementById("guard1");
-
-const guard2 =
-    document.getElementById("guard2");
-
-const guard3 =
-    document.getElementById("guard3");
-
-const obstacle1 =
-    document.getElementById("obstacle1");
-
-const obstacle2 =
-    document.getElementById("obstacle2");
-
-const coin1 =
-    document.getElementById("coin1");
-
-const coin2 =
-    document.getElementById("coin2");
-
-const coin3 =
-    document.getElementById("coin3");
-
-const scoreText =
-    document.getElementById("score");
-
-const coinsText =
-    document.getElementById("coins");
-
-const livesText =
-    document.getElementById("lives");
-
-const levelText =
-    document.getElementById("level");
-
-const gameMessage =
-    document.getElementById("gameMessage");
-
-const restartButton =
-    document.getElementById("restartButton");
-
-const backMenuButton =
-    document.getElementById("backMenuButton");
-
-
-// ==========================================
-// AKUN
-// ==========================================
-
-function getAccounts() {
-
-    const data =
-        localStorage.getItem("gobakAccounts");
-
-    return data
-        ? JSON.parse(data)
-        : [];
-
+function showLogin() {
+    loginPage.classList.remove("hidden");
+    registerPage.classList.add("hidden");
 }
 
 
-// ==========================================
-// REGISTER
-// ==========================================
-
-registerForm.addEventListener(
-    "submit",
-    function(event) {
-
-        event.preventDefault();
-
-        const username =
-            registerUsername.value.trim();
-
-        const password =
-            registerPassword.value;
-
-        const confirm =
-            confirmPassword.value;
+function showRegister() {
+    loginPage.classList.add("hidden");
+    registerPage.classList.remove("hidden");
+}
 
 
-        if (username.length < 3) {
+/* =====================================================
+   REGISTER
+===================================================== */
 
-            registerMessage.textContent =
-                "Username minimal 3 karakter.";
+function register() {
 
-            return;
-        }
+    const username =
+        document.getElementById("registerUsername").value.trim();
 
+    const password =
+        document.getElementById("registerPassword").value;
 
-        if (password.length < 4) {
-
-            registerMessage.textContent =
-                "Password minimal 4 karakter.";
-
-            return;
-        }
+    const confirm =
+        document.getElementById("registerConfirm").value;
 
 
-        if (password !== confirm) {
-
-            registerMessage.textContent =
-                "Password tidak sama.";
-
-            return;
-        }
-
-
-        const accounts =
-            getAccounts();
-
-
-        const exists =
-            accounts.some(
-                account =>
-                    account.username.toLowerCase() ===
-                    username.toLowerCase()
-            );
-
-
-        if (exists) {
-
-            registerMessage.textContent =
-                "Username sudah digunakan.";
-
-            return;
-        }
-
-
-        accounts.push({
-
-            username: username,
-
-            password: password,
-
-            highScore: 0
-
-        });
-
-
-        localStorage.setItem(
-            "gobakAccounts",
-            JSON.stringify(accounts)
-        );
-
-
-        registerMessage.style.color =
-            "#159957";
-
-        registerMessage.textContent =
-            "Akun berhasil dibuat!";
-
-
-        setTimeout(function() {
-
-            registerPage.classList.add(
-                "hidden"
-            );
-
-            loginPage.classList.remove(
-                "hidden"
-            );
-
-            registerMessage.style.color =
-                "#d63031";
-
-        }, 900);
-
+    if (username.length < 3) {
+        alert("Nama pengguna minimal 3 karakter!");
+        return;
     }
-);
 
 
-// ==========================================
-// LOGIN
-// ==========================================
-
-loginForm.addEventListener(
-    "submit",
-    function(event) {
-
-        event.preventDefault();
-
-        const username =
-            loginUsername.value.trim();
-
-        const password =
-            loginPassword.value;
-
-
-        const accounts =
-            getAccounts();
-
-
-        const account =
-            accounts.find(
-
-                acc =>
-
-                    acc.username.toLowerCase() ===
-                    username.toLowerCase() &&
-
-                    acc.password ===
-                    password
-
-            );
-
-
-        if (!account) {
-
-            loginMessage.textContent =
-                "Username atau password salah.";
-
-            return;
-        }
-
-
-        localStorage.setItem(
-            "currentUser",
-            account.username
-        );
-
-
-        loginForm.reset();
-
-        showMenu(account.username);
-
+    if (password.length < 4) {
+        alert("Kata sandi minimal 4 karakter!");
+        return;
     }
-);
 
 
-// ==========================================
-// MENU
-// ==========================================
+    if (password !== confirm) {
+        alert("Konfirmasi kata sandi tidak sama!");
+        return;
+    }
 
-function showMenu(username) {
+
+    const existing = accounts.find(
+        account =>
+            account.username.toLowerCase() === username.toLowerCase()
+    );
+
+
+    if (existing) {
+        alert("Nama pengguna sudah digunakan!");
+        return;
+    }
+
+
+    accounts.push({
+        username: username,
+        password: password,
+        highScore: 0
+    });
+
+
+    localStorage.setItem(
+        "gobakAccounts",
+        JSON.stringify(accounts)
+    );
+
+
+    alert("Akun berhasil dibuat! Silakan masuk.");
+
+    document.getElementById("registerUsername").value = "";
+    document.getElementById("registerPassword").value = "";
+    document.getElementById("registerConfirm").value = "";
+
+    showLogin();
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function login() {
+
+    const username =
+        document.getElementById("loginUsername").value.trim();
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+
+    const account = accounts.find(
+        account =>
+            account.username.toLowerCase() === username.toLowerCase() &&
+            account.password === password
+    );
+
+
+    if (!account) {
+        alert("Nama pengguna atau kata sandi salah!");
+        return;
+    }
+
+
+    currentUser = account;
+
+    document.getElementById("menuUsername").textContent =
+        currentUser.username;
+
 
     loginPage.classList.add("hidden");
-
     registerPage.classList.add("hidden");
-
-    gamePage.classList.add("hidden");
-
     menuPage.classList.remove("hidden");
-
-
-    menuUsername.textContent =
-        username;
-
-    gameUsername.textContent =
-        username;
-
 }
 
 
-// ==========================================
-// REGISTER / LOGIN
-// ==========================================
+/* =====================================================
+   LOGOUT
+===================================================== */
 
-document
-    .getElementById("showRegister")
-    .addEventListener(
-        "click",
-        function() {
+function logout() {
 
-            loginPage.classList.add(
-                "hidden"
-            );
+    currentUser = null;
 
-            registerPage.classList.remove(
-                "hidden"
-            );
+    gamePage.classList.add("hidden");
+    menuPage.classList.add("hidden");
+    registerPage.classList.add("hidden");
 
-        }
-    );
+    loginPage.classList.remove("hidden");
+
+    document.getElementById("loginUsername").value = "";
+    document.getElementById("loginPassword").value = "";
+}
 
 
-document
-    .getElementById("showLogin")
-    .addEventListener(
-        "click",
-        function() {
+/* =====================================================
+   DATA GAME
+===================================================== */
 
-            registerPage.classList.add(
-                "hidden"
-            );
+const gameArea = document.getElementById("gameArea");
+const player = document.getElementById("player");
 
-            loginPage.classList.remove(
-                "hidden"
-            );
+const guard1 = document.getElementById("guard1");
+const guard2 = document.getElementById("guard2");
+const guard3 = document.getElementById("guard3");
 
-        }
-    );
-
-
-// ==========================================
-// CARA BERMAIN
-// ==========================================
-
-howToPlayButton.addEventListener(
-    "click",
-    function() {
-
-        howToPlay.classList.toggle(
-            "hidden"
-        );
-
-    }
-);
+const coinsElements = [
+    document.getElementById("coin1"),
+    document.getElementById("coin2"),
+    document.getElementById("coin3"),
+    document.getElementById("coin4")
+];
 
 
-// ==========================================
-// DATA GAME
-// ==========================================
+let playerX = 0;
+let playerY = 0;
 
-let playerX;
+let score = 0;
+let coins = 0;
+let lives = 5;
+let level = 1;
 
-let playerY;
+let gameRunning = false;
 
-let score;
-
-let coins;
-
-let lives;
-
-let level;
-
-let gameRunning;
-
-let timer;
+let gameTimer = null;
 
 let lastHit = 0;
 
 
-// POSISI PENJAGA
+/* posisi penjaga */
+let guardPositions = [80, 350, 620];
 
-let guardPositions = [
-    80,
-    300,
-    500
-];
+let guardDirections = [1, -1, 1];
 
-
-let guardDirections = [
-    1,
-    -1,
-    1
-];
+let guardRows = [120, 300, 440];
 
 
-// ==========================================
-// START GAME
-// ==========================================
-
-playButton.addEventListener(
-    "click",
-    startGame
-);
-
+/* =====================================================
+   MULAI GAME
+===================================================== */
 
 function startGame() {
 
-    menuPage.classList.add(
-        "hidden"
-    );
+    menuPage.classList.add("hidden");
+    gamePage.classList.remove("hidden");
 
-    gamePage.classList.remove(
-        "hidden"
-    );
+
+    document.getElementById("gameUsername").textContent =
+        currentUser.username;
 
 
     score = 0;
-
     coins = 0;
-
     lives = 5;
-
     level = 1;
 
     gameRunning = true;
 
-
-    gameUsername.textContent =
-        localStorage.getItem(
-            "currentUser"
-        );
+    updateUI();
 
 
-    playerX = 20;
+    /* posisi awal pemain */
+    playerX = gameArea.clientWidth / 2 - 25;
 
-    playerY =
-        gameArea.clientHeight - 70;
+    playerY = gameArea.clientHeight - 90;
 
 
+    /* posisi penjaga */
     guardPositions = [
-        80,
+        100,
+        gameArea.clientWidth / 2,
+        gameArea.clientWidth - 150
+    ];
+
+
+    guardRows = [
+        130,
         300,
-        500
+        450
     ];
 
 
@@ -485,287 +251,339 @@ function startGame() {
     ];
 
 
-    setInitialPositions();
+    positionPlayer();
 
-    updatePlayer();
+    positionGuards();
 
-    updateStatus();
-
-    resetCoins();
+    randomizeCoins();
 
 
-    gameMessage.textContent =
-        "Lewati 3 penjaga dan ambil koin!";
+    clearInterval(gameTimer);
+
+    gameTimer = setInterval(gameLoop, 30);
 
 
-    clearInterval(timer);
-
-
-    timer = setInterval(
-        gameLoop,
-        40
+    showMessage(
+        "Kumpulkan semua koin dan hindari 3 penjaga!"
     );
-
 }
 
 
-// ==========================================
-// POSISI AWAL
-// ==========================================
+/* =====================================================
+   POSISI PEMAIN
+===================================================== */
 
-function setInitialPositions() {
+function positionPlayer() {
 
-    guard1.style.left =
-        "80px";
-
-    guard1.style.top =
-        "90px";
-
-
-    guard2.style.left =
-        "300px";
-
-    guard2.style.top =
-        "230px";
-
-
-    guard3.style.left =
-        "500px";
-
-    guard3.style.top =
-        "370px";
-
-
-    obstacle1.style.left =
-        "180px";
-
-    obstacle1.style.top =
-        "150px";
-
-
-    obstacle2.style.left =
-        "400px";
-
-    obstacle2.style.top =
-        "300px";
-
+    player.style.left = playerX + "px";
+    player.style.top = playerY + "px";
 }
 
 
-// ==========================================
-// PEMAIN
-// ==========================================
+/* =====================================================
+   POSISI PENJAGA
+===================================================== */
 
-function updatePlayer() {
+function positionGuards() {
 
-    player.style.left =
-        playerX + "px";
+    guard1.style.left = guardPositions[0] + "px";
+    guard1.style.top = guardRows[0] + "px";
 
-    player.style.top =
-        playerY + "px";
 
+    guard2.style.left = guardPositions[1] + "px";
+    guard2.style.top = guardRows[1] + "px";
+
+
+    guard3.style.left = guardPositions[2] + "px";
+    guard3.style.top = guardRows[2] + "px";
 }
 
 
-// ==========================================
-// STATUS
-// ==========================================
+/* =====================================================
+   ACAK KOIN
+===================================================== */
 
-function updateStatus() {
+function randomizeCoins() {
 
-    scoreText.textContent =
-        score;
-
-    coinsText.textContent =
-        coins;
-
-    livesText.textContent =
-        lives;
-
-    levelText.textContent =
-        level;
-
-}
+    const width = gameArea.clientWidth;
+    const height = gameArea.clientHeight;
 
 
-// ==========================================
-// KEYBOARD
-// ==========================================
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (!gameRunning)
-            return;
+    const positions = [];
 
 
-        if (
-            [
-                "ArrowUp",
-                "ArrowDown",
-                "ArrowLeft",
-                "ArrowRight",
-                "w",
-                "a",
-                "s",
-                "d",
-                "W",
-                "A",
-                "S",
-                "D"
-            ].includes(event.key)
-        ) {
+    for (let i = 0; i < coinsElements.length; i++) {
 
-            event.preventDefault();
+        let x;
+        let y;
 
-            movePlayer(event.key);
-
-        }
-
-    }
-);
+        let validPosition = false;
 
 
-// ==========================================
-// TOMBOL HP
-// ==========================================
+        while (!validPosition) {
 
-document
-    .querySelectorAll(
-        ".controls button"
-    )
-    .forEach(
-        button => {
+            x = Math.random() * (width - 100) + 50;
 
-            button.addEventListener(
-                "click",
-                function() {
+            y = Math.random() * (height - 180) + 80;
 
-                    movePlayer(
-                        button.dataset.key
-                    );
 
+            validPosition = true;
+
+
+            /*
+                Jangan terlalu dekat dengan
+                posisi penjaga.
+            */
+
+            for (let g = 0; g < guardPositions.length; g++) {
+
+                const distance = Math.sqrt(
+                    Math.pow(x - guardPositions[g], 2) +
+                    Math.pow(y - guardRows[g], 2)
+                );
+
+
+                if (distance < 100) {
+                    validPosition = false;
+                    break;
                 }
-            );
+            }
 
+
+            /*
+                Jangan terlalu dekat dengan
+                koin lain.
+            */
+
+            for (const pos of positions) {
+
+                const distance = Math.sqrt(
+                    Math.pow(x - pos.x, 2) +
+                    Math.pow(y - pos.y, 2)
+                );
+
+
+                if (distance < 70) {
+                    validPosition = false;
+                    break;
+                }
+            }
         }
+
+
+        positions.push({
+            x: x,
+            y: y
+        });
+
+
+        coinsElements[i].style.left = x + "px";
+        coinsElements[i].style.top = y + "px";
+
+        coinsElements[i].style.display = "flex";
+    }
+}
+
+
+/* =====================================================
+   GERAK PEMAIN
+===================================================== */
+
+function movePlayer(direction) {
+
+    if (!gameRunning) return;
+
+
+    const speed = 18;
+
+
+    if (direction === "up") {
+        playerY -= speed;
+    }
+
+
+    if (direction === "down") {
+        playerY += speed;
+    }
+
+
+    if (direction === "left") {
+        playerX -= speed;
+    }
+
+
+    if (direction === "right") {
+        playerX += speed;
+    }
+
+
+    /* batas arena */
+
+    playerX = Math.max(
+        10,
+        Math.min(
+            gameArea.clientWidth - player.offsetWidth - 10,
+            playerX
+        )
     );
 
 
-// ==========================================
-// GERAK PEMAIN
-// ==========================================
-
-function movePlayer(key) {
-
-    if (!gameRunning)
-        return;
-
-
-    const step = 20;
+    playerY = Math.max(
+        35,
+        Math.min(
+            gameArea.clientHeight - player.offsetHeight - 10,
+            playerY
+        )
+    );
 
 
-    if (
-        key === "ArrowUp" ||
-        key === "w" ||
-        key === "W"
-    )
-        playerY -= step;
-
-
-    if (
-        key === "ArrowDown" ||
-        key === "s" ||
-        key === "S"
-    )
-        playerY += step;
-
-
-    if (
-        key === "ArrowLeft" ||
-        key === "a" ||
-        key === "A"
-    )
-        playerX -= step;
-
-
-    if (
-        key === "ArrowRight" ||
-        key === "d" ||
-        key === "D"
-    )
-        playerX += step;
-
-
-    limitPlayer();
-
-    updatePlayer();
-
+    positionPlayer();
 }
 
 
-// ==========================================
-// BATAS PEMAIN
-// ==========================================
+/* =====================================================
+   KEYBOARD
+===================================================== */
 
-function limitPlayer() {
+document.addEventListener("keydown", function(event) {
 
-    playerX =
-        Math.max(
-            0,
-            Math.min(
-                playerX,
-                gameArea.clientWidth -
-                player.offsetWidth
-            )
-        );
+    if (!gameRunning) return;
 
 
-    playerY =
-        Math.max(
-            0,
-            Math.min(
-                playerY,
-                gameArea.clientHeight -
-                player.offsetHeight
-            )
-        );
-
-}
+    const key = event.key.toLowerCase();
 
 
-// ==========================================
-// GAME LOOP
-// ==========================================
+    if (
+        key === "arrowup" ||
+        key === "w"
+    ) {
+        event.preventDefault();
+        movePlayer("up");
+    }
+
+
+    if (
+        key === "arrowdown" ||
+        key === "s"
+    ) {
+        event.preventDefault();
+        movePlayer("down");
+    }
+
+
+    if (
+        key === "arrowleft" ||
+        key === "a"
+    ) {
+        event.preventDefault();
+        movePlayer("left");
+    }
+
+
+    if (
+        key === "arrowright" ||
+        key === "d"
+    ) {
+        event.preventDefault();
+        movePlayer("right");
+    }
+});
+
+
+/* =====================================================
+   GAME LOOP
+===================================================== */
 
 function gameLoop() {
 
-    if (!gameRunning)
-        return;
+    if (!gameRunning) return;
 
 
     moveGuards();
 
-    checkCollision();
+    checkCoinCollision();
 
-    checkCoins();
+    checkGuardCollision();
 
     checkFinish();
-
 }
 
 
-// ==========================================
-// PENJAGA
-// ==========================================
+/* =====================================================
+   GERAK PENJAGA
+===================================================== */
 
 function moveGuards() {
 
-    const speed =
-        1.8 +
-        (level - 1) * 0.6;
+    const width = gameArea.clientWidth;
 
+
+    /*
+        Kecepatan semakin bertambah
+        setiap level.
+    */
+
+    const speed =
+        1.5 + ((level - 1) * 0.45);
+
+
+    for (let i = 0; i < 3; i++) {
+
+        guardPositions[i] +=
+            speed * guardDirections[i];
+
+
+        if (
+            guardPositions[i] <= 20 ||
+            guardPositions[i] >= width - 70
+        ) {
+
+            guardDirections[i] *= -1;
+        }
+    }
+
+
+    positionGuards();
+}
+
+
+/* =====================================================
+   TABRAKAN DENGAN KOIN
+===================================================== */
+
+function checkCoinCollision() {
+
+    coinsElements.forEach(function(coin) {
+
+        if (coin.style.display === "none") {
+            return;
+        }
+
+
+        if (isColliding(player, coin)) {
+
+            coin.style.display = "none";
+
+            coins++;
+
+            score += 25;
+
+            updateUI();
+
+
+            showMessage(
+                "🪙 Koin berhasil dikumpulkan! +25"
+            );
+        }
+    });
+}
+
+
+/* =====================================================
+   TABRAKAN PENJAGA
+===================================================== */
+
+function checkGuardCollision() {
 
     const guards = [
         guard1,
@@ -774,128 +592,40 @@ function moveGuards() {
     ];
 
 
-    guards.forEach(
-        (guard, index) => {
+    for (const guard of guards) {
 
-            guardPositions[index] +=
-                guardDirections[index] *
-                speed;
+        if (isColliding(player, guard)) {
 
-
-            const max =
-                gameArea.clientWidth -
-                guard.offsetWidth;
+            const now = Date.now();
 
 
-            if (
-                guardPositions[index] <= 0 ||
-                guardPositions[index] >= max
-            ) {
+            /*
+                Supaya nyawa tidak berkurang
+                berkali-kali dalam waktu singkat.
+            */
 
-                guardDirections[index] *= -1;
+            if (now - lastHit > 1200) {
 
+                lastHit = now;
+
+                loseLife();
+
+                break;
             }
-
-
-            guard.style.left =
-                guardPositions[index] +
-                "px";
-
         }
-    );
-
-}
-
-
-// ==========================================
-// TABRAKAN
-// ==========================================
-
-function checkCollision() {
-
-    const playerRect =
-        player.getBoundingClientRect();
-
-
-    const objects = [
-
-        guard1,
-
-        guard2,
-
-        guard3,
-
-        obstacle1,
-
-        obstacle2
-
-    ];
-
-
-    for (
-        const object of objects
-    ) {
-
-        if (
-            collision(
-                playerRect,
-                object.getBoundingClientRect()
-            )
-        ) {
-
-            loseLife();
-
-            return;
-
-        }
-
     }
-
 }
 
 
-// ==========================================
-// COLLISION
-// ==========================================
-
-function collision(a, b) {
-
-    return (
-
-        a.left < b.right &&
-
-        a.right > b.left &&
-
-        a.top < b.bottom &&
-
-        a.bottom > b.top
-
-    );
-
-}
-
-
-// ==========================================
-// KEHILANGAN NYAWA
-// ==========================================
+/* =====================================================
+   KEHILANGAN NYAWA
+===================================================== */
 
 function loseLife() {
 
-    if (
-        Date.now() - lastHit <
-        1000
-    )
-        return;
-
-
-    lastHit =
-        Date.now();
-
-
     lives--;
 
-
-    updateStatus();
+    updateUI();
 
 
     if (lives <= 0) {
@@ -903,310 +633,316 @@ function loseLife() {
         gameOver();
 
         return;
-
     }
 
 
-    gameMessage.textContent =
-        "💥 Aduh! Nyawa tersisa: " +
-        lives;
+    showMessage(
+        "⚠️ Kamu tertangkap! Nyawa berkurang."
+    );
 
 
     resetPlayer();
-
 }
 
 
-// ==========================================
-// RESET PLAYER
-// ==========================================
+/* =====================================================
+   RESET PEMAIN
+===================================================== */
 
 function resetPlayer() {
 
-    playerX = 20;
+    playerX =
+        gameArea.clientWidth / 2 - 25;
 
     playerY =
-        gameArea.clientHeight - 70;
+        gameArea.clientHeight - 90;
 
 
-    updatePlayer();
-
+    positionPlayer();
 }
 
 
-// ==========================================
-// KOIN
-// ==========================================
+/* =====================================================
+   CEK SEMUA KOIN
+===================================================== */
 
-function resetCoins() {
+function allCoinsCollected() {
 
-    const maxX =
-        gameArea.clientWidth - 50;
-
-
-    coin1.style.left =
-        Math.min(120, maxX) + "px";
-
-    coin1.style.top =
-        "140px";
-
-
-    coin2.style.left =
-        Math.min(350, maxX) + "px";
-
-    coin2.style.top =
-        "270px";
-
-
-    coin3.style.left =
-        Math.min(500, maxX) + "px";
-
-    coin3.style.top =
-        "420px";
-
-
-    coin1.style.display =
-        "flex";
-
-    coin2.style.display =
-        "flex";
-
-    coin3.style.display =
-        "flex";
-
-}
-
-
-// ==========================================
-// AMBIL KOIN
-// ==========================================
-
-function checkCoins() {
-
-    const playerRect =
-        player.getBoundingClientRect();
-
-
-    const coinElements = [
-
-        coin1,
-        coin2,
-        coin3
-
-    ];
-
-
-    coinElements.forEach(
-        coin => {
-
-            if (
-                coin.style.display ===
-                "none"
-            )
-                return;
-
-
-            if (
-                collision(
-                    playerRect,
-                    coin.getBoundingClientRect()
-                )
-            ) {
-
-                coin.style.display =
-                    "none";
-
-
-                coins++;
-
-                score += 25;
-
-
-                updateStatus();
-
-
-                gameMessage.textContent =
-                    "🪙 Koin didapat! +25 skor";
-
-            }
-
-        }
+    return coinsElements.every(
+        coin => coin.style.display === "none"
     );
-
 }
 
 
-// ==========================================
-// FINISH
-// ==========================================
+/* =====================================================
+   FINISH
+===================================================== */
 
 function checkFinish() {
 
-    if (playerY <= 10) {
+    /*
+        Pemain harus mengumpulkan semua koin
+        sebelum bisa naik level.
+    */
 
-        score +=
-            100 * level;
+    if (
+        playerY <= 45 &&
+        allCoinsCollected()
+    ) {
 
-
-        level++;
-
-
-        updateStatus();
-
-
-        resetPlayer();
-
-        resetCoins();
-
-
-        gameMessage.textContent =
-            "🎉 Level naik! Sekarang Level " +
-            level +
-            "!";
-
+        nextLevel();
     }
 
+
+    if (
+        playerY <= 45 &&
+        !allCoinsCollected()
+    ) {
+
+        showMessage(
+            "🪙 Kumpulkan semua koin terlebih dahulu!"
+        );
+
+        playerY = 65;
+
+        positionPlayer();
+    }
 }
 
 
-// ==========================================
-// GAME OVER
-// ==========================================
+/* =====================================================
+   LEVEL BERIKUTNYA
+===================================================== */
+
+function nextLevel() {
+
+    level++;
+
+    score += 100;
+
+    coins = 0;
+
+
+    updateUI();
+
+
+    /*
+        Reset posisi pemain.
+    */
+
+    resetPlayer();
+
+
+    /*
+        Koin DIACAK LAGI.
+    */
+
+    randomizeCoins();
+
+
+    /*
+        Posisi penjaga juga berubah.
+    */
+
+    guardPositions = [
+        Math.random() * 200 + 30,
+        Math.random() * 200 + 250,
+        Math.random() * 150 + 500
+    ];
+
+
+    guardRows = [
+        100 + Math.random() * 80,
+        260 + Math.random() * 100,
+        400 + Math.random() * 80
+    ];
+
+
+    positionGuards();
+
+
+    showMessage(
+        "🎉 LEVEL " + level +
+        "! Koin berpindah dan penjaga semakin cepat!"
+    );
+}
+
+
+/* =====================================================
+   TABRAKAN
+===================================================== */
+
+function isColliding(a, b) {
+
+    const aRect = a.getBoundingClientRect();
+    const bRect = b.getBoundingClientRect();
+
+
+    return !(
+        aRect.right < bRect.left ||
+        aRect.left > bRect.right ||
+        aRect.bottom < bRect.top ||
+        aRect.top > bRect.bottom
+    );
+}
+
+
+/* =====================================================
+   UPDATE UI
+===================================================== */
+
+function updateUI() {
+
+    document.getElementById("lives").textContent =
+        lives;
+
+    document.getElementById("coins").textContent =
+        coins;
+
+    document.getElementById("score").textContent =
+        score;
+
+    document.getElementById("level").textContent =
+        level;
+}
+
+
+/* =====================================================
+   PESAN
+===================================================== */
+
+let messageTimeout;
+
+
+function showMessage(message) {
+
+    const messageBox =
+        document.getElementById("gameMessage");
+
+
+    messageBox.textContent = message;
+
+
+    clearTimeout(messageTimeout);
+
+
+    messageTimeout = setTimeout(function() {
+
+        if (gameRunning) {
+
+            messageBox.textContent =
+                "Kumpulkan semua koin dan hindari penjaga!";
+        }
+
+    }, 1800);
+}
+
+
+/* =====================================================
+   GAME OVER
+===================================================== */
 
 function gameOver() {
 
     gameRunning = false;
 
-    clearInterval(timer);
+    clearInterval(gameTimer);
 
 
     saveHighScore();
 
 
-    gameMessage.innerHTML =
-        "💀 GAME OVER<br>" +
-        "⭐ Skor: " +
-        score +
-        "<br>🏆 Level: " +
-        level;
+    const again = confirm(
+        "GAME OVER!\n\n" +
+        "Skor kamu: " + score +
+        "\nLevel: " + level +
+        "\n\nMain lagi?"
+    );
 
+
+    if (again) {
+
+        startGame();
+
+    } else {
+
+        backToMenu();
+    }
 }
 
 
-// ==========================================
-// HIGH SCORE
-// ==========================================
+/* =====================================================
+   SIMPAN HIGH SCORE
+===================================================== */
 
 function saveHighScore() {
 
-    const currentUser =
-        localStorage.getItem(
-            "currentUser"
-        );
+    if (!currentUser) return;
 
 
-    if (!currentUser)
-        return;
+    const account = accounts.find(
+        account =>
+            account.username === currentUser.username
+    );
 
 
-    const accounts =
-        getAccounts();
+    if (!account) return;
 
 
-    const account =
-        accounts.find(
-            acc =>
-                acc.username ===
-                currentUser
-        );
+    if (score > (account.highScore || 0)) {
 
-
-    if (!account)
-        return;
-
-
-    if (
-        score >
-        (account.highScore || 0)
-    ) {
-
-        account.highScore =
-            score;
-
+        account.highScore = score;
 
         localStorage.setItem(
             "gobakAccounts",
             JSON.stringify(accounts)
         );
-
     }
-
 }
 
 
-// ==========================================
-// RESTART
-// ==========================================
+/* =====================================================
+   RESTART
+===================================================== */
 
-restartButton.addEventListener(
-    "click",
-    startGame
-);
+function restartGame() {
 
+    clearInterval(gameTimer);
 
-// ==========================================
-// MENU
-// ==========================================
-
-backMenuButton.addEventListener(
-    "click",
-    function() {
-
-        clearInterval(timer);
-
-        gameRunning = false;
-
-        gamePage.classList.add(
-            "hidden"
-        );
-
-        menuPage.classList.remove(
-            "hidden"
-        );
-
-    }
-);
+    startGame();
+}
 
 
-// ==========================================
-// LOGOUT
-// ==========================================
+/* =====================================================
+   KEMBALI KE MENU
+===================================================== */
 
-logoutButton.addEventListener(
-    "click",
-    function() {
+function backToMenu() {
 
-        clearInterval(timer);
+    gameRunning = false;
 
-        gameRunning = false;
+    clearInterval(gameTimer);
 
+    gamePage.classList.add("hidden");
 
-        localStorage.removeItem(
-            "currentUser"
-        );
+    menuPage.classList.remove("hidden");
+}
 
 
-        menuPage.classList.add(
-            "hidden"
-        );
+/* =====================================================
+   RESIZE
+===================================================== */
 
-        gamePage.classList.add(
-            "hidden"
-        );
+window.addEventListener("resize", function() {
 
-        loginPage.classList.remove(
-            "hidden"
-        );
+    if (!gameRunning) return;
 
-    }
-);
+
+    playerX = Math.min(
+        playerX,
+        gameArea.clientWidth - player.offsetWidth - 10
+    );
+
+
+    positionPlayer();
+});
