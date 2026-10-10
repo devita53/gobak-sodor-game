@@ -479,7 +479,7 @@ let countdownTimer = null;
 
 let lastHit = 0;
 
-let levelTimeLeft = 35;
+let levelTimeLeft = 3OO;
 
 
 /* =====================================================
