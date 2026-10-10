@@ -1105,6 +1105,11 @@ button {
    PENGGANTI ALERT BROWSER
 ================================================== */
 
+/* ==================================================
+   NOTIFIKASI DALAM GAME
+   PENGGANTI ALERT BROWSER
+================================================== */
+
 .notification-popup {
     position: fixed;
 
@@ -1147,6 +1152,40 @@ button {
     animation:
         notificationShow .25s ease;
 }
+
+
+/* ================= THUMBNAIL NOTIFIKASI ================= */
+
+.notification-thumbnail {
+    width: 80px;
+    height: 80px;
+
+    margin: 0 auto 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff3bf,
+            #ffd75a
+        );
+
+    border-radius: 20px;
+
+    font-size: 42px;
+
+    border: 3px solid #f0b900;
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,.15);
+}
+
+
+/* ================= ICON NOTIFIKASI ================= */
 
 .notification-icon {
     width: 65px;
