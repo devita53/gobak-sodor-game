@@ -26,6 +26,47 @@ const gamePage =
     document.getElementById("gamePage");
 
 
+/* =====================================================
+   SISTEM NOTIFIKASI DALAM GAME
+   TIDAK MENGGUNAKAN ALERT BROWSER
+===================================================== */
+
+function showNotification(
+    message,
+    title = "Informasi",
+    icon = "ℹ️"
+) {
+
+    document.getElementById(
+        "notificationTitle"
+    ).textContent = title;
+
+    document.getElementById(
+        "notificationMessage"
+    ).textContent = message;
+
+    document.getElementById(
+        "notificationIcon"
+    ).textContent = icon;
+
+    document
+        .getElementById("notificationPopup")
+        .classList.remove("hidden");
+}
+
+
+function closeNotification() {
+
+    document
+        .getElementById("notificationPopup")
+        .classList.add("hidden");
+}
+
+
+/* =====================================================
+   LOGIN / REGISTER PAGE
+===================================================== */
+
 function showLogin() {
 
     loginPage.classList.remove("hidden");
@@ -67,7 +108,11 @@ function register() {
 
     if (username.length < 3) {
 
-        alert("Nama pengguna minimal 3 karakter!");
+        showNotification(
+            "Nama pengguna minimal 3 karakter.",
+            "Nama Pengguna",
+            "👤"
+        );
 
         return;
     }
@@ -75,7 +120,11 @@ function register() {
 
     if (password.length < 4) {
 
-        alert("Kata sandi minimal 4 karakter!");
+        showNotification(
+            "Kata sandi minimal 4 karakter.",
+            "Kata Sandi",
+            "🔐"
+        );
 
         return;
     }
@@ -83,7 +132,11 @@ function register() {
 
     if (password !== confirm) {
 
-        alert("Konfirmasi kata sandi tidak sama!");
+        showNotification(
+            "Konfirmasi kata sandi tidak sama.",
+            "Kata Sandi",
+            "⚠️"
+        );
 
         return;
     }
@@ -99,7 +152,11 @@ function register() {
 
     if (existing) {
 
-        alert("Nama pengguna sudah digunakan!");
+        showNotification(
+            "Nama pengguna sudah digunakan. Silakan gunakan nama lain.",
+            "Pendaftaran Gagal",
+            "⚠️"
+        );
 
         return;
     }
@@ -122,11 +179,6 @@ function register() {
     );
 
 
-    alert(
-        "Akun berhasil dibuat! Silakan masuk."
-    );
-
-
     document.getElementById(
         "registerUsername"
     ).value = "";
@@ -141,6 +193,13 @@ function register() {
 
 
     showLogin();
+
+
+    showNotification(
+        "Akun berhasil dibuat! Silakan masuk untuk mulai bermain.",
+        "Pendaftaran Berhasil!",
+        "🎉"
+    );
 }
 
 
@@ -173,8 +232,10 @@ function login() {
 
     if (!account) {
 
-        alert(
-            "Nama pengguna atau kata sandi salah!"
+        showNotification(
+            "Nama pengguna atau kata sandi yang kamu masukkan salah.",
+            "Login Gagal",
+            "❌"
         );
 
         return;
@@ -186,6 +247,12 @@ function login() {
 
     document.getElementById(
         "menuUsername"
+    ).textContent =
+        currentUser.username;
+
+
+    document.getElementById(
+        "gameUsername"
     ).textContent =
         currentUser.username;
 
@@ -226,7 +293,7 @@ function logout() {
 
 
 /* =====================================================
-   DATA GAME
+   GAME DATA
 ===================================================== */
 
 const gameArea =
@@ -309,15 +376,12 @@ function startGame() {
         .classList.add("hidden");
 
 
+    closeNotification();
+
+
     menuPage.classList.add("hidden");
 
     gamePage.classList.remove("hidden");
-
-
-    document.getElementById(
-        "gameUsername"
-    ).textContent =
-        currentUser.username;
 
 
     score = 0;
@@ -436,7 +500,7 @@ function positionGuards() {
 
 
 /* =====================================================
-   ACAK KOIN
+   ACAK KOIN SETIAP LEVEL
 ===================================================== */
 
 function randomizeCoins() {
@@ -481,8 +545,6 @@ function randomizeCoins() {
             validPosition = true;
 
 
-            /* Jarak dari penjaga */
-
             for (
                 let g = 0;
                 g < guardPositions.length;
@@ -512,8 +574,6 @@ function randomizeCoins() {
                 }
             }
 
-
-            /* Jarak dari koin lain */
 
             for (
                 const pos of positions
@@ -573,25 +633,18 @@ function movePlayer(direction) {
 
 
     if (direction === "up") {
-
         playerY -= speed;
     }
 
-
     if (direction === "down") {
-
         playerY += speed;
     }
 
-
     if (direction === "left") {
-
         playerX -= speed;
     }
 
-
     if (direction === "right") {
-
         playerX += speed;
     }
 
@@ -698,7 +751,6 @@ function gameLoop() {
 
     if (!gameRunning) return;
 
-
     moveGuards();
 
     checkCoinCollision();
@@ -763,7 +815,6 @@ function checkCoinCollision() {
                 coin.style.display ===
                 "none"
             ) {
-
                 return;
             }
 
@@ -802,13 +853,9 @@ function checkCoinCollision() {
 function checkGuardCollision() {
 
     const guards = [
-
         guard1,
-
         guard2,
-
         guard3
-
     ];
 
 
@@ -889,7 +936,7 @@ function resetPlayer() {
 
 
 /* =====================================================
-   CEK SEMUA KOIN
+   CEK KOIN
 ===================================================== */
 
 function allCoinsCollected() {
@@ -951,21 +998,15 @@ function nextLevel() {
 
     updateUI();
 
-
     resetPlayer();
 
 
-    /*
-        KOIN DIACAK KEMBALI
-        SETIAP LEVEL
-    */
+    /* KOIN BERPINDAH */
 
     randomizeCoins();
 
 
-    /*
-        POSISI PENJAGA BERUBAH
-    */
+    /* PENJAGA BERUBAH POSISI */
 
     const width =
         gameArea.clientWidth;
@@ -974,13 +1015,22 @@ function nextLevel() {
     guardPositions = [
 
         Math.random() *
-        Math.max(100, width - 150),
+        Math.max(
+            100,
+            width - 150
+        ),
 
         Math.random() *
-        Math.max(100, width - 150),
+        Math.max(
+            100,
+            width - 150
+        ),
 
         Math.random() *
-        Math.max(100, width - 150)
+        Math.max(
+            100,
+            width - 150
+        )
 
     ];
 
@@ -998,8 +1048,6 @@ function nextLevel() {
 
     ];
 
-
-    /* Pastikan posisi penjaga tidak keluar arena */
 
     guardPositions =
         guardPositions.map(
@@ -1030,10 +1078,7 @@ function nextLevel() {
     positionGuards();
 
 
-    /*
-        Acak lagi koin setelah
-        posisi penjaga berubah.
-    */
+    /* Acak ulang koin setelah penjaga berubah */
 
     randomizeCoins();
 
@@ -1107,7 +1152,7 @@ function updateUI() {
 
 
 /* =====================================================
-   PESAN GAME
+   PESAN DALAM GAME
 ===================================================== */
 
 let messageTimeout;
@@ -1172,11 +1217,6 @@ function gameOver() {
         level;
 
 
-    /*
-        Tampilkan popup dari GAME,
-        bukan notifikasi browser.
-    */
-
     document
         .getElementById(
             "gameOverPopup"
@@ -1203,7 +1243,7 @@ function playAgain() {
 
 
 /* =====================================================
-   SIMPAN HIGH SCORE
+   HIGH SCORE
 ===================================================== */
 
 function saveHighScore() {
@@ -1267,6 +1307,9 @@ function backToMenu() {
             "gameOverPopup"
         )
         .classList.add("hidden");
+
+
+    closeNotification();
 
 
     gamePage.classList.add("hidden");
