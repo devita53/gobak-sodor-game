@@ -486,11 +486,11 @@ let levelTimeLeft = 3OO;
    PENGATURAN KESULITAN
 ===================================================== */
 
-const MAX_LEVEL = 10;
+const MAX_LEVEL = 20;
 
-const START_TIME = 22;
+const START_TIME = 35;
 
-const MIN_TIME = 13;
+const MIN_TIME = 33;
 
 
 /*
